@@ -4,10 +4,10 @@
 import { components, hooks, utils } from '@generouted/react-router/client'
 
 export type Path =
-  | ``
+  | `/orgs/:orgID/channels/:channelID`
 
 export type Params = {
-  
+  '/orgs/:orgID/channels/:channelID': { orgID: string; channelID: string }
 }
 
 export type ModalPath = never
