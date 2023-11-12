@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Gift, PlusCircle, Sticker } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
+import PopoverEnjoy from './PopoverEnjoy';
 
 const MESSAGES = [
   {
@@ -151,6 +152,7 @@ export default function ChatList() {
   const chatListRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [messages, setMessages] = useState(MESSAGES);
+  const [text, setText] = useState('');
   const handleChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && inputRef.current?.value.trim() !== '') {
       flushSync(() => {
@@ -168,12 +170,16 @@ export default function ChatList() {
           },
         ]);
       });
+      setText('');
       inputRef.current!.value = '';
       chatListRef.current?.scrollTo({
         top: chatListRef.current.scrollHeight,
         behavior: 'smooth',
       });
     }
+  };
+  const handleAddEnjoy = (emoji: { native: string }) => {
+    setText((prevText) => prevText + emoji.native);
   };
   return (
     <div className='relative h-full'>
@@ -199,17 +205,20 @@ export default function ChatList() {
         ))}
       </div>
       <div className='absolute w-full bottom-6'>
-        <PlusCircle className='absolute w-6 h-6 top-3 left-3 cursor-pointer' />
+        <PlusCircle className='absolute w-6 h-6 cursor-pointer top-3 left-3' />
         <Input
           placeholder='Send message...'
           type='text'
           className='pl-12 pr-24'
           onKeyUp={handleChange}
           ref={inputRef}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         ></Input>
-        <div className='absolute top-3 right-4 flex gap-3'>
+        <div className='absolute flex gap-3 top-3 right-4'>
           <Gift className='w-6 h-6 cursor-pointer' />
           <Sticker className='w-6 h-6 cursor-pointer' />
+          <PopoverEnjoy onEmojiSelect={handleAddEnjoy}></PopoverEnjoy>
         </div>
       </div>
     </div>

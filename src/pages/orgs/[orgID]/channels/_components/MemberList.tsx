@@ -6,7 +6,7 @@ const CATEGORIES = [
     categoryName: 'Đà Nẵng',
     members: [
       {
-        id: '1',
+        id: 1,
         name: 'John Doe',
         avatar:
           'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
@@ -18,13 +18,13 @@ const CATEGORIES = [
     categoryName: 'Online',
     members: [
       {
-        id: '1',
+        id: 1,
         name: 'Phước Thạnh',
         avatar:
           'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
       },
       {
-        id: '2',
+        id: 2,
         name: 'Tom',
         avatar:
           'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
@@ -36,7 +36,7 @@ const CATEGORIES = [
     categoryName: 'Offline',
     members: [
       {
-        id: '1',
+        id: 1,
         name: 'Nobita',
         avatar:
           'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
