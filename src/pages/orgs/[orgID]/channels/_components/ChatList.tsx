@@ -204,7 +204,7 @@ export default function ChatList() {
           </div>
         ))}
       </div>
-      <div className='absolute w-full bottom-6'>
+      <div className='absolute w-full select-none bottom-6'>
         <PlusCircle className='absolute w-6 h-6 cursor-pointer top-3 left-3' />
         <Input
           placeholder='Send message...'
