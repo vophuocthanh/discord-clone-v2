@@ -209,7 +209,7 @@ export default function ChatList() {
         <Input
           placeholder='Send message...'
           type='text'
-          className='pl-12 pr-24'
+          className='pl-12 pr-32'
           onKeyUp={handleChange}
           ref={inputRef}
           value={text}

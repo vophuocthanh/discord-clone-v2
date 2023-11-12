@@ -56,7 +56,7 @@ export default function PopoverMember({ member }: Props) {
             <span className='text-sm text-primary/60'>bin2003</span>
             <hr className='h-2 my-2 border-t border-primary/60' />
             <p className='font-bold'>Giới thiệu về tôi</p>
-            <span>Đep trai, học bình thường</span>
+            <span>Siêu vip pro 😂</span>
             <p className='font-bold'>Gia nhập từ</p>
             <div className='flex items-center gap-2'>
               <span>{new Date().toLocaleDateString()}</span>

@@ -1,8 +1,16 @@
 import TooltipIcon from '@/components/TooltipIcon';
+import { Input } from '@/components/ui/input';
 import ChatList from '@/pages/orgs/[orgID]/channels/_components/ChatList';
 import MemberList from '@/pages/orgs/[orgID]/channels/_components/MemberList';
 import { useParams } from '@/router';
-import { Frame, HelpCircle, Users2 } from 'lucide-react';
+import {
+  BellOff,
+  Frame,
+  HelpCircle,
+  MessageCircle,
+  Pin,
+  Users2,
+} from 'lucide-react';
 import { useState } from 'react';
 
 export default function Channels() {
@@ -15,13 +23,22 @@ export default function Channels() {
           <Frame />
           {channelID}
         </div>
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-4'>
+          <MessageCircle className='cursor-pointer' />
+          <BellOff className='cursor-pointer' />
+          <Pin className='cursor-pointer' />
           <TooltipIcon
             icon={
-              <Users2 onClick={() => setIsHideMemberList(!isHideMemberList)} />
+              <Users2
+                className='cursor-pointer'
+                onClick={() => setIsHideMemberList(!isHideMemberList)}
+              />
             }
             content={isHideMemberList ? 'Show member list' : 'Hide member list'}
           />
+          <div className=''>
+            <Input placeholder='Search' className='h-6 text-xs rounded' />
+          </div>
           <HelpCircle className='cursor-pointer' />
         </div>
       </header>
@@ -34,7 +51,7 @@ export default function Channels() {
           <ChatList />
         </div>
         {isHideMemberList ? null : (
-          <div className='w-1/4 bg-primary/10 p-4'>
+          <div className='w-1/4 p-4 bg-primary/10'>
             <MemberList />
           </div>
         )}

@@ -6,9 +6,16 @@ import {
   Headphones,
   Home,
   Mic,
+  MonitorUp,
+  Music4,
+  PhoneMissed,
   Plus,
+  Rocket,
   Settings,
+  Signal,
   Users,
+  VibrateOff,
+  Video,
   Volume2,
 } from 'lucide-react';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -31,6 +38,25 @@ const HEADERS = [
   },
 ];
 
+const OPTIONS = [
+  {
+    id: 1,
+    icon: <Video />,
+  },
+  {
+    id: 2,
+    icon: <MonitorUp />,
+  },
+  {
+    id: 3,
+    icon: <Rocket />,
+  },
+  {
+    id: 4,
+    icon: <Music4 />,
+  },
+];
+
 const CATEGORIES = [
   {
     id: 1,
@@ -38,12 +64,12 @@ const CATEGORIES = [
     channels: [
       {
         id: '1',
-        name: 'Class 3',
+        name: 'Class 1',
         logo: <Globe />,
       },
       {
         id: '2',
-        name: 'Class 4',
+        name: 'Class 2',
         logo: <Globe />,
       },
     ],
@@ -70,28 +96,28 @@ const CATEGORIES = [
     channels: [
       {
         id: '5',
-        name: 'Project 5',
+        name: 'Class Audio 1',
         logo: <Volume2 />,
       },
       {
         id: '6',
-        name: 'Project 6',
+        name: 'Class Audio 2',
         logo: <Volume2 />,
       },
     ],
   },
   {
     id: 4,
-    name: 'Class Live',
+    name: 'Class Live ',
     channels: [
       {
         id: '7',
-        name: 'Project 1',
+        name: 'Class Live Audio 1',
         logo: <Volume2 />,
       },
       {
         id: '8',
-        name: 'Project 2',
+        name: 'Class Live Audio 2',
         logo: <Volume2 />,
       },
     ],
@@ -157,6 +183,29 @@ export default function Org() {
               </div>
             ))}
           </div>
+        </div>
+        <div className='flex items-center justify-between gap-4 p-3'>
+          <div className='flex flex-col'>
+            <div className='flex items-center gap-2 font-bold text-green-400'>
+              <Signal className='cursor-pointer' />
+              <p className='text-xl'>Đã kết nối giọng nói</p>
+            </div>
+            <p className='text-primary/60'>Class 1</p>
+          </div>
+          <div className='flex items-center gap-4'>
+            <VibrateOff className='cursor-pointer' />
+            <PhoneMissed className='cursor-pointer' />
+          </div>
+        </div>
+        <div className='flex items-center justify-between px-3 '>
+          {OPTIONS.map((option) => (
+            <span
+              className='flex px-5 py-1 rounded cursor-pointer bg-primary/20'
+              key={option.id}
+            >
+              {option.icon}
+            </span>
+          ))}
         </div>
         <div className='absolute bottom-0 flex items-center justify-between w-full p-3'>
           <div className='flex items-center gap-4'>
