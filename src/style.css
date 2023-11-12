@@ -1,4 +1,17 @@
 @tailwind base;
+*::-webkit-scrollbar {
+  width: 1px;
+}
+*::-webkit-scrollbar-track {
+  /* background: #f1f1f1; */
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  /* background-color: red; */
+  border-radius: 14px;
+  /* border: 3px solid orange; */
+}
 @tailwind components;
 @tailwind utilities;
 
@@ -55,5 +68,29 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.custom-scroll {
+  /* Thay đổi màu sắc của thanh cuộn */
+  ::-webkit-scrollbar {
+    width: 1px; /* Độ rộng của thanh cuộn */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #3498db; /* Màu của thanh cuộn */
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Màu nền của thanh cuộn */
+  }
+
+  /* Ẩn thanh cuộn khi không được sử dụng */
+  ::-webkit-scrollbar-thumb:vertical {
+    height: 50px; /* Độ dài của thanh cuộn */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #2980b9; /* Màu khi di chuột qua thanh cuộn */
   }
 }
