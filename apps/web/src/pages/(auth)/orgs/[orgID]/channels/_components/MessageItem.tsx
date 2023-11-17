@@ -1,7 +1,4 @@
 import { Message } from '@/lib/type';
-import { Fragment } from 'react';
-import Linkify from 'react-linkify';
-import { Link } from 'react-router-dom';
 
 interface Props {
   message: Message;
@@ -25,7 +22,7 @@ export default function MessageItem({ message }: Props) {
             {new Date(message.createdAt).toLocaleString()}
           </span>
         </p>
-        <Linkify
+        {/* <Linkify
           componentDecorator={(
             decoratedHref: string,
             decoratedText: string,
@@ -44,7 +41,7 @@ export default function MessageItem({ message }: Props) {
           )}
         >
           {message.message}
-        </Linkify>
+        </Linkify> */}
       </div>
     </div>
   );
