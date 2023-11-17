@@ -17,7 +17,7 @@ export default function OrgSidebar({ orgs }: OrgSidebarProps) {
         <div key={org.id}>
           <div
             className={cn({
-              'fixed left-0 h-14 w-1 border-l-4 rounded-r border-primary':
+              'fixed left-0 h-14 w-1 border-l-4 rounded-r border-primary-foreground':
                 org.id === orgID,
             })}
           ></div>

@@ -17,11 +17,12 @@ export default function PopoverEnjoy({ onEmojiSelect }: Props) {
       <PopoverTrigger asChild>
         <Annoyed className='w-6 h-6 cursor-pointer' />
       </PopoverTrigger>
-      <PopoverContent side='top' className='w-96'>
+      <PopoverContent side='top' className='w-fit p-0'>
         <Picker
           data={data}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onEmojiSelect={(emoji: any) => onEmojiSelect(emoji)}
+          theme='dark'
         />
       </PopoverContent>
     </Popover>

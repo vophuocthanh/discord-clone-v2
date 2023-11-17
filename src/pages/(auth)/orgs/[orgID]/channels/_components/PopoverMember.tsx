@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { User } from '@/types';
+import { User } from '@/lib/type';
 import { Frame, Pencil } from 'lucide-react';
 interface Props {
   member: User;

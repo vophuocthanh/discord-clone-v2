@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { useParams } from '@/router';
 import {
   Calendar,
@@ -11,7 +12,6 @@ import {
   PhoneMissed,
   Plus,
   Rocket,
-  Settings,
   Signal,
   Users,
   VibrateOff,
@@ -19,6 +19,7 @@ import {
   Volume2,
 } from 'lucide-react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import SettingModal from './_components/SettingModal';
 
 const HEADERS = [
   {
@@ -125,58 +126,56 @@ const CATEGORIES = [
 ];
 
 export default function Org() {
-  const params = useParams('/orgs/:orgID/channels/:channelID');
+  const { channelID, orgID } = useParams('/orgs/:orgID/channels/:channelID');
   const navigate = useNavigate();
-  const navigateToChannels = (id: string) => {
-    console.log(params);
-    navigate(`/orgs/${params.orgID}/channels/${id}`);
+
+  const navigateToChannel = (id: string) => {
+    navigate(`/orgs/${orgID}/channels/${id}`);
   };
   return (
     <div className='flex w-full'>
-      <div className='relative flex flex-col w-1/5 bg-primary/10'>
-        <div className='flex items-center justify-between p-3 border-b cursor-pointer h-14 border-background'>
-          <div className='flex items-center gap-2 text-3xl'>
+      <div className='relative bg-primary-foreground/10 text-primary-foreground 0 w-[20rem] flex flex-col'>
+        <div className='flex items-center justify-between p-3 border-b h-14 border-primary-foreground/10'>
+          <div className='flex items-center gap-2 text-2xl'>
             <Home />
             <h1 className='font-bold'>Discord</h1>
           </div>
           <ChevronDown />
         </div>
-        <div className='overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-300 h-3/4'>
-          <div className='text-xl text-primary/60'>
+        <div className='overflow-scroll h-3/4'>
+          <div className='text-xl text-primary-foreground/60'>
             {HEADERS.map((header) => (
               <div
+                className='flex gap-2 px-3 py-2 cursor-pointer hover:bg-primary-foreground/20'
                 key={header.id}
-                className='flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-primary-foreground/90'
               >
                 {header.icon}
-                <p>{header.name}</p>
+                <p> {header.name} </p>
               </div>
             ))}
           </div>
-          <div className='px-2 text-primary/60'>
-            <hr className='h-2 my-4 border-t border-primary/60' />
+          <div className='px-2 text-primary-foreground/60'>
+            <hr className='h-2 my-4 border-primary-foreground/60' />
             {CATEGORIES.map((category) => (
               <div key={category.id}>
-                <div className='flex items-center justify-between w-full'>
+                <div className='flex justify-between gap-2'>
                   <div className='flex gap-2'>
                     <ChevronDown className='w-4' />
-                    <h1 className='uppercase'>{category.name}</h1>
+                    <h1 className='uppercase'> {category.name} </h1>
                   </div>
                   <Plus />
                 </div>
-                <div className='py-4 space-y-2 '>
+                <div className='py-4 space-y-2'>
                   {category.channels.map((channel) => (
                     <div
+                      className={cn('px-6 py-3 cursor-pointer', {
+                        'bg-primary-foreground/20 text-primary-foreground/80':
+                          channel.id === channelID,
+                      })}
                       key={channel.id}
-                      className='flex gap-2 px-8 py-2 rounded cursor-pointer bg-primary-foreground/90'
+                      onClick={() => navigateToChannel(channel.id)}
                     >
-                      <span className='flex w-4'>{channel.logo}</span>
-                      <p
-                        className='cursor-pointer text-primary'
-                        onClick={() => navigateToChannels(channel.id)}
-                      >
-                        {channel.name}
-                      </p>
+                      {channel.name}
                     </div>
                   ))}
                 </div>
@@ -184,30 +183,30 @@ export default function Org() {
             ))}
           </div>
         </div>
-        <div className='flex items-center justify-between gap-4 p-3'>
+        <div className='flex items-center justify-between gap-4 px-3 mb-1'>
           <div className='flex flex-col'>
             <div className='flex items-center gap-2 font-bold text-green-400'>
               <Signal className='cursor-pointer' />
-              <p className='text-xl'>Đã kết nối giọng nói</p>
+              <p className='text-sm'>Đã kết nối giọng nói</p>
             </div>
-            <p className='text-primary/60'>Class 1</p>
+            <p className='text-primary-foreground/60'>Class 1</p>
           </div>
           <div className='flex items-center gap-4'>
             <VibrateOff className='cursor-pointer' />
             <PhoneMissed className='cursor-pointer' />
           </div>
         </div>
-        <div className='flex items-center justify-between px-3 '>
+        <div className='flex items-center justify-between px-2'>
           {OPTIONS.map((option) => (
             <span
-              className='flex px-5 py-1 rounded cursor-pointer bg-primary/20'
+              className='flex px-3 py-1 rounded cursor-pointer bg-primary-foreground/20'
               key={option.id}
             >
               {option.icon}
             </span>
           ))}
         </div>
-        <div className='absolute bottom-0 flex items-center justify-between w-full p-3'>
+        <div className='absolute bottom-0 flex items-center justify-between w-full px-3 py-1'>
           <div className='flex items-center gap-4'>
             <img
               src='https://st.quantrimang.com/photos/image/2019/03/13/HinhnenGoku-0.jpg'
@@ -218,13 +217,13 @@ export default function Org() {
             />
             <div className='flex flex-col'>
               <p className='text-base font-bold'>Songoku</p>
-              <p className='text-sm text-primary/60'>Online</p>
+              <p className='text-sm text-primary-foreground/60'>Online</p>
             </div>
           </div>
           <div className='flex items-center gap-2'>
             <Mic className='cursor-pointer' />
             <Headphones className='cursor-pointer' />
-            <Settings className='cursor-pointer' />
+            <SettingModal />
           </div>
         </div>
       </div>

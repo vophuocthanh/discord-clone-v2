@@ -49,8 +49,8 @@ export default function MemberList() {
   return (
     <div className='flex flex-col gap-8'>
       {CATEGORIES.map((category) => (
-        <div className='flex flex-col gap-2' key={category.id}>
-          <p className='text-sm uppercase'>
+        <div key={category.id} className='flex flex-col gap-4'>
+          <p className='font-bold'>
             {category.categoryName} - {category.members.length}
           </p>
           <div className='flex flex-col gap-4'>

@@ -4,7 +4,12 @@
 import { components, hooks, utils } from '@generouted/react-router/client'
 
 export type Path =
+  | `/`
+  | `/login`
   | `/orgs/:orgID/channels/:channelID`
+  | `/register`
+  | `/safety`
+  | `/servers`
 
 export type Params = {
   '/orgs/:orgID/channels/:channelID': { orgID: string; channelID: string }

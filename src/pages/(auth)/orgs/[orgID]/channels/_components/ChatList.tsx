@@ -182,7 +182,7 @@ export default function ChatList() {
     setText((prevText) => prevText + emoji.native);
   };
   return (
-    <div className='relative h-full'>
+    <div className='relative h-full text-primary-foreground'>
       <div
         className='flex flex-col h-[calc(100vh-9rem)] overflow-y-auto'
         ref={chatListRef}
@@ -195,7 +195,7 @@ export default function ChatList() {
                 <span className='font-bold text-blue-500'>
                   {message.sender.name}
                 </span>
-                <span className='text-sm text-primary/60'>
+                <span className='text-sm text-primary-foreground/60'>
                   {new Date(message.createAt).toLocaleString()}
                 </span>
               </p>
@@ -205,7 +205,7 @@ export default function ChatList() {
         ))}
       </div>
       <div className='absolute w-full select-none bottom-6'>
-        <PlusCircle className='absolute w-6 h-6 cursor-pointer top-3 left-3' />
+        <PlusCircle className='absolute w-6 h-6 cursor-pointer top-2 left-2' />
         <Input
           placeholder='Send message...'
           type='text'
@@ -215,7 +215,7 @@ export default function ChatList() {
           value={text}
           onChange={(e) => setText(e.target.value)}
         ></Input>
-        <div className='absolute flex gap-3 top-3 right-4'>
+        <div className='absolute flex gap-3 top-2 right-4'>
           <Gift className='w-6 h-6 cursor-pointer' />
           <Sticker className='w-6 h-6 cursor-pointer' />
           <PopoverEnjoy onEmojiSelect={handleAddEnjoy}></PopoverEnjoy>
