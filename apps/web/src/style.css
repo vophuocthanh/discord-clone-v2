@@ -117,3 +117,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes fadeInFromSides {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-from-sides {
+  opacity: 0;
+  animation: fadeInFromSides 1s ease-out;
+  animation-fill-mode: forwards;
+}

@@ -5,7 +5,7 @@ export default function Avatar({ src, alt }: AvatarProps) {
       <img
         src={src}
         alt={alt}
-        className='object-cover w-12 h-12 rounded-full aspect-square'
+        className='object-cover w-10 h-10 rounded-full aspect-square'
       />
     </div>
   );

@@ -5,7 +5,6 @@ import {
   ChevronDown,
   Globe,
   Headphones,
-  Home,
   Mic,
   MonitorUp,
   Music4,
@@ -20,6 +19,7 @@ import {
 } from 'lucide-react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SettingModal from './_components/SettingModal';
+import PopoverSidebar from './channels/_components/PopoverSidebar';
 
 const HEADERS = [
   {
@@ -135,13 +135,7 @@ export default function Org() {
   return (
     <div className='flex w-full'>
       <div className='relative bg-primary-foreground/10 text-primary-foreground 0 w-[20rem] flex flex-col'>
-        <div className='flex items-center justify-between p-3 border-b h-14 border-primary-foreground/10'>
-          <div className='flex items-center gap-2 text-2xl'>
-            <Home />
-            <h1 className='font-bold'>Discord</h1>
-          </div>
-          <ChevronDown />
-        </div>
+        <PopoverSidebar></PopoverSidebar>
         <div className='overflow-scroll h-3/4'>
           <div className='text-xl text-primary-foreground/60'>
             {HEADERS.map((header) => (
@@ -169,7 +163,7 @@ export default function Org() {
                   {category.channels.map((channel) => (
                     <div
                       className={cn('px-6 py-3 cursor-pointer', {
-                        'bg-primary-foreground/20 text-primary-foreground/80':
+                        'bg-primary-foreground/20 text-primary-foreground/80 rounded':
                           channel.id === channelID,
                       })}
                       key={channel.id}
@@ -207,13 +201,13 @@ export default function Org() {
           ))}
         </div>
         <div className='absolute bottom-0 flex items-center justify-between w-full px-3 py-1'>
-          <div className='flex items-center gap-4'>
+          <div className='flex items-center gap-4 hover:bg-primary-foreground/20 rounded cursor-pointer px-2'>
             <img
               src='https://st.quantrimang.com/photos/image/2019/03/13/HinhnenGoku-0.jpg'
               alt='avatar'
-              width={40}
-              height={40}
-              className='object-cover w-10 h-10 rounded-full aspect-square'
+              width={30}
+              height={30}
+              className='object-cover w-8 h-8 rounded-full aspect-square'
             />
             <div className='flex flex-col'>
               <p className='text-base font-bold'>Songoku</p>
