@@ -9,7 +9,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useState } from 'react';
 import { signIn } from '@/apis/auth';
-import qrCode from '@/assets/images/qr-code.png';
 import { Checkbox } from '@/components/ui/checkbox';
 
 export function Loader() {
