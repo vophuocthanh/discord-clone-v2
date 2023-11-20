@@ -1,19 +1,13 @@
 {
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "node --watch public/index.js",
     "deploy": "vercel",
-    "build:watch": "(concurrently \"tsc -w\" \"tsc-alias -w\")",
-    "dev": "npm run build:watch & node --watch public/index.js"
+    "start": "vercel dev"
   },
   "dependencies": {
-    "@hono/node-server": "^1.2.3",
     "hono": "^3.10.1"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "typescript": "^5.2.2",
     "vercel": "^32.4.1"
   }
 }
