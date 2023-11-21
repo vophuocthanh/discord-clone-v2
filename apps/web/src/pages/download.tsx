@@ -1,3 +1,3 @@
 export default function Component() {
-  return <div>Support</div>;
+  return <div>Download</div>;
 }

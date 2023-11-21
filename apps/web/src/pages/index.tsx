@@ -61,16 +61,16 @@ export default function Component() {
           <div className='flex items-center justify-between w-full gap-20'>
             <img src={logo} alt='logo' />
             <div className='flex items-center gap-10'>
-              <Link to='/'>Download</Link>
-              <Link to='/'>Nitro</Link>
-              <Link to='/'>Discover</Link>
-              <Link to='/'>Safety</Link>
-              <Link to='/'>Support</Link>
-              <Link to='/'>Blog</Link>
-              <Link to='/'>Careers</Link>
+              <Link to='/download'>Download</Link>
+              <Link to='/nitro'>Nitro</Link>
+              <Link to='/discover'>Discover</Link>
+              <Link to='/safety'>Safety</Link>
+              <Link to='/servers'>Support</Link>
+              <Link to='/blog'>Blog</Link>
+              <Link to='/careers'>Careers</Link>
             </div>
             <Link to='/login'>
-              <Button className='text-black bg-white hover:bg-white hover:shadow-xl'>
+              <Button className='text-black bg-white rounded-full hover:bg-white hover:shadow-xl'>
                 Login
               </Button>
             </Link>
@@ -85,7 +85,7 @@ export default function Component() {
             and hang out more often.
           </p>
         </div>
-        <div className='flex gap-6 mt-20'>
+        <div className='flex gap-6 mt-10'>
           <Button className='flex h-16 gap-4 px-6 text-xl text-black bg-white rounded-full hover:bg-white hover:text-primary hover:shadow-xl'>
             <span>
               <Download />
@@ -189,40 +189,40 @@ export default function Component() {
               ))}
             </div>
           </div>
-          <div className='grid w-full grid-cols-4 gap-4 '>
+          <div className='grid w-full grid-cols-4 gap-4'>
             <div className='p-4 space-y-2'>
-              <p className='text-primary'>Products</p>
-              <p className=''>Download</p>
-              <p className=''>Nitro</p>
-              <p className=''>Status</p>
+              <p className='cursor-pointer text-primary'>Products</p>
+              <p className='cursor-pointer '>Download</p>
+              <p className='cursor-pointer '>Nitro</p>
+              <p className='cursor-pointer '>Status</p>
             </div>
             <div className='p-4 space-y-2'>
-              <p className='text-primary'>Company</p>
-              <p className=''>About</p>
-              <p className=''>Branding</p>
-              <p className=''>Newsroom</p>
+              <p className='cursor-pointer text-primary'>Company</p>
+              <p className='cursor-pointer '>About</p>
+              <p className='cursor-pointer '>Branding</p>
+              <p className='cursor-pointer '>Newsroom</p>
             </div>
             <div className='p-4 space-y-2'>
-              <p className='text-primary'>Resources</p>
-              <p className=''>College</p>
-              <p className=''>Support</p>
-              <p className=''>Safety</p>
-              <p className=''>Blog</p>
-              <p className=''>Feedback</p>
-              <p className=''>Build</p>
-              <p className=''>StreamKit</p>
-              <p className=''>Creators</p>
-              <p className=''>Community</p>
+              <p className='cursor-pointer text-primary'>Resources</p>
+              <p className='cursor-pointer '>College</p>
+              <p className='cursor-pointer '>Support</p>
+              <p className='cursor-pointer '>Safety</p>
+              <p className='cursor-pointer '>Blog</p>
+              <p className='cursor-pointer '>Feedback</p>
+              <p className='cursor-pointer '>Build</p>
+              <p className='cursor-pointer '>StreamKit</p>
+              <p className='cursor-pointer '>Creators</p>
+              <p className='cursor-pointer '>Community</p>
             </div>
             <div className='p-4 space-y-2'>
-              <p className='text-primary'>Policies</p>
-              <p className=''>Terms</p>
-              <p className=''>Privacy</p>
-              <p className=''>Status</p>
-              <p className=''>Cookie Settings</p>
-              <p className=''>Acknowledgements</p>
-              <p className=''>Licenses</p>
-              <p className=''>Moderation</p>
+              <p className='cursor-pointer text-primary'>Policies</p>
+              <p className='cursor-pointer '>Terms</p>
+              <p className='cursor-pointer '>Privacy</p>
+              <p className='cursor-pointer '>Status</p>
+              <p className='cursor-pointer '>Cookie Settings</p>
+              <p className='cursor-pointer '>Acknowledgements</p>
+              <p className='cursor-pointer '>Licenses</p>
+              <p className='cursor-pointer '>Moderation</p>
             </div>
           </div>
         </div>
