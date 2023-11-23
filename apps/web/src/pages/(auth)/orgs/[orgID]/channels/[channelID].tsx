@@ -32,7 +32,7 @@ export default function Channel() {
           <div className=''>
             <Input
               placeholder='Search'
-              className='h-6 text-xs text-white rounded w-48'
+              className='h-6 text-xs text-white rounded w-48 bg-[#1d202a]'
             />
           </div>
           <HelpCircle className='cursor-pointer' />
@@ -47,7 +47,7 @@ export default function Channel() {
           <ChatList />
         </div>
         {isHideMemberList ? null : (
-          <div className='w-[15rem] bg-primary-foreground/10 p-4'>
+          <div className='w-[15rem] bg-[#1d202ad1] p-4'>
             <MemberList />
           </div>
         )}
