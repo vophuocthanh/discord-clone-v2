@@ -16,6 +16,7 @@ import {
   Youtube,
 } from 'lucide-react';
 import { useEffect } from 'react';
+import SectionInView from '@/components/SectionInView';
 const SOCIAL = [
   {
     id: 1,
@@ -38,7 +39,7 @@ const SOCIAL = [
 export default function Component() {
   useEffect(() => {
     const handleScroll = () => {
-      const elements = document.querySelectorAll('.fade-in-from-sides');
+      const elements = document.querySelectorAll('');
       elements.forEach((element) => {
         const elementRect = element.getBoundingClientRect();
         if (elementRect.top <= window.innerHeight / 2) {
@@ -97,14 +98,10 @@ export default function Component() {
           </Button>
         </div>
       </div>
-      <div className='w-full h-[500px] text-black bg-white'>
+      <SectionInView className='w-full h-[500px] text-black bg-white'>
         <div className='flex items-center max-w-5xl gap-10 mx-auto '>
-          <img
-            src={bgGroup}
-            alt='bg-group'
-            className='object-cover fade-in-from-sides'
-          />
-          <div className='flex flex-col max-w-[300px] fade-in-from-sides'>
+          <img src={bgGroup} alt='bg-group' className='object-cover' />
+          <div className='flex flex-col max-w-[300px]'>
             <p className='text-4xl font-bold'>
               Create an invite-only place where you belong
             </p>
@@ -115,10 +112,10 @@ export default function Component() {
             </p>
           </div>
         </div>
-      </div>
-      <div className='text-black bg-[#F6F6F6] w-full h-[34rem]'>
+      </SectionInView>
+      <SectionInView className='text-black bg-[#F6F6F6] w-full h-[34rem]'>
         <div className='flex items-center max-w-5xl gap-10 pt-20 mx-auto'>
-          <div className='flex flex-col max-w-[300px] fade-in-from-sides'>
+          <div className='flex flex-col max-w-[300px]'>
             <p className='text-4xl font-bold'>Where hanging out is easy</p>
             <p className='mt-4 leading-8'>
               Grab a seat in a voice channel when you’re free. Friends in your
@@ -129,12 +126,12 @@ export default function Component() {
           <img
             src={bgGroupRight}
             alt='bg-group-right'
-            className='object-cover fade-in-from-sides'
+            className='object-cover'
           />
         </div>
-      </div>
-      <div className='text-black w-full h-[34rem] bg-white'>
-        <div className='flex items-center max-w-5xl gap-10 pt-20 mx-auto fade-in-from-sides'>
+      </SectionInView>
+      <SectionInView className='text-black w-full h-[34rem] bg-white'>
+        <div className='flex items-center max-w-5xl gap-10 pt-20 mx-auto'>
           <img src={bgGroupLeft} alt='bg-group-left' className='object-cover' />
           <div className='flex flex-col max-w-[300px]'>
             <p className='text-4xl font-bold'>From few to a fandom</p>
@@ -145,9 +142,9 @@ export default function Component() {
             </p>
           </div>
         </div>
-      </div>
-      <div className='text-black bg-[#F6F6F6] w-full h-[74rem]'>
-        <div className='flex flex-col items-center max-w-5xl pt-20 mx-auto fade-in-from-sides'>
+      </SectionInView>
+      <SectionInView className=' bg-[#F6F6F6] w-full h-[74rem] text-black'>
+        <div className='flex flex-col items-center max-w-5xl pt-20 mx-auto'>
           <div className='flex text-center flex-col max-w-[1000px]'>
             <h1 className='text-6xl font-bold'>
               Reliable tech for staying close
@@ -168,7 +165,7 @@ export default function Component() {
             Download for Windows
           </Button>
         </div>
-      </div>
+      </SectionInView>
       <footer className='w-full bg-black h-[44rem]'>
         <div className='flex items-start max-w-5xl gap-20 pt-20 mx-auto'>
           <div className='flex flex-col max-w-[200px] space-y-4 p-4'>

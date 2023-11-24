@@ -56,7 +56,7 @@ export default function Component() {
   return (
     <div className='relative flex w-full h-screen'>
       <img src={bgAuth} className='object-cover w-full h-full' />
-      <div className='absolute w-1/3 p-8 text-center -translate-x-1/2 -translate-y-1/2 rounded-sm top-1/2 left-1/2 bg-background text-primary-foreground'>
+      <div className='absolute w-1/3 p-8 text-center -translate-x-1/2 -translate-y-1/2 bg-black rounded-sm top-1/2 left-1/2 text-primary-foreground'>
         <h1 className='mb-6 text-2xl font-bold'>Create an Account</h1>
         <form className='text-start' onSubmit={handleSubmit(onSubmit)}>
           <label className='w-full mb-4'>

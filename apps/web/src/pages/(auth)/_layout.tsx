@@ -23,6 +23,9 @@ export default function App() {
       navigate('/orgs/1');
     }
   }, [navigate]);
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+  }, []);
   return (
     <div className='flex w-full h-screen bg-background'>
       <OrgSidebar orgs={ORGS}></OrgSidebar>

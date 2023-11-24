@@ -31,8 +31,8 @@ export default function Component() {
     mode: 'onBlur',
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: 'phuocthanh@gmail.com',
+      password: 'Enouvo@123',
     },
   });
 
@@ -55,7 +55,7 @@ export default function Component() {
     <div className='relative flex w-full h-screen'>
       <img src={bgAuth} className='object-cover w-full h-full' />
       <div className=''>
-        <div className='absolute w-1/2 p-8 text-center -translate-x-1/2 -translate-y-1/2 rounded-sm top-1/2 left-1/2 bg-background text-primary-foreground'>
+        <div className='absolute w-1/2 p-8 text-center -translate-x-1/2 -translate-y-1/2 bg-black rounded-sm top-1/2 left-1/2 text-primary-foreground'>
           <div className='flex gap-4'>
             <div className='w-full'>
               <h1 className='text-2xl font-bold'>Welcome back!</h1>

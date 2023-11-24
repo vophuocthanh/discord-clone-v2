@@ -3,5 +3,8 @@
   "scripts": {
     "dev:api": "cd apps/apis && pnpm run start",
     "dev:web": "cd apps/web && pnpm run dev"
+  },
+  "dependencies": {
+    "react-query": "^3.39.3"
   }
 }
