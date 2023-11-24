@@ -12,7 +12,7 @@ export default function OrgSidebar({ orgs }: OrgSidebarProps) {
   const navigate = useNavigate();
   const { orgID } = useParams('/orgs/:orgID/channels/:channelID');
   return (
-    <div className='p-6 space-y-5'>
+    <div className='p-3 space-y-5'>
       {orgs.map((org) => (
         <div key={org.id}>
           <div
