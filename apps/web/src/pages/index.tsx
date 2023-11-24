@@ -61,14 +61,28 @@ export default function Component() {
         <header className='flex items-center justify-between h-20 max-w-6xl'>
           <div className='flex items-center justify-between w-full gap-20'>
             <img src={logo} alt='logo' />
-            <div className='flex items-center gap-10'>
-              <Link to='/download'>Download</Link>
-              <Link to='/nitro'>Nitro</Link>
-              <Link to='/discover'>Discover</Link>
-              <Link to='/safety'>Safety</Link>
-              <Link to='/servers'>Support</Link>
-              <Link to='/blog'>Blog</Link>
-              <Link to='/careers'>Careers</Link>
+            <div className='flex items-center gap-10 text-lg font-medium'>
+              <Link to='/download' className='hover:underline'>
+                Download
+              </Link>
+              <Link to='/nitro' className='hover:underline'>
+                Nitro
+              </Link>
+              <Link to='/discover' className='hover:underline'>
+                Discover
+              </Link>
+              <Link to='/safety' className='hover:underline'>
+                Safety
+              </Link>
+              <Link to='/servers' className='hover:underline'>
+                Support
+              </Link>
+              <Link to='/blog' className='hover:underline'>
+                Blog
+              </Link>
+              <Link to='/careers' className='hover:underline'>
+                Careers
+              </Link>
             </div>
             <Link to='/login'>
               <Button className='text-black bg-white rounded-full hover:bg-white hover:shadow-xl'>
