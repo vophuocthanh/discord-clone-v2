@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/popover';
 import { User } from '@/lib/type';
 import { cn } from '@/lib/utils';
-import { BadgeX } from 'lucide-react';
 interface Props {
   member: User;
 }
@@ -25,20 +24,20 @@ export default function PopoverMember({ member }: Props) {
           <p className='font-bold text-green-400'> {member.name} </p>
         </div>
       </PopoverTrigger>
-      <PopoverContent side='left' className='mr-4 w-80 z-10 border-none p-0'>
+      <PopoverContent side='left' className='z-10 p-0 mr-4 border-none w-80'>
         <div
           className={cn('rounded-t-md h-16 relative')}
           style={{ backgroundColor: member.backgroundColor }}
         >
-          <div className='w-20 h-20 p-2 bg-slate-950 absolute -bottom-10 left-4 rounded-full'>
+          <div className='absolute w-20 h-20 p-2 rounded-full bg-slate-950 -bottom-10 left-4'>
             <img
               src={member.avatar}
               alt={member.name}
-              className='h-full w-full object-cover rounded-full'
+              className='object-cover w-full h-full rounded-full'
             />
           </div>
         </div>
-        <div className='bg-gray-700 pt-8 pb-1 rounded-b-md'>
+        <div className='pt-8 pb-1 bg-gray-700 rounded-b-md'>
           <div className='flex flex-col gap-1 p-4 m-4 bg-black rounded-md'>
             <h1 className='text-xl font-bold'>{member.name}</h1>
             <span className='text-sm text-primary-foreground/60'>bin2003</span>
@@ -56,9 +55,9 @@ export default function PopoverMember({ member }: Props) {
               {member?.roles?.map((role) => (
                 <Badge
                   key={role}
-                  className='flex items-center gap-2 bg-primary-foreground/10 hover:bg-primary-foreground/20 cursor-pointer'
+                  className='flex items-center gap-2 cursor-pointer bg-primary-foreground/10 hover:bg-primary-foreground/20'
                 >
-                  <span className='w-3 h-3 rounded-full flex  bg-green-400'></span>
+                  <span className='flex w-3 h-3 bg-green-400 rounded-full'></span>
                   {role}
                 </Badge>
               ))}
