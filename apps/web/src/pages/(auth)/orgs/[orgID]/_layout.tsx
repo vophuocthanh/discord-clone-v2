@@ -5,7 +5,9 @@ import {
   ChevronDown,
   Globe,
   Headphones,
+  MegaphoneOff,
   Mic,
+  MicOff,
   MonitorUp,
   Music4,
   PhoneMissed,
@@ -15,11 +17,15 @@ import {
   Users,
   VibrateOff,
   Video,
-  Volume2,
 } from 'lucide-react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SettingModal from './_components/SettingModal';
 import PopoverSidebar from './channels/_components/PopoverSidebar';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+import { getChannels } from '@/apis/channels';
+import { groupBy } from 'lodash-es';
+import TooltipIcon from '@/components/TooltipIcon';
 
 const HEADERS = [
   {
@@ -58,79 +64,21 @@ const OPTIONS = [
   },
 ];
 
-const CATEGORIES = [
-  {
-    id: 1,
-    name: 'Class',
-    channels: [
-      {
-        id: '1',
-        name: 'Class 1',
-        logo: <Globe />,
-      },
-      {
-        id: '2',
-        name: 'Class 2',
-        logo: <Globe />,
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Class Live',
-    channels: [
-      {
-        id: '3',
-        name: 'Project 1',
-        logo: <Volume2 />,
-      },
-      {
-        id: '4',
-        name: 'Project 2',
-        logo: <Volume2 />,
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: 'Class Audio',
-    channels: [
-      {
-        id: '5',
-        name: 'Class Audio 1',
-        logo: <Volume2 />,
-      },
-      {
-        id: '6',
-        name: 'Class Audio 2',
-        logo: <Volume2 />,
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: 'Class Live ',
-    channels: [
-      {
-        id: '7',
-        name: 'Class Live Audio 1',
-        logo: <Volume2 />,
-      },
-      {
-        id: '8',
-        name: 'Class Live Audio 2',
-        logo: <Volume2 />,
-      },
-    ],
-  },
-];
-
 export default function Org() {
+  const [micOn, setMicOn] = useState(false);
+  const [headphoneOn, steHeadphoneOn] = useState(true);
   const { channelID, orgID } = useParams('/orgs/:orgID/channels/:channelID');
   const navigate = useNavigate();
 
+  const { data } = useQuery(['channels'], () => getChannels(orgID));
   const navigateToChannel = (id: string) => {
     navigate(`/orgs/${orgID}/channels/${id}`);
+  };
+  const handleMic = () => {
+    setMicOn(!micOn);
+  };
+  const handleHeadphone = () => {
+    steHeadphoneOn(!headphoneOn);
   };
   return (
     <div className='flex w-full'>
@@ -150,31 +98,33 @@ export default function Org() {
           </div>
           <div className='px-2 text-primary-foreground/60'>
             <hr className='h-2 my-4 border-primary-foreground/60' />
-            {CATEGORIES.map((category) => (
-              <div key={category.id}>
-                <div className='flex justify-between gap-2'>
-                  <div className='flex gap-2'>
-                    <ChevronDown className='w-4' />
-                    <h1 className='uppercase'> {category.name} </h1>
-                  </div>
-                  <Plus />
-                </div>
-                <div className='py-4 space-y-2'>
-                  {category.channels.map((channel) => (
-                    <div
-                      className={cn('px-6 py-3 cursor-pointer', {
-                        'bg-primary-foreground/20 text-primary-foreground/80 rounded':
-                          channel.id === channelID,
-                      })}
-                      key={channel.id}
-                      onClick={() => navigateToChannel(channel.id)}
-                    >
-                      {channel.name}
+            {Object.entries(groupBy(data?.data, 'category.name')).map(
+              ([category, channels]) => (
+                <div key={category}>
+                  <div className='flex justify-between gap-2'>
+                    <div className='flex gap-2'>
+                      <ChevronDown className='w-4' />
+                      <h1 className='uppercase'> {category} </h1>
                     </div>
-                  ))}
+                    <Plus />
+                  </div>
+                  <div className='py-4 space-y-2'>
+                    {channels.map((channel) => (
+                      <div
+                        className={cn('px-6 py-3 cursor-pointer', {
+                          'bg-primary-foreground/20 text-primary-foreground/80 rounded':
+                            channel.id === channelID,
+                        })}
+                        key={channel.id}
+                        onClick={() => navigateToChannel(channel.id)}
+                      >
+                        {channel.name}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
         <div className='flex items-center justify-between gap-4 px-3 mb-1'>
@@ -215,8 +165,39 @@ export default function Org() {
             </div>
           </div>
           <div className='flex items-center gap-2'>
-            <Mic className='cursor-pointer' />
-            <Headphones className='cursor-pointer' />
+            <TooltipIcon
+              icon={
+                micOn ? (
+                  <Mic
+                    onClick={handleMic}
+                    className='text-green-300 cursor-pointer select-none'
+                  />
+                ) : (
+                  <MicOff
+                    onClick={handleMic}
+                    className='text-red-500 cursor-pointer select-none'
+                  />
+                )
+              }
+              content={micOn ? 'Tắt âm' : 'Bỏ tắt ấm'}
+            />
+            <TooltipIcon
+              icon={
+                headphoneOn ? (
+                  <Headphones
+                    onClick={handleHeadphone}
+                    className='cursor-pointer'
+                  />
+                ) : (
+                  <MegaphoneOff
+                    onClick={handleHeadphone}
+                    className='text-red-500 cursor-pointer select-none'
+                  />
+                )
+              }
+              content={micOn ? 'Tắt tiếng' : 'Bỏ tắt tiếng'}
+            />
+
             <SettingModal />
           </div>
         </div>

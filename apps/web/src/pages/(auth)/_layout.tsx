@@ -1,19 +1,8 @@
+import { getOrgs } from '@/apis/orgs';
 import OrgSidebar from '@/components/OrgSidebar';
 import { useEffect } from 'react';
+import { useQuery } from 'react-query';
 import { Outlet, useNavigate } from 'react-router-dom';
-
-const ORGS = [
-  {
-    id: '1',
-    icon: 'https://enouvo.com/wp-content/uploads/2022/07/cropped-logo-vien-trang-file-in-01.png',
-    name: 'Enouvo',
-  },
-  {
-    id: '2',
-    icon: 'https://static.ybox.vn/2022/11/3/1667994393514-uyen182xp9pj-avatar.png',
-    name: 'Axon Active',
-  },
-];
 
 export default function App() {
   const navigate = useNavigate();
@@ -26,9 +15,11 @@ export default function App() {
   useEffect(() => {
     document.documentElement.classList.add('dark');
   }, []);
+
+  const { data } = useQuery(['orgs'], () => getOrgs());
   return (
     <div className='flex w-full h-screen bg-background'>
-      <OrgSidebar orgs={ORGS}></OrgSidebar>
+      <OrgSidebar orgs={data?.data ?? []}></OrgSidebar>
       <Outlet></Outlet>
       <div className=''></div>
     </div>

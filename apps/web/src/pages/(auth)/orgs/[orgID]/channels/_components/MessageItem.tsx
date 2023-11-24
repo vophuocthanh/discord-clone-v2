@@ -12,36 +12,14 @@ export default function MessageItem({ message }: Props) {
         alt={message.sender.name}
         className='object-cover w-12 h-12 rounded-full'
       />
-      <div>
-        <p>
-          <span className='font-bold text-blue-500'>
-            {message.sender.name}{' '}
-          </span>
+      <div className='flex flex-col'>
+        <div className='flex gap-2'>
+          <span className='font-bold text-blue-500'>{message.sender.name}</span>
           <span className='text-sm text-primary-foreground/40'>
-            {' '}
             {new Date(message.createdAt).toLocaleString()}
           </span>
-        </p>
-        {/* <Linkify
-          componentDecorator={(
-            decoratedHref: string,
-            decoratedText: string,
-            key: number
-          ) => (
-            <Fragment key={key}>
-              <Link
-                className='underline text-sky-500'
-                to={decoratedHref}
-                rel='noreferrer'
-                target='_blank'
-              >
-                {decoratedText}
-              </Link>
-            </Fragment>
-          )}
-        >
-          {message.message}
-        </Linkify> */}
+        </div>
+        <div className=''>{message.message}</div>
       </div>
     </div>
   );

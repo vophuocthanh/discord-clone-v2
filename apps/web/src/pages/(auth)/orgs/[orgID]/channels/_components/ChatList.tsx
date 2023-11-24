@@ -1,158 +1,22 @@
-import Avatar from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import { Gift, PlusCircle, Sticker } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import PopoverEnjoy from './PopoverEnjoy';
-
-const MESSAGES = [
-  {
-    id: 1,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'Hello, how are you?',
-  },
-  {
-    id: 2,
-    sender: {
-      name: 'Jane Smith',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'I am good, thanks for asking.',
-  },
-  {
-    id: 3,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-  {
-    id: 4,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-  {
-    id: 5,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-  {
-    id: 6,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-  {
-    id: 7,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-  {
-    id: 8,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-  {
-    id: 9,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-  {
-    id: 10,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-  {
-    id: 11,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-  {
-    id: 12,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-  {
-    id: 13,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-  {
-    id: 14,
-    sender: {
-      name: 'John Doe',
-      avatar:
-        'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    },
-    createAt: '2022-01-01T00:00:00.000Z',
-    message: 'What about you?',
-  },
-];
+import { useQuery } from 'react-query';
+import { getMessages } from '@/apis/messages';
+import { useParams } from '@/router';
+import { Message } from '@/lib/type';
+import MessageItem from './MessageItem';
 
 export default function ChatList() {
   const chatListRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [messages, setMessages] = useState(MESSAGES);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [text, setText] = useState('');
+  const { orgID, channelID } = useParams('/orgs/:orgID/channels/:channelID');
+
+  const { data } = useQuery(['messages'], () => getMessages(orgID, channelID));
   const handleChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && inputRef.current?.value.trim() !== '') {
       flushSync(() => {
@@ -161,12 +25,15 @@ export default function ChatList() {
           {
             id: messages.length + 1,
             sender: {
+              id: 1,
               name: 'John Doe',
               avatar:
-                'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
+                'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
+              backgroundColor: 'bg-red-500',
+              roles: [],
             },
-            createAt: '2022-01-01T00:00:00.000Z',
-            message: inputRef.current!.value,
+            createdAt: '2022-01-01T00:00:00.000Z',
+            message: text,
           },
         ]);
       });
@@ -187,20 +54,9 @@ export default function ChatList() {
         className='flex flex-col h-[calc(100vh-9rem)] overflow-y-auto'
         ref={chatListRef}
       >
-        {messages.map((message) => (
+        {[...(data?.data ?? []), ...messages]?.map((message) => (
           <div key={message.id} className='flex items-center gap-5 my-2'>
-            <Avatar src={message.sender.avatar} alt={message.sender.name} />
-            <div className='flex flex-col'>
-              <p className='flex items-center gap-2'>
-                <span className='font-bold text-blue-500'>
-                  {message.sender.name}
-                </span>
-                <span className='text-sm text-primary-foreground/60'>
-                  {new Date(message.createAt).toLocaleString()}
-                </span>
-              </p>
-              <p>{message.message}</p>
-            </div>
+            <MessageItem key={message.id} message={message}></MessageItem>
           </div>
         ))}
       </div>
