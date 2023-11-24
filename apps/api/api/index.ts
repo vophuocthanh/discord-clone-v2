@@ -19,7 +19,7 @@ app.use(
     credentials: true,
   })
 );
-app.route('/', auth);
-app.route('/orgs', orgs);
+app.route('/', auth); // .../api/
+app.route('/orgs', orgs); // .../api/orgs/....
 
 export default handle(app);
