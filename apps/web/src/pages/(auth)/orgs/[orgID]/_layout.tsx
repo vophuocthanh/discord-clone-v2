@@ -20,12 +20,13 @@ import {
 } from 'lucide-react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SettingModal from './_components/SettingModal';
-import PopoverSidebar from './channels/_components/PopoverSidebar';
+import PopoverSidebar from './channels/_components/popover/PopoverSidebar';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getChannels } from '@/apis/channels';
 import { groupBy } from 'lodash-es';
 import TooltipIcon from '@/components/TooltipIcon';
+import { SkeletonChannel } from './channels/_components/skeleton/SkeletonChannel';
 
 const HEADERS = [
   {
@@ -98,32 +99,43 @@ export default function Org() {
           </div>
           <div className='px-2 text-primary-foreground/60'>
             <hr className='h-2 my-4 border-primary-foreground/60' />
-            {Object.entries(groupBy(data?.data, 'category.name')).map(
-              ([category, channels]) => (
-                <div key={category}>
-                  <div className='flex justify-between gap-2'>
-                    <div className='flex gap-2'>
-                      <ChevronDown className='w-4' />
-                      <h1 className='uppercase'> {category} </h1>
-                    </div>
-                    <Plus />
-                  </div>
-                  <div className='py-4 space-y-2'>
-                    {channels.map((channel) => (
-                      <div
-                        className={cn('px-6 py-3 cursor-pointer', {
-                          'bg-primary-foreground/20 text-primary-foreground/80 rounded':
-                            channel.id === channelID,
-                        })}
-                        key={channel.id}
-                        onClick={() => navigateToChannel(channel.id)}
-                      >
-                        {channel.name}
+            {!data ? (
+              <div className='flex flex-col space-y-10'>
+                <SkeletonChannel />
+                <SkeletonChannel />
+                <SkeletonChannel />
+                <SkeletonChannel />
+              </div>
+            ) : (
+              <div className=''>
+                {Object.entries(groupBy(data?.data, 'category.name')).map(
+                  ([category, channels]) => (
+                    <div key={category}>
+                      <div className='flex justify-between gap-2'>
+                        <div className='flex gap-2'>
+                          <ChevronDown className='w-4' />
+                          <h1 className='uppercase'> {category} </h1>
+                        </div>
+                        <Plus />
                       </div>
-                    ))}
-                  </div>
-                </div>
-              )
+                      <div className='py-4 space-y-2'>
+                        {channels.map((channel) => (
+                          <div
+                            className={cn('px-6 py-3 cursor-pointer', {
+                              'bg-primary-foreground/20 text-primary-foreground/80 rounded':
+                                channel.id === channelID,
+                            })}
+                            key={channel.id}
+                            onClick={() => navigateToChannel(channel.id)}
+                          >
+                            {channel.name}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
             )}
           </div>
         </div>

@@ -4,7 +4,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { BellOff, ChevronRight } from 'lucide-react';
-import { RadioGroupNotification } from './RadioGroupNotification';
+import { RadioGroupNotification } from '../RadioGroupNotification';
 import TooltipIcon from '@/components/TooltipIcon';
 
 export default function PopoverNotification() {

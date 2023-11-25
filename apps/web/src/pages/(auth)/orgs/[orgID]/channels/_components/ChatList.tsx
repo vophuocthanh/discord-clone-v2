@@ -2,12 +2,13 @@ import { Input } from '@/components/ui/input';
 import { Gift, PlusCircle, Sticker } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import PopoverEnjoy from './PopoverEnjoy';
+import PopoverEnjoy from './popover/PopoverEnjoy';
 import { useQuery } from 'react-query';
 import { getMessages } from '@/apis/messages';
 import { useParams } from '@/router';
 import { Message } from '@/lib/type';
 import MessageItem from './MessageItem';
+import { SkeletonChatList } from './skeleton/SkeletonChatList';
 
 export default function ChatList() {
   const chatListRef = useRef<HTMLDivElement>(null);
@@ -54,11 +55,22 @@ export default function ChatList() {
         className='flex flex-col h-[calc(100vh-9rem)] overflow-y-auto'
         ref={chatListRef}
       >
-        {[...(data?.data ?? []), ...messages]?.map((message) => (
-          <div key={message.id} className='flex items-center gap-5 my-2'>
-            <MessageItem key={message.id} message={message}></MessageItem>
+        {!data ? (
+          <div className='flex flex-col space-y-10 mt-4'>
+            <SkeletonChatList></SkeletonChatList>
+            <SkeletonChatList></SkeletonChatList>
+            <SkeletonChatList></SkeletonChatList>
+            <SkeletonChatList></SkeletonChatList>
           </div>
-        ))}
+        ) : (
+          <div className=''>
+            {[...(data?.data ?? []), ...messages]?.map((message) => (
+              <div key={message.id} className='flex items-center gap-5 my-2'>
+                <MessageItem key={message.id} message={message}></MessageItem>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <div className='absolute w-full select-none bottom-6'>
         <PlusCircle className='absolute w-6 h-6 cursor-pointer top-2 left-2' />

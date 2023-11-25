@@ -10,11 +10,12 @@ import mac from '@/assets/images/mac.svg';
 import { DropdownButton } from './_components/dropdown/DropdownButton';
 import { DropdownDownloadPublic } from './_components/dropdown/DropdownDownloadPublic';
 import Footer from './_components/Footer';
+import SectionInView from '@/components/SectionInView';
 export default function Component() {
   return (
     <div className=' w-full h-full'>
       <header className='mx-auto bg-[#23272a] justify-center flex'>
-        <div className='h-[40rem] max-w-6xl mt-10 text-white flex flex-col items-center'>
+        <div className='h-[40rem] max-w-6xl mt-12 text-white flex flex-col items-center'>
           <div className='flex items-center justify-between w-full gap-20'>
             <Link to='/'>
               <img src={logo} alt='logo' />
@@ -44,11 +45,11 @@ export default function Component() {
             </div>
             <Link to='/login'>
               <Button className='text-black bg-white rounded-full hover:bg-white hover:shadow-xl'>
-                Login
+                Sign up
               </Button>
             </Link>
           </div>
-          <div className='flex justify-between max-w-6xl gap-10 mt-20'>
+          <SectionInView className='flex justify-between max-w-6xl gap-10 mt-20'>
             <div className=''>
               <h1 className='text-6xl font-bold'>
                 GET DISCORD <br /> FOR ANY <br /> DEVICE
@@ -68,7 +69,7 @@ export default function Component() {
               </div>
             </div>
             <img src={banner} alt='banner' className='ml-6' />
-          </div>
+          </SectionInView>
         </div>
       </header>
       <div className='flex text-black justify-between items-center max-w-6xl mx-auto gap-10 my-20'>
