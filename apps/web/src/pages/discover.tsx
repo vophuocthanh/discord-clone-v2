@@ -2,8 +2,6 @@ import logo from '@/assets/images/logo.png';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import bg from '@/assets/images/bg-discover.png';
-import bgGroup from '@/assets/images/bg-group.png';
-import bgGroupRight from '@/assets/images/bg-group-right.png';
 import bgGroupLeft from '@/assets/images/bg-group-left.png';
 import bgCall from '@/assets/images/bg-call.png';
 import bgStars from '@/assets/images/stars.png';
