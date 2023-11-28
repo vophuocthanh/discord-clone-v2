@@ -69,7 +69,7 @@ export default function Component() {
           </SectionInView> */}
         </div>
       </header>
-      <video width='100%' height='360' controls autoPlay loop>
+      <video width='100%' height='360' autoPlay loop>
         <source src={video} type='video/webm' />
       </video>
       <div className='flex text-black justify-between items-center max-w-6xl mx-auto gap-10 my-20'>
