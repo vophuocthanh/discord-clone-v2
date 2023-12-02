@@ -48,7 +48,7 @@ export default function Component() {
               </Button>
             </Link>
           </div>
-          <SectionInView className='flex justify-between items-center max-w-6xl gap-10 mt-10'>
+          <SectionInView className='flex justify-between items-center max-w-6xl gap-10'>
             <div className=''>
               <h1 className='text-6xl font-bold'>DISCORD SAFETY CENTER</h1>
               <p className='mt-10'>
@@ -66,11 +66,28 @@ export default function Component() {
             <img
               src={bannerSafety}
               alt='banner'
-              className='ml-6 h-[30rem] w-[30rem]'
+              className='ml-6 h-[36rem] w-[36rem]'
             />
           </SectionInView>
         </div>
       </header>
+      <div className='max-w-7xl mt-10 flex flex-col text-black mx-auto'>
+        <h1 className='text-center text-5xl font-bold'>
+          Building Safer Spaces
+        </h1>
+        <div className='w-full aspect-video flex justify-center '>
+          <iframe
+            width='840'
+            height='396'
+            src='https://www.youtube.com/embed/LvtpbOarcWE'
+            title='Discord: A Safer Place for Teens to Hang Out Online'
+            frameBorder='0'
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+            allowFullScreen
+            className='mt-10 rounded-md'
+          ></iframe>
+        </div>
+      </div>
       <div className='flex text-black justify-between items-center max-w-6xl mx-auto gap-10 my-20'>
         <div className='flex flex-col space-y-10'>
           <div className='relative flex w-[36rem] overflow-hidden flex-col items-center space-y-6  rounded-lg h-[46rem] bg-[#f6f6f6]'>
