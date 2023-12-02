@@ -7,17 +7,21 @@ export type Path =
   | `/`
   | `/blog`
   | `/careers`
+  | `/channels/:orgID/:channelID`
+  | `/channels/:orgID/channel-browser`
+  | `/channels/:orgID/member-safety`
   | `/discover`
   | `/download`
   | `/login`
   | `/nitro`
-  | `/orgs/:orgID/channels/:channelID`
   | `/register`
   | `/safety`
   | `/servers`
 
 export type Params = {
-  '/orgs/:orgID/channels/:channelID': { orgID: string; channelID: string }
+  '/channels/:orgID/:channelID': { orgID: string; channelID: string }
+  '/channels/:orgID/channel-browser': { orgID: string }
+  '/channels/:orgID/member-safety': { orgID: string }
 }
 
 export type ModalPath = never

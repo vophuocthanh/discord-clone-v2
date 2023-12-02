@@ -6,8 +6,8 @@ import { useParams } from '@/router';
 import { SkeletonMember } from './skeleton/SkeletonMemmber';
 
 export default function MemberList() {
-  const { orgID, channelID } = useParams('/orgs/:orgID/channels/:channelID');
-  const { data } = useQuery(['members'], () => getMembers(orgID, channelID));
+  const { channelID, orgID } = useParams('/channels/:orgID/:channelID');
+  const { data } = useQuery(['members'], () => getMembers(channelID, orgID));
   return (
     <div className='flex flex-col gap-8'>
       {!data ? (

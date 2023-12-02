@@ -15,7 +15,7 @@ export default function ChatList() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [text, setText] = useState('');
-  const { orgID, channelID } = useParams('/orgs/:orgID/channels/:channelID');
+  const { orgID, channelID } = useParams('/channels/:orgID/:channelID');
 
   const { data } = useQuery(['messages'], () => getMessages(orgID, channelID));
   const handleChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -56,7 +56,7 @@ export default function ChatList() {
         ref={chatListRef}
       >
         {!data ? (
-          <div className='flex flex-col space-y-10 mt-4'>
+          <div className='flex flex-col mt-4 space-y-10'>
             <SkeletonChatList></SkeletonChatList>
             <SkeletonChatList></SkeletonChatList>
             <SkeletonChatList></SkeletonChatList>

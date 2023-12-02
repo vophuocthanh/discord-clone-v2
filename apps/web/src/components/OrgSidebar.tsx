@@ -1,37 +1,38 @@
-import { Orgs } from '@/lib/type';
+import { Org } from '@/lib/type';
 import { cn } from '@/lib/utils';
-import { useParams } from '@/router';
+import { useParams, useNavigate } from '@/router';
 import { Plus } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
 interface OrgSidebarProps {
-  orgs: Orgs[];
+  orgs: Org[];
 }
 
 export default function OrgSidebar({ orgs }: OrgSidebarProps) {
   const navigate = useNavigate();
-  const { orgID } = useParams('/orgs/:orgID/channels/:channelID');
+  const { orgID } = useParams('/channels/:orgID/:channelID');
   return (
-    <div className='p-3 space-y-5'>
+    <div className='p-4 space-y-4'>
       {orgs.map((org) => (
         <div key={org.id}>
           <div
             className={cn({
-              'fixed left-0 h-14 w-1 border-l-4 rounded-r border-primary-foreground':
+              'fixed left-0 bg-primary-foreground/60 h-14 rounded-r w-1':
                 org.id === orgID,
             })}
-          ></div>
+          />
           <img
+            onClick={() =>
+              navigate(`/channels/:orgID/:channelID`, {
+                params: { orgID: org.id, channelID: '1' },
+              })
+            }
             src={org.icon}
             alt={org.name}
             className='cursor-pointer w-14 h-14'
-            onClick={() => {
-              navigate(`/orgs/${org.id}`);
-            }}
           />
         </div>
       ))}
-      <div className='flex items-center justify-center text-green-500 bg-gray-700 rounded-full cursor-pointer h-14 w-14'>
+      <div className='flex items-center justify-center text-green-500 rounded-full cursor-pointer w-14 h-14 bg-primary-foreground/10'>
         <Plus />
       </div>
     </div>

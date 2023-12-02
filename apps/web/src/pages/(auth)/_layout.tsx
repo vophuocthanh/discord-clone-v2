@@ -3,14 +3,14 @@ import OrgSidebar from '@/components/OrgSidebar';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { SkeletonOrg } from './orgs/[orgID]/channels/_components/skeleton/SkeletonOrg';
+import { SkeletonOrg } from './channels/[orgID]/_components/skeleton/SkeletonOrg';
 
 export default function App() {
   const navigate = useNavigate();
   useEffect(() => {
     document.documentElement.classList.add('dark');
     if (window.location.pathname === '/') {
-      navigate('/orgs/1');
+      navigate('/channels/1');
     }
   }, [navigate]);
   useEffect(() => {

@@ -1,7 +1,6 @@
 import { cn } from '@/lib/utils';
-import { useParams } from '@/router';
+import { Link, useParams } from '@/router';
 import {
-  Calendar,
   ChevronDown,
   Globe,
   Headphones,
@@ -19,32 +18,15 @@ import {
   Video,
 } from 'lucide-react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import SettingModal from './_components/SettingModal';
-import PopoverSidebar from './channels/_components/popover/PopoverSidebar';
+import PopoverSidebar from './_components/popover/PopoverSidebar';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getChannels } from '@/apis/channels';
 import { groupBy } from 'lodash-es';
 import TooltipIcon from '@/components/TooltipIcon';
-import { SkeletonChannel } from './channels/_components/skeleton/SkeletonChannel';
-
-const HEADERS = [
-  {
-    id: 1,
-    name: 'Events',
-    icon: <Calendar />,
-  },
-  {
-    id: 2,
-    name: 'Browse Channels',
-    icon: <Globe />,
-  },
-  {
-    id: 3,
-    name: 'Members',
-    icon: <Users />,
-  },
-];
+import { SkeletonChannel } from './_components/skeleton/SkeletonChannel';
+import EventsModal from './_components/EventsModal';
+import SettingModal from './_components/SettingModal';
 
 const OPTIONS = [
   {
@@ -65,15 +47,16 @@ const OPTIONS = [
   },
 ];
 
-export default function Org() {
+export default function Component() {
   const [micOn, setMicOn] = useState(false);
   const [headphoneOn, steHeadphoneOn] = useState(true);
-  const { channelID, orgID } = useParams('/orgs/:orgID/channels/:channelID');
+  const { channelID, orgID } = useParams('/channels/:orgID/:channelID');
   const navigate = useNavigate();
 
   const { data } = useQuery(['channels'], () => getChannels(orgID));
+  const channels = data?.data;
   const navigateToChannel = (id: string) => {
-    navigate(`/orgs/${orgID}/channels/${id}`);
+    navigate(`/channels/${orgID}/${id}`);
   };
   const handleMic = () => {
     setMicOn(!micOn);
@@ -86,16 +69,27 @@ export default function Org() {
       <div className='relative bg-primary-foreground/10 text-primary-foreground 0 w-[20rem] flex flex-col'>
         <PopoverSidebar></PopoverSidebar>
         <div className='overflow-scroll h-3/4'>
-          <div className='text-xl text-primary-foreground/60'>
-            {HEADERS.map((header) => (
-              <div
-                className='flex gap-2 px-3 py-2 cursor-pointer hover:bg-primary-foreground/20'
-                key={header.id}
-              >
-                {header.icon}
-                <p> {header.name} </p>
-              </div>
-            ))}
+          <div className='pt-2 pl-2 text-xl text-primary-foreground/60'>
+            <EventsModal />
+            <Link
+              to='/channels/:orgID/channel-browser'
+              params={{ orgID }}
+              className='flex w-full gap-2 px-3 py-2 hover:bg-primary-foreground/20'
+            >
+              <Globe />
+              <p>Browse Channels</p>
+            </Link>
+            <Link
+              to='/channels/:orgID/member-safety'
+              params={{ orgID }}
+              state={{
+                channel: channels?.find((channel) => channel.id === channelID),
+              }}
+              className='flex w-full gap-2 px-3 py-2 hover:bg-primary-foreground/20'
+            >
+              <Users />
+              <p>Member</p>
+            </Link>
           </div>
           <div className='px-2 text-primary-foreground/60'>
             <hr className='h-2 my-4 border-primary-foreground/60' />
@@ -108,7 +102,7 @@ export default function Org() {
               </div>
             ) : (
               <div className=''>
-                {Object.entries(groupBy(data?.data, 'category.name')).map(
+                {Object.entries(groupBy(channels, 'category.name')).map(
                   ([category, channels]) => (
                     <div key={category}>
                       <div className='flex justify-between gap-2'>

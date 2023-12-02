@@ -1,17 +1,17 @@
 import TooltipIcon from '@/components/TooltipIcon';
 import { useParams } from '@/router';
 import { Frame, HelpCircle, Users2 } from 'lucide-react';
-import MemberList from './_components/MemberList';
-import ChatList from './_components/ChatList';
 import { useState } from 'react';
-import PopoverGim from './_components/popover/PopoverGim';
-import PopoverNotification from './_components/popover/PopoverNotification';
-import PopoverMessages from './_components/popover/PopoverMessages';
 import { Input } from '@/components/ui/input';
+import PopoverMessages from './_components/popover/PopoverMessages';
+import PopoverNotification from './_components/popover/PopoverNotification';
+import PopoverGim from './_components/popover/PopoverGim';
+import ChatList from './_components/ChatList';
+import MemberList from './_components/MemberList';
 
 export default function Channel() {
   const [isHideMemberList, setIsHideMemberList] = useState(false);
-  const { channelID } = useParams('/orgs/:orgID/channels/:channelID');
+  const { channelID } = useParams('/channels/:orgID/:channelID');
   return (
     <div>
       <header className='flex items-center justify-between p-3 text-2xl border-b border-primary-foreground/10 h-14 bg-[#1d202ab8] '>
