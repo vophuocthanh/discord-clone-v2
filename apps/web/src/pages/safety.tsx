@@ -2,17 +2,18 @@ import { Link } from 'react-router-dom';
 import logo from '@/assets/images/logo.png';
 import { Button } from '@/components/ui/button';
 import bannerSafety from '@/assets/images/bg-safety.svg';
-import ios from '@/assets/images/ios.svg';
-import linux from '@/assets/images/linux.svg';
-import android from '@/assets/images/android.svg';
-import mac from '@/assets/images/mac.svg';
-import { DropdownButton } from './_components/dropdown/DropdownButton';
-import { DropdownDownloadPublic } from './_components/dropdown/DropdownDownloadPublic';
+import safetyLibrary from '@/assets/images/safety-library.svg';
+import privacyHub from '@/assets/images/safety-privacy.svg';
+import parentHub from '@/assets/images/safety-parent.svg';
+import transparencyHub from '@/assets/images/safety-transparent.svg';
+import safetyNewHub from '@/assets/images/safety-new.svg';
+import policyHub from '@/assets/images/safety-privacy.svg';
 import Footer from './_components/Footer';
 import SectionInView from '@/components/SectionInView';
+import { ArrowRight } from 'lucide-react';
 export default function Component() {
   return (
-    <div className=' w-full h-full'>
+    <div className='w-full h-full '>
       <header className='mx-auto bg-[#5865f2] justify-center flex'>
         <div className='h-[calc(100vh-4.5rem)] max-w-6xl mt-12 text-white flex flex-col items-center'>
           <div className='flex items-center justify-between w-full gap-20'>
@@ -48,7 +49,7 @@ export default function Component() {
               </Button>
             </Link>
           </div>
-          <SectionInView className='flex justify-between items-center max-w-6xl gap-10'>
+          <SectionInView className='flex items-center justify-between max-w-6xl gap-10'>
             <div className=''>
               <h1 className='text-6xl font-bold'>DISCORD SAFETY CENTER</h1>
               <p className='mt-10'>
@@ -71,11 +72,11 @@ export default function Component() {
           </SectionInView>
         </div>
       </header>
-      <div className='max-w-7xl mt-10 flex flex-col text-black mx-auto'>
-        <h1 className='text-center text-5xl font-bold'>
+      <div className='flex flex-col mx-auto mt-10 h-100% text-black max-w-7xl'>
+        <h1 className='text-5xl font-bold text-center'>
           Building Safer Spaces
         </h1>
-        <div className='w-full aspect-video flex justify-center '>
+        <div className='flex justify-center w-full aspect-video h-[30rem]'>
           <iframe
             width='840'
             height='396'
@@ -88,43 +89,139 @@ export default function Component() {
           ></iframe>
         </div>
       </div>
-      <div className='flex text-black justify-between items-center max-w-6xl mx-auto gap-10 my-20'>
-        <div className='flex flex-col space-y-10'>
-          <div className='relative flex w-[36rem] overflow-hidden flex-col items-center space-y-6  rounded-lg h-[46rem] bg-[#f6f6f6]'>
-            <h1 className='text-4xl mt-28 font-bold'>iOS</h1>
-            <Button className='bg-black text-white rounded-full text-xl p-8 hover:bg-black hover:shadow-md hover:scale-110'>
-              Download
-            </Button>
-            <img src={ios} alt='ios' className='absolute top-[21.5rem]' />
+      <div className='text-black flex justify-between bg-[#f6f6f6] w-full gap-10 py-20 h-100%'>
+        <div className='flex flex-col mx-auto mt-20 space-y-20 max-w-7xl'>
+          <div className='flex items-center justify-between gap-20'>
+            <div className='flex flex-col mr-auto space-y-4'>
+              <h1 className='text-5xl font-bold'>Safety Library</h1>
+              <p className='w-[30rem] font-light'>
+                Everything you could ever want to know about safety on Discord.
+                <br />
+                Whether you’re a user, a moderator, or a parent, discover all of
+                our <br /> tools and resources and how to use them.
+              </p>
+              <div className='flex items-center gap-4 hover:scale-x-95 hover:transition-all'>
+                <Link to='/safety-library' className='text-semibold'>
+                  Explore more
+                </Link>
+                <ArrowRight className='text-white rounded-full bg-primary' />
+              </div>
+            </div>
+            <img
+              src={safetyLibrary}
+              alt='safety'
+              className='w-[30rem] h-[20rem] rounded-md'
+            />
           </div>
-          <div className='relative flex w-[36rem] flex-col overflow-hidden items-center space-y-6  rounded-lg h-[40rem] bg-[#f6f6f6]'>
-            <h1 className='text-4xl mt-28 font-bold'>Linux</h1>
-            <DropdownButton></DropdownButton>
-            <img src={linux} alt='ios' className='absolute top-[16rem]' />
+          <div className='flex items-center justify-between gap-20'>
+            <img
+              src={privacyHub}
+              alt='safety'
+              className='w-[30rem] h-[20rem] rounded-md'
+            />
+            <div className='flex flex-col mr-auto space-y-4'>
+              <h1 className='text-5xl font-bold'>Privacy Hub</h1>
+              <p className='w-[30rem] font-light'>
+                Everything you could ever want to know about safety on Discord.
+                <br />
+                Whether you’re a user, a moderator, or a parent, discover all of
+                our <br /> tools and resources and how to use them.
+              </p>
+              <div className='flex items-center gap-4 hover:scale-x-95 hover:transition-all'>
+                <Link to='/safety-privacy' className='text-semibold'>
+                  Explore more
+                </Link>
+                <ArrowRight className='text-white rounded-full bg-primary' />
+              </div>
+            </div>
           </div>
-          <div className='relative flex w-[36rem] flex-col overflow-hidden items-center space-y-6 rounded-lg h-96 bg-[#f6f6f6]'>
-            <h1 className='text-4xl mt-28 font-bold'>Feeling experimental?</h1>
-            <p>
-              Try our Public Test Build and test new features before they
-              launch.
-            </p>
-            <DropdownDownloadPublic></DropdownDownloadPublic>
+          <div className='flex items-center justify-between gap-20'>
+            <div className='flex flex-col mr-auto space-y-4'>
+              <h1 className='text-5xl font-bold'>Parent Hub</h1>
+              <p className='w-[30rem] font-light'>
+                Everything you could ever want to know about safety on Discord.
+                <br />
+                Whether you’re a user, a moderator, or a parent, discover all of
+                our <br /> tools and resources and how to use them.
+              </p>
+              <div className='flex items-center gap-4 hover:scale-x-95 hover:transition-all'>
+                <Link to='/safety-parents' className='text-semibold'>
+                  Explore more
+                </Link>
+                <ArrowRight className='text-white rounded-full bg-primary' />
+              </div>
+            </div>
+            <img
+              src={parentHub}
+              alt='safety'
+              className='w-[30rem] h-[20rem] rounded-md'
+            />
           </div>
-        </div>
-        <div className='flex flex-col space-y-10'>
-          <div className='relative flex w-[36rem] overflow-hidden flex-col items-center space-y-6  rounded-lg h-[46rem] bg-[#f6f6f6]'>
-            <h1 className='text-4xl mt-14 font-bold'>Android</h1>
-            <Button className='bg-black text-white rounded-full text-xl p-8 hover:bg-black hover:shadow-md hover:scale-110'>
-              Download
-            </Button>
-            <img src={android} alt='ios' className='absolute top-[13.5rem]' />
+          <div className='flex items-center justify-between gap-20'>
+            <img
+              src={transparencyHub}
+              alt='safety'
+              className='w-[30rem] h-[20rem] rounded-md'
+            />
+            <div className='flex flex-col mr-auto space-y-4'>
+              <h1 className='text-5xl font-bold'>Transparency Hub</h1>
+              <p className='w-[30rem] font-light'>
+                Everything you could ever want to know about safety on Discord.
+                <br />
+                Whether you’re a user, a moderator, or a parent, discover all of
+                our <br /> tools and resources and how to use them.
+              </p>
+              <div className='flex items-center gap-4 hover:scale-x-95 hover:transition-all'>
+                <Link to='/safety-transparency' className='text-semibold'>
+                  Explore more
+                </Link>
+                <ArrowRight className='text-white rounded-full bg-primary' />
+              </div>
+            </div>
           </div>
-          <div className='relative flex w-[36rem] overflow-hidden flex-col items-center space-y-6  rounded-lg h-[38rem] bg-[#f6f6f6]'>
-            <h1 className='text-4xl mt-14 font-bold'>Mac</h1>
-            <Button className='bg-black text-white rounded-full text-xl p-8 hover:bg-black hover:shadow-md hover:scale-110'>
-              Download
-            </Button>
-            <img src={mac} alt='ios' className='absolute top-[13.5rem]' />
+          <div className='flex items-center justify-between gap-20'>
+            <div className='flex flex-col mr-auto space-y-4'>
+              <h1 className='text-5xl font-bold'>Safety News Hub</h1>
+              <p className='w-[30rem] font-light'>
+                Everything you could ever want to know about safety on Discord.
+                <br />
+                Whether you’re a user, a moderator, or a parent, discover all of
+                our <br /> tools and resources and how to use them.
+              </p>
+              <div className='flex items-center gap-4 hover:scale-x-95 hover:transition-all'>
+                <Link to='/safety-news' className='text-semibold'>
+                  Explore more
+                </Link>
+                <ArrowRight className='text-white rounded-full bg-primary' />
+              </div>
+            </div>
+            <img
+              src={safetyNewHub}
+              alt='safety'
+              className='w-[30rem] h-[20rem] rounded-md'
+            />
+          </div>
+          <div className='flex items-center justify-between gap-20'>
+            <img
+              src={policyHub}
+              alt='safety'
+              className='w-[30rem] h-[20rem] rounded-md'
+            />
+            <div className='flex flex-col mr-auto space-y-4'>
+              <h1 className='text-5xl font-bold'>Policy Hub</h1>
+              <p className='w-[30rem] font-light'>
+                Everything you could ever want to know about safety on Discord.
+                <br />
+                Whether you’re a user, a moderator, or a parent, discover all of
+                our <br /> tools and resources and how to use them.
+              </p>
+              <div className='flex items-center gap-4 hover:scale-x-95 hover:transition-all'>
+                <Link to='/safety-policies' className='text-semibold'>
+                  Explore more
+                </Link>
+                <ArrowRight className='text-white rounded-full bg-primary' />
+              </div>
+            </div>
           </div>
         </div>
       </div>
