@@ -3,6 +3,11 @@ export interface Org {
   name: string;
   icon: string;
 }
+export interface Orgs {
+  id: string;
+  name: string;
+  icon: string;
+}
 export interface User {
   id: number;
   name: string;
