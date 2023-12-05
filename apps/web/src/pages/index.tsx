@@ -8,26 +8,10 @@ import bgGroupLeft from '@/assets/images/bg-group-left.png';
 import bgCall from '@/assets/images/bg-call.png';
 import bgStars from '@/assets/images/stars.png';
 import { Download } from 'lucide-react';
-import { useEffect } from 'react';
 import SectionInView from '@/components/SectionInView';
 import Footer from './_components/Footer';
 
 export default function Component() {
-  useEffect(() => {
-    const handleScroll = () => {
-      const elements = document.querySelectorAll('');
-      elements.forEach((element) => {
-        const elementRect = element.getBoundingClientRect();
-        if (elementRect.top <= window.innerHeight / 2) {
-          element.classList.add('animated', 'fadeInFromSides');
-        }
-      });
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
   return (
     <div className='w-full bg-white'>
       <div

@@ -13,9 +13,9 @@ import Footer from './_components/Footer';
 import SectionInView from '@/components/SectionInView';
 export default function Component() {
   return (
-    <div className=' w-full h-full'>
-      <header className='mx-auto bg-[#23272a] justify-center flex'>
-        <div className='h-[40rem] max-w-6xl mt-12 text-white flex flex-col items-center'>
+    <div className='w-full h-full'>
+      <header className='mx-auto bg-[#232b2b] justify-center flex'>
+        <div className='h-[calc(100vh-4.5rem)] max-w-6xl mt-12 text-white flex flex-col items-center'>
           <div className='flex items-center justify-between w-full gap-20'>
             <Link to='/'>
               <img src={logo} alt='logo' />

@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 
 export default function Component() {
   return (
-    <div className='w-full bg-white'>
+    <div className='w-full h-full bg-white'>
       <div
         className='flex flex-col mx-auto items-center w-full bg-no-repeat bg-cover h-[28rem]'
         style={{ backgroundImage: `url(${bg})` }}
@@ -47,7 +47,7 @@ export default function Component() {
             </div>
             <Link to='/login'>
               <Button className='text-black bg-white rounded-full hover:bg-white hover:shadow-xl'>
-                Login
+                Sign up
               </Button>
             </Link>
           </div>
