@@ -1,4 +1,4 @@
-const PROJECT_ALL = [
+const SCIENCETECH = [
   {
     id: 1,
     img: 'https://cdn.discordapp.com/discovery-splashes/1046979304547954728/d0ac123bc0db716e100a5a3a24c62fa8.jpg?size=2048',
@@ -41,12 +41,12 @@ export default function ScienceTech() {
   return (
     <div className='w-full h-full p-4 space-y-4'>
       <h1>ScienceTech</h1>
-      {PROJECT_ALL.map((project) => (
+      {SCIENCETECH.map((project) => (
         <div
           className='flex gap-4 rounded-md hover:bg-gray-100'
           key={project.id}
         >
-          <img src={project.img} alt='image' className='w-80 h-48 rounded-md' />
+          <img src={project.img} alt='image' className='h-48 rounded-md w-80' />
           <div className='flex flex-col space-y-4'>
             <span className='text-xl font-bold'>{project.name}</span>
             <p>{project.desc}</p>
@@ -56,8 +56,8 @@ export default function ScienceTech() {
               <span>{project.members}</span>
             </div>
             <div className='flex items-center gap-2 p-2 bg-gray-200 rounded w-28'>
-              <span className='w-4 h-4 flex rounded-full bg-green-400'></span>
-              <span className='uppercase font-bold'>{project.status}</span>
+              <span className='flex w-4 h-4 bg-green-400 rounded-full'></span>
+              <span className='font-bold uppercase'>{project.status}</span>
             </div>
           </div>
         </div>
