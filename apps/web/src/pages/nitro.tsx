@@ -25,8 +25,8 @@ export default function Component() {
         </video>
       </div>
       <header className='absolute left-0 right-0 top-0 mx-auto justify-center flex'>
-        <div className='h-[40rem] max-w-6xl mt-12 text-white flex flex-col items-center'>
-          <div className='flex items-center justify-between w-full gap-20'>
+        <div className='h-[40rem] mt-12 text-white flex flex-col justify-between items-center'>
+          <div className='flex items-center justify-between w-full gap-20 max-w-7xl mx-auto'>
             <Link to='/'>
               <img src={logo} alt='logo' />
             </Link>

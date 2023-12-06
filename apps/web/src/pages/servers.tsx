@@ -77,10 +77,9 @@ const SUPPORTS = [
 const HELPS = [
   {
     id: 1,
-    names: 'Developer Support',
-    imgs: developerDiscord,
-    descriptions:
-      'Your home for support with developing bots, apps, & games using our API and SDK! ',
+    title: 'Developer Support',
+    image: developerDiscord,
+    desc: 'Your home for support with developing bots, apps, & games using our API and SDK! ',
   },
   {
     id: 2,
@@ -201,15 +200,13 @@ export default function Component() {
             key={item.id}
           >
             <img
-              src={item.imgs}
+              src={item.image}
               alt=''
               className='w-24 h-24 rounded-full flex justify-center items-center mx-auto'
             />
-            <h1 className='text-xl font-bold text-primary'>{item.names}</h1>
+            <h1 className='text-xl font-bold text-primary'>{item.title}</h1>
             <hr className='w-20 flex justify-center items-center mx-auto' />
-            <p className='text-center text-sm text-[#8b8d8f]'>
-              {item.descriptions}
-            </p>
+            <p className='text-center text-sm text-[#8b8d8f]'>{item.desc}</p>
           </div>
         ))}
       </div>
