@@ -7,12 +7,45 @@ import workPeople from '@/assets/images/careers/work-people.webp';
 import joinCulture from '@/assets/images/careers/join-culture.webp';
 import Internships from '@/assets/images/careers/internships.webp';
 import startCareers from '@/assets/images/careers/start-careens.svg';
+import bannerOne from '@/assets/images/careers/banner-1.webp';
+import bannerTwo from '@/assets/images/careers/banner-2.webp';
+import bannerThere from '@/assets/images/careers/banner-3.webp';
+import bannerFour from '@/assets/images/careers/banner-4.webp';
+import bannerFire from '@/assets/images/careers/banner-5.webp';
 
 export default function Component() {
   return (
-    <div className='w-full h-full '>
+    <div className='w-full'>
+      <div className='absolute top-[34rem] left-20'>
+        <img
+          src={bannerTwo}
+          alt='banner'
+          className='w-[26rem] h-[18rem] rounded-2xl'
+        />
+      </div>
+      <div className='absolute top-[34rem] right-48'>
+        <img
+          src={bannerThere}
+          alt='banner'
+          className='w-[20rem] h-[16rem] rounded-2xl'
+        />
+      </div>
+      <div className='absolute top-[74rem] right-48'>
+        <img
+          src={bannerFire}
+          alt='banner'
+          className='w-[30rem] h-[20rem] rounded-2xl'
+        />
+      </div>
+      <div className='absolute top-[74rem] left-64'>
+        <img
+          src={bannerFour}
+          alt='banner'
+          className='w-[16rem] h-[12rem] rounded-2xl'
+        />
+      </div>
       <header className='mx-auto bg-[#5865f2] justify-center flex'>
-        <div className='h-[calc(100vh-4.5rem)] max-w-6xl mt-12 text-white flex flex-col items-center'>
+        <div className='flex flex-col items-center h-[100rem] max-w-6xl mt-12 text-white'>
           <div className='flex items-center justify-between w-full gap-20'>
             <Link to='/'>
               <img src={logo} alt='logo' />
@@ -48,15 +81,24 @@ export default function Component() {
           </div>
           <SectionInView className='flex flex-col items-center justify-between max-w-6xl gap-10 mt-32'>
             <h1 className='text-6xl font-bold uppercase'>WORK AT DISCORD</h1>
-            <p className='text-center text-xl'>
+            <p className='text-xl text-center'>
               Discord is home to (com) passionate people who believe in our
               mission of creating <br /> space for everyone to find belonging.
             </p>
           </SectionInView>
+          <div className='flex flex-col items-center justify-between gap-10 mt-32'>
+            <div className='absolute top-[40rem]'>
+              <img
+                src={bannerOne}
+                alt='banner'
+                className='w-[50rem] h-[40rem] rounded-2xl'
+              />
+            </div>
+          </div>
         </div>
       </header>
-      <div className='w-full text-black my-20'>
-        <div className='max-w-4xl mx-auto justify-center flex flex-col items-center my-20 space-y-10'>
+      <div className='w-full my-20 text-black'>
+        <div className='flex flex-col items-center justify-center max-w-4xl mx-auto my-20 space-y-10'>
           <h2 className='text-5xl font-bold'>Come build belonging with us</h2>
           <p className='text-lg text-center'>
             Discord is working toward an inclusive world where no one feels like
@@ -72,7 +114,7 @@ export default function Component() {
             build <br /> belonging with us!
           </p>
         </div>
-        <div className='flex flex-col mx-auto mt-20 space-y-20 max-w-6xl'>
+        <div className='flex flex-col max-w-6xl mx-auto mt-20 space-y-20'>
           <div className='flex items-center justify-between'>
             <div className='flex flex-col space-y-4'>
               <h1 className='text-3xl font-bold'>Work with people who care.</h1>
@@ -126,7 +168,7 @@ export default function Component() {
                   read more about our program.
                 </span>
               </p>
-              <Button className='w-56 h-14 rounded-full'>Explore more</Button>
+              <Button className='w-56 rounded-full h-14'>Explore more</Button>
             </div>
             <img
               src={Internships}
@@ -134,7 +176,7 @@ export default function Component() {
               className='w-[30rem] h-[25rem] rounded-md'
             />
           </div>
-          <div className='flex flex-col justify-center text-center space-y-2'>
+          <div className='flex flex-col justify-center space-y-2 text-center'>
             <img
               src={startCareers}
               alt='star'
@@ -148,7 +190,6 @@ export default function Component() {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );

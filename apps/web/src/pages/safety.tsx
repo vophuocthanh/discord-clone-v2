@@ -11,11 +11,39 @@ import policyHub from '@/assets/images/safety-privacy.svg';
 import Footer from './_components/Footer';
 import SectionInView from '@/components/SectionInView';
 import { ArrowRight } from 'lucide-react';
+
+const SAFETY_LIBRARY = [
+  {
+    id: 1,
+    name: 'Safety Library',
+  },
+  {
+    id: 2,
+    name: 'Privacy Hub',
+  },
+  {
+    id: 3,
+    name: 'Parent Hub',
+  },
+  {
+    id: 4,
+    name: 'Transparency Hub',
+  },
+  {
+    id: 5,
+    name: 'Safety News Hub',
+  },
+  {
+    id: 6,
+    name: 'Policy Hub',
+  },
+];
+
 export default function Component() {
   return (
     <div className='w-full h-full '>
       <header className='mx-auto bg-[#5865f2] justify-center flex'>
-        <div className='h-[calc(100vh-4.5rem)] max-w-6xl mt-12 text-white flex flex-col items-center'>
+        <div className='flex flex-col items-center max-w-6xl mt-12 text-white'>
           <div className='flex items-center justify-between w-full gap-20'>
             <Link to='/'>
               <img src={logo} alt='logo' />
@@ -70,6 +98,16 @@ export default function Component() {
               className='ml-6 h-[36rem] w-[36rem]'
             />
           </SectionInView>
+          <div className='flex flex-wrap items-center justify-between mb-10 gap-y-10 max-w-7xl'>
+            {SAFETY_LIBRARY.map((item) => (
+              <div
+                className='flex items-center justify-center text-2xl font-black text-center text-black uppercase bg-white rounded-lg shadow-md hover:transition-all hover:bg-green-400 h-28 w-80 hover:shadow-t'
+                key={item.id}
+              >
+                {item.name}
+              </div>
+            ))}
+          </div>
         </div>
       </header>
       <div className='flex flex-col mx-auto mt-10 h-100% text-black max-w-7xl'>
