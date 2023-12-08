@@ -5,9 +5,6 @@ import { logger } from 'hono/logger';
 import { router as auth } from '../modules/auth/auth.controller';
 import { router as orgs } from '../modules/orgs/orgs.controller';
 
-export const config = {
-  runtime: 'edge',
-};
 const app = new Hono().basePath('/api');
 
 app.use('*', logger());
