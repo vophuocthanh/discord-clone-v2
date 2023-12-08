@@ -56,11 +56,10 @@ router
   .get('/:orgId/members', (c) =>
     c.json([
       {
-        id: '01',
-        displayName: 'Songoku',
-        username: 'songoku',
-        avatar:
-          'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
+        id: '001',
+        displayName: 'John Doe',
+        username: 'john_doe',
+        avatar: 'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
         memberSince: '2022-01-01',
         joinedDiscord: '2022-01-01',
         joinMethod: 'Discord',
