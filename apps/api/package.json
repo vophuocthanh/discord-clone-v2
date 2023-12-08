@@ -5,6 +5,7 @@
     "start": "vercel dev --yes"
   },
   "dependencies": {
+    "@prisma/client": "^5.7.0",
     "hono": "^3.10.1"
   },
   "devDependencies": {

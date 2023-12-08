@@ -1,22 +1,13 @@
 import { Hono } from 'hono';
+import { db } from '../../prisma/db';
 
 export const router = new Hono();
 
 router
-  .get('/', (c) =>
-    c.json([
-      {
-        id: '1',
-        icon: 'https://enouvo.com/wp-content/uploads/2022/07/cropped-logo-vien-trang-file-in-01.png',
-        name: 'Enouvo',
-      },
-      {
-        id: '2',
-        icon: 'https://static.ybox.vn/2022/11/3/1667994393514-uyen182xp9pj-avatar.png',
-        name: 'Axon Active',
-      },
-    ])
-  )
+  .get('/', async (c) => {
+    const orgs = await db.org.findMany({}); // tim tat ca orgs
+    return c.json(orgs);
+  })
   .get('/:orgId/channels', (c) =>
     c.json([
       {
