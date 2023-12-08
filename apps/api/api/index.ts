@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { handle } from 'hono/vercel';
+import { serve } from '@hono/node-server';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { router as auth } from '../modules/auth/auth.controller';
@@ -15,7 +16,14 @@ app.use(
     credentials: true,
   })
 );
-app.route('/', auth); // .../api/
-app.route('/orgs', orgs); // .../api/orgs/....
+app.route('/', auth);
+app.route('/orgs', orgs);
 
-export default handle(app);
+serve(app, () => {
+  console.log('Server is running on http://localhost:3000');
+});
+
+// export const config = {
+//   runtime: 'edge',
+// };
+// export default handle(app);

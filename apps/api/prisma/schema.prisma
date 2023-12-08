@@ -6,12 +6,15 @@ datasource db {
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["fullTextIndex"]
+  output   = "./generated/client"
 }
 
 model Org {
-  id String @id
+  id String @id @default(cuid())
   icon String
   name String
 
   @@map("orgs")
 }
+
+

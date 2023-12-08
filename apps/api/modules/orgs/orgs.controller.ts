@@ -5,7 +5,17 @@ export const router = new Hono();
 
 router
   .get('/', async (c) => {
-    const orgs = await db.org.findMany({}); // tim tat ca orgs
+    const orgs = await db.org.findMany({});
+    return c.json(orgs);
+  })
+  .post('/', async (c) => {
+    const { name, icon } = await c.req.json<{ name: string; icon: string }>();
+    const orgs = await db.org.create({
+      data: {
+        name: name,
+        icon: icon,
+      },
+    });
     return c.json(orgs);
   })
   .get('/:orgId/channels', (c) =>
