@@ -80,7 +80,7 @@ export default function SettingModal() {
       </DialogTrigger>
       <DialogContent className='max-w-full h-screen flex gap-0 p-0'>
         <div className='w-1/3 bg-primary-foreground/10 flex justify-end'>
-          <div className='w-1/2 p-2'>
+          <div className='w-1/2 mt-10 p-2'>
             <div>
               {SETTINGS.map((setting) => (
                 <div key={setting.key} className='border-b py-3'>
@@ -116,24 +116,26 @@ export default function SettingModal() {
           </div>
         </div>
         <div className='w-2/3 p-6 h-screen overflow-auto bg-primary-foreground/20'>
-          {(() => {
-            switch (tab) {
-              case 'user-settings/My Account':
-                return <MyAccount />;
-              case 'user-settings/Profiles':
-                return <Profiles />;
-              case 'user-settings/Authorized Apps':
-                return <AuthorizedApp />;
-              case 'billing-settings/Nitro':
-                return <NitroSetting />;
-              case 'billing-settings/Server Upgrades':
-                return <ServerUpgrade />;
-              case 'billing-settings/Subscriptions':
-                return <Subscription />;
-              default:
-                return null;
-            }
-          })()}
+          <div className='mt-10'>
+            {(() => {
+              switch (tab) {
+                case 'user-settings/My Account':
+                  return <MyAccount />;
+                case 'user-settings/Profiles':
+                  return <Profiles />;
+                case 'user-settings/Authorized Apps':
+                  return <AuthorizedApp />;
+                case 'billing-settings/Nitro':
+                  return <NitroSetting />;
+                case 'billing-settings/Server Upgrades':
+                  return <ServerUpgrade />;
+                case 'billing-settings/Subscriptions':
+                  return <Subscription />;
+                default:
+                  return null;
+              }
+            })()}
+          </div>
         </div>
       </DialogContent>
     </Dialog>

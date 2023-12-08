@@ -53,7 +53,6 @@ export default function UploadImage() {
                     </div>
                   )}
                 </div>
-
                 <span className='flex mx-auto font-bold'>Tải Lên Hình Ảnh</span>
               </div>
               <input
