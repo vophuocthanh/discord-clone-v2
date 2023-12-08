@@ -56,7 +56,7 @@ router
   .get('/:orgId/members', (c) =>
     c.json([
       {
-        id: '001',
+        id: '01',
         displayName: 'Songoku',
         username: 'songoku',
         avatar:
