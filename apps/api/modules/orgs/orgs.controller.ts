@@ -53,6 +53,21 @@ router
       },
     ])
   )
+  .get('/:orgId/members', (c) =>
+    c.json([
+      {
+        id: '001',
+        displayName: 'Songoku',
+        username: 'songoku',
+        avatar:
+          'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
+        memberSince: '2022-01-01',
+        joinedDiscord: '2022-01-01',
+        joinMethod: 'Discord',
+        roles: ['Admin'],
+      },
+    ])
+  )
   .get('/:orgId/channels/:channelId/messages', (c) =>
     c.json([
       {
