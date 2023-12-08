@@ -134,3 +134,15 @@
   animation: fadeInFromSides 1s ease-out;
   animation-fill-mode: forwards;
 }
+
+.gradient-custom {
+  background: rgb(55, 54, 187);
+  background: linear-gradient(
+    198deg,
+    rgba(55, 54, 187, 1) -10.75%,
+    rgba(70, 112, 232, 1) 27.1%,
+    rgba(70, 112, 232, 1) 44.16%,
+    rgba(242, 216, 244, 1) 90%,
+    rgba(223, 144, 175, 1) 100%
+  );
+}

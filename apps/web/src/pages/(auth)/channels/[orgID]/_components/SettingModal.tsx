@@ -6,6 +6,8 @@ import { LogOut, Settings } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import MyAccount from './MyAccount';
 import Profiles from './Profiles';
+import NitroSetting from './NitroSetting';
+import AuthorizedApp from './AuthorizedApp';
 
 export default function SettingModal() {
   const [tab, setTab] = useState('user-settings/My Account');
@@ -33,7 +35,7 @@ export default function SettingModal() {
             name: 'Profiles',
           },
           {
-            name: 'Privacy & Safety',
+            name: 'Authorized Apps',
           },
         ],
       },
@@ -42,13 +44,13 @@ export default function SettingModal() {
         name: 'Billing Settings',
         children: [
           {
-            name: 'My Account',
+            name: 'Nitro',
           },
           {
-            name: 'Profiles',
+            name: 'Server Upgrades',
           },
           {
-            name: 'Privacy & Safety',
+            name: 'Subscriptions',
           },
         ],
       },
@@ -118,6 +120,10 @@ export default function SettingModal() {
                 return <MyAccount />;
               case 'user-settings/Profiles':
                 return <Profiles />;
+              case 'user-settings/Authorized Apps':
+                return <AuthorizedApp />;
+              case 'billing-settings/Nitro':
+                return <NitroSetting />;
               default:
                 return null;
             }

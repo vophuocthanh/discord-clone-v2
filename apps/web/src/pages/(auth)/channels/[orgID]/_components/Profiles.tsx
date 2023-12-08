@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 import FileServer from './profile-details/FileServer';
-import FileUsers from './profile-details/FIleUsers';
+import FileUsers from './profile-details/FileUsers';
 
 export default function Profiles() {
   const [tab, setTab] = useState('file-users/Hồ Sơ Người Dùng');
