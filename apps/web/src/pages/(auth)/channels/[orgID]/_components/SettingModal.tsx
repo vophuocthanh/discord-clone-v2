@@ -8,6 +8,8 @@ import MyAccount from './MyAccount';
 import Profiles from './Profiles';
 import NitroSetting from './NitroSetting';
 import AuthorizedApp from './AuthorizedApp';
+import Subscription from './Subscription';
+import ServerUpgrade from './ServerUpgrade';
 
 export default function SettingModal() {
   const [tab, setTab] = useState('user-settings/My Account');
@@ -78,7 +80,7 @@ export default function SettingModal() {
       </DialogTrigger>
       <DialogContent className='max-w-full h-screen flex gap-0 p-0'>
         <div className='w-1/3 bg-primary-foreground/10 flex justify-end'>
-          <div className='w-1/2 mt-20 p-2'>
+          <div className='w-1/2 p-2'>
             <div>
               {SETTINGS.map((setting) => (
                 <div key={setting.key} className='border-b py-3'>
@@ -124,6 +126,10 @@ export default function SettingModal() {
                 return <AuthorizedApp />;
               case 'billing-settings/Nitro':
                 return <NitroSetting />;
+              case 'billing-settings/Server Upgrades':
+                return <ServerUpgrade />;
+              case 'billing-settings/Subscriptions':
+                return <Subscription />;
               default:
                 return null;
             }
