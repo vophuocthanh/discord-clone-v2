@@ -5,10 +5,19 @@ import { HardDriveUpload, UploadCloud } from 'lucide-react';
 
 export default function UploadImage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     setSelectedFile(file || null);
+
+    if (file) {
+      // Create a URL for the selected file and set it as the image URL
+      const url = URL.createObjectURL(file);
+      setImageUrl(url);
+    } else {
+      setImageUrl(null);
+    }
   };
 
   return (
@@ -22,9 +31,29 @@ export default function UploadImage() {
           <div className='bg-gray-600 rounded-lg w-44 h-44'>
             <label htmlFor='uploadInput' className='cursor-pointer'>
               <div className='flex flex-col space-y-2'>
-                <div className='flex w-32 h-32 mx-auto mt-2 bg-red-500 rounded-full'>
-                  <UploadCloud className='m-auto text-white' />
+                <div
+                  className={`flex w-32 h-32 mx-auto mt-2 rounded-full ${
+                    selectedFile ? '' : 'bg-primary'
+                  }`}
+                >
+                  <UploadCloud
+                    className={`m-auto text-white ${
+                      selectedFile ? 'hidden' : ''
+                    }`}
+                  />
+                  {selectedFile && (
+                    <div className=''>
+                      {imageUrl && (
+                        <img
+                          src={imageUrl}
+                          alt='Selected'
+                          className='w-32 h-32 rounded-full object-cover'
+                        />
+                      )}
+                    </div>
+                  )}
                 </div>
+
                 <span className='flex mx-auto font-bold'>Tải Lên Hình Ảnh</span>
               </div>
               <input
@@ -39,7 +68,7 @@ export default function UploadImage() {
           <div className='bg-gray-600 rounded-lg w-44 h-44'>
             <label htmlFor='uploadInputGif' className='cursor-pointer'>
               <div className='flex flex-col space-y-2'>
-                <div className='flex w-32 h-32 mx-auto mt-2 bg-red-500 rounded-full'>
+                <div className='flex w-32 h-32 mx-auto mt-2 bg-primary rounded-full'>
                   <HardDriveUpload className='m-auto text-white' />
                 </div>
                 <span className='flex mx-auto font-bold'>Chọn Ảnh GIF</span>
@@ -54,11 +83,6 @@ export default function UploadImage() {
             </label>
           </div>
         </div>
-        {selectedFile && (
-          <div className='mt-4'>
-            <p>Đã chọn file: {selectedFile.name || 'N/A'}</p>
-          </div>
-        )}
       </DialogContent>
     </Dialog>
   );
