@@ -1,3 +1,4 @@
+import { getOrgMembers } from '@/apis/orgs';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
   Table,
@@ -9,48 +10,16 @@ import {
 } from '@/components/ui/table';
 import { Link, useParams } from '@/router';
 import { HelpCircle, Users } from 'lucide-react';
+import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
-
-const MEMBERS = [
-  {
-    id: '001',
-    displayName: 'Songoku',
-    username: 'songoku',
-    avatar:
-      'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    memberSince: '2022-01-01',
-    joinedDiscord: '2022-01-01',
-    joinMethod: 'Discord',
-    roles: ['Admin'],
-  },
-  {
-    id: '002',
-    displayName: 'Songoku',
-    username: 'songoku',
-    avatar:
-      'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    memberSince: '2022-01-01',
-    joinedDiscord: '2022-01-01',
-    joinMethod: 'Discord',
-    roles: ['Member'],
-  },
-  {
-    id: '003',
-    displayName: 'Songoku',
-    username: 'songoku',
-    avatar:
-      'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-    memberSince: '2022-01-01',
-    joinedDiscord: '2022-01-01',
-    joinMethod: 'Discord',
-    roles: ['Member'],
-  },
-];
 
 export default function Component() {
   const { orgID } = useParams('/channels/:orgID/member-safety');
   const location = useLocation();
-  console.log('location:', location);
+  const { data: membersResult } = useQuery(['members'], () =>
+    getOrgMembers(orgID)
+  );
+  console.log('membersResult:', membersResult);
   return (
     <div>
       <header className='flex items-center justify-between p-3 text-2xl border-b h-14 bg-[#1d202ab8]'>
@@ -91,7 +60,7 @@ export default function Component() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {MEMBERS.map((member) => (
+              {membersResult?.data.map((member) => (
                 <TableRow key={member.id}>
                   <TableCell className='flex items-center gap-2'>
                     <Checkbox className='w-6 h-6 border-gray-400 rounded' />

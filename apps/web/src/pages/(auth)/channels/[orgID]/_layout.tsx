@@ -133,78 +133,80 @@ export default function Component() {
             )}
           </div>
         </div>
-        <div className='flex items-center justify-between gap-4 px-3 mb-1'>
-          <div className='flex flex-col'>
-            <div className='flex items-center gap-2 font-bold text-green-400'>
-              <Signal className='cursor-pointer' />
-              <p className='text-sm'>Đã kết nối giọng nói</p>
-            </div>
-            <p className='text-primary-foreground/60'>Class 1</p>
-          </div>
-          <div className='flex items-center gap-4'>
-            <VibrateOff className='cursor-pointer' />
-            <PhoneMissed className='cursor-pointer' />
-          </div>
-        </div>
-        <div className='flex items-center justify-between px-2'>
-          {OPTIONS.map((option) => (
-            <span
-              className='flex px-3 py-1 rounded cursor-pointer bg-primary-foreground/20'
-              key={option.id}
-            >
-              {option.icon}
-            </span>
-          ))}
-        </div>
-        <div className='absolute bottom-0 flex items-center justify-between w-full px-3 py-1'>
-          <div className='flex items-center gap-4 px-2 rounded cursor-pointer hover:bg-primary-foreground/20'>
-            <img
-              src='https://st.quantrimang.com/photos/image/2019/03/13/HinhnenGoku-0.jpg'
-              alt='avatar'
-              width={30}
-              height={30}
-              className='object-cover w-8 h-8 rounded-full aspect-square'
-            />
+        <div className='flex flex-col'>
+          <div className='flex items-center justify-between gap-4 px-3 mb-1'>
             <div className='flex flex-col'>
-              <p className='text-base font-bold'>Songoku</p>
-              <p className='text-sm text-primary-foreground/60'>Online</p>
+              <div className='flex items-center gap-2 font-bold text-green-400'>
+                <Signal className='cursor-pointer' />
+                <p className='text-sm'>Đã kết nối giọng nói</p>
+              </div>
+              <p className='text-primary-foreground/60'>Class 1</p>
+            </div>
+            <div className='flex items-center gap-4'>
+              <VibrateOff className='cursor-pointer' />
+              <PhoneMissed className='cursor-pointer' />
             </div>
           </div>
-          <div className='flex items-center gap-2'>
-            <TooltipIcon
-              icon={
-                micOn ? (
-                  <Mic
-                    onClick={handleMic}
-                    className='text-green-300 cursor-pointer select-none'
-                  />
-                ) : (
-                  <MicOff
-                    onClick={handleMic}
-                    className='text-red-500 cursor-pointer select-none'
-                  />
-                )
-              }
-              content={micOn ? 'Tắt âm' : 'Bỏ tắt ấm'}
-            />
-            <TooltipIcon
-              icon={
-                headphoneOn ? (
-                  <Headphones
-                    onClick={handleHeadphone}
-                    className='cursor-pointer'
-                  />
-                ) : (
-                  <MegaphoneOff
-                    onClick={handleHeadphone}
-                    className='text-red-500 cursor-pointer select-none'
-                  />
-                )
-              }
-              content={micOn ? 'Tắt tiếng' : 'Bỏ tắt tiếng'}
-            />
+          <div className='flex items-center justify-between px-2'>
+            {OPTIONS.map((option) => (
+              <span
+                className='flex px-3 py-1 rounded cursor-pointer bg-primary-foreground/20'
+                key={option.id}
+              >
+                {option.icon}
+              </span>
+            ))}
+          </div>
+          <div className='absolute bottom-0 flex items-center justify-between w-full px-3 py-1'>
+            <div className='flex items-center gap-4 px-2 rounded cursor-pointer hover:bg-primary-foreground/20'>
+              <img
+                src='https://st.quantrimang.com/photos/image/2019/03/13/HinhnenGoku-0.jpg'
+                alt='avatar'
+                width={30}
+                height={30}
+                className='object-cover w-8 h-8 rounded-full aspect-square'
+              />
+              <div className='flex flex-col'>
+                <p className='text-base font-bold'>Songoku</p>
+                <p className='text-sm text-primary-foreground/60'>Online</p>
+              </div>
+            </div>
+            <div className='flex items-center gap-2'>
+              <TooltipIcon
+                icon={
+                  micOn ? (
+                    <Mic
+                      onClick={handleMic}
+                      className='text-green-300 cursor-pointer select-none'
+                    />
+                  ) : (
+                    <MicOff
+                      onClick={handleMic}
+                      className='text-red-500 cursor-pointer select-none'
+                    />
+                  )
+                }
+                content={micOn ? 'Tắt âm' : 'Bỏ tắt ấm'}
+              />
+              <TooltipIcon
+                icon={
+                  headphoneOn ? (
+                    <Headphones
+                      onClick={handleHeadphone}
+                      className='cursor-pointer'
+                    />
+                  ) : (
+                    <MegaphoneOff
+                      onClick={handleHeadphone}
+                      className='text-red-500 cursor-pointer select-none'
+                    />
+                  )
+                }
+                content={micOn ? 'Tắt tiếng' : 'Bỏ tắt tiếng'}
+              />
 
-            <SettingModal />
+              <SettingModal />
+            </div>
           </div>
         </div>
       </div>

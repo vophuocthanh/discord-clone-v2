@@ -40,14 +40,14 @@ export default function ServerUpgrade() {
       <div className='flex flex-col space-y-3'>
         {SERVER_BOOT.map((server) => (
           <div
-            className='flex justify-between bg-gray-500 border border-primary px-4 py-8 items-center rounded'
+            className='flex items-center justify-between px-4 py-8 bg-gray-500 border rounded border-primary'
             key={server.id}
           >
-            <div className='flex gap-4 items-center'>
+            <div className='flex items-center gap-4'>
               <img
                 src={server.img}
                 alt={server.alt}
-                className='w-16 h-16 rounded-full object-cover'
+                className='object-cover w-16 h-16 rounded-full'
               />
               <div className='flex flex-col'>
                 <span className='text-2xl font-bold'>{server.name}</span>
@@ -58,7 +58,7 @@ export default function ServerUpgrade() {
                 </div>
               </div>
             </div>
-            <Button className='bg-primary-foreground/30 rounded hover:bg-primary-foreground/30'>
+            <Button className='rounded bg-primary-foreground/30 hover:bg-primary-foreground/30'>
               Boost this server
             </Button>
           </div>

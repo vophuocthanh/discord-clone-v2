@@ -1,7 +1,7 @@
 import { request } from '@/lib/request';
 
 export const getOrgs = async () => {
-  return request.get(`/orgs`);
+  return request.get('/orgs');
 };
 
 interface Member {
