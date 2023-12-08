@@ -19,7 +19,6 @@ export default function Component() {
   const { data: membersResult } = useQuery(['members'], () =>
     getOrgMembers(orgID)
   );
-  console.log('membersResult:', membersResult);
   return (
     <div>
       <header className='flex items-center justify-between p-3 text-2xl border-b h-14 bg-[#1d202ab8]'>
@@ -60,10 +59,10 @@ export default function Component() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {membersResult?.data.map((member) => (
+              {membersResult?.data?.map((member) => (
                 <TableRow key={member.id}>
                   <TableCell className='flex items-center gap-2'>
-                    <Checkbox className='w-6 h-6 border-gray-400 rounded' />
+                    <Checkbox />
                     <div className='flex gap-2'>
                       <img
                         src={member.avatar}
