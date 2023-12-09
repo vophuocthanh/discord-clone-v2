@@ -7,68 +7,79 @@ import bg from '@/assets/images/background.png';
 import { Input } from '@/components/ui/input';
 import { Minus } from 'lucide-react';
 import { useState } from 'react';
-import developerDiscord from '@/assets/images/server/developer-discord.gif';
+import announcement from '@/assets/images/support/announcements.png';
+import discordInterface from '@/assets/images/support/discord-interface.png';
+import accountSetting from '@/assets/images/support/account-settings.png';
+import gettingStarted from '@/assets/images/support/getting-startred.png';
+import serverBooster from '@/assets/images/support/server-setup.png';
+import communityProgram from '@/assets/images/support/community-programs.png';
+import perksSubscription from '@/assets/images/support/perks-subscriptions.png';
+import billing from '@/assets/images/support/Billing.png';
+import trustSafety from '@/assets/images/support/trust-safety.png';
+import FAQs from '@/assets/images/support/FAQs.png';
+import developerSupport from '@/assets/images/support/develoepr-support.png';
+import twitter from '@/assets/images/support/icon-twitter.png';
 
 const SUPPORTS = [
   {
     id: 1,
-    img: 'https://support.discord.com/hc/article_attachments/4413878201879',
+    img: announcement,
     name: 'Announcement',
     description:
       'We`ve got our ear to the ground. Here`s what you need to know.',
   },
   {
     id: 2,
-    img: 'https://e7.pngegg.com/pngimages/519/542/png-clipart-discord-computer-icons-logo-challenge-miscellaneous-purple.png',
+    img: discordInterface,
     name: 'Discord`s Interface',
     description: 'WHAT DOES THIS BUTTON DO!?!11',
   },
   {
     id: 3,
-    img: 'https://cdn6.f-cdn.com/contestentries/2034159/59342373/61c5877fe4ee1_thumb900.jpg',
+    img: accountSetting,
     name: 'Account Settings',
     description: 'You`re a special snowflake and so is your account.',
   },
   {
     id: 4,
-    img: 'https://e7.pngegg.com/pngimages/705/535/png-clipart-computer-icons-discord-logo-discord-icon-rectangle-logo.png',
+    img: gettingStarted,
     name: 'Getting Started',
     description: 'Start off on the right foot! Not the left one!',
   },
   {
     id: 5,
-    img: 'https://i.pinimg.com/564x/88/f6/cf/88f6cf550ede7dd88b9f0c548ca6765b.jpg',
+    img: serverBooster,
     name: 'Server Setup',
     description: 'Almost as exciting as interior decorating.',
   },
   {
     id: 6,
-    img: 'https://i.pinimg.com/736x/05/78/01/0578014576b782b4e50450a2ea562180.jpg',
+    img: communityProgram,
     name: 'Community Programs',
     description:
       'Bringing people together from all around the globe (and occasionally Mars)',
   },
   {
     id: 7,
-    img: 'https://www.bhmpics.com/downloads/cool-discord-logo/27.28207a109739299.y3jvccw5otksnzgyldasmta4.png',
+    img: perksSubscription,
     name: 'Perks and Subscriptions',
     description: `Please don't shop until you drop. Let us help.`,
   },
   {
     id: 8,
-    img: 'https://pngshare.com/wp-content/uploads/2021/06/Discord-Logo-Unique-3.png',
+    img: billing,
     name: 'Billing',
     description: 'That feel when you look at your bank account.',
   },
   {
     id: 9,
-    img: 'https://pngshare.com/wp-content/uploads/2021/06/Discord-Logo-HD-20.png',
+    img: trustSafety,
     name: 'Trust & Safety',
     description: 'Keep things safe & sound for you and your buddies.',
   },
   {
     id: 10,
-    img: 'https://cdn.icon-icons.com/icons2/3882/PNG/256/discord_icon_245605.png',
+    img: FAQs,
     name: 'F.A.Q.s',
     description: 'All you can eat self-serve problem solving.',
   },
@@ -78,14 +89,13 @@ const HELPS = [
   {
     id: 1,
     title: 'Developer Support',
-    image: developerDiscord,
+    image: developerSupport,
     desc: 'Your home for support with developing bots, apps, & games using our API and SDK! ',
   },
   {
     id: 2,
     title: 'Twitter',
-    image:
-      'https://bcassetcdn.com/public/blog/wp-content/uploads/2022/01/04191113/badskull-by-iblowyourdesign-dribbble-1024x1024.jpg',
+    image: twitter,
     desc: 'Have a quick question? Hit us up on Twitter!',
   },
 ];
