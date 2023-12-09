@@ -3,6 +3,8 @@
   "scripts": {
     "deploy": "vercel",
     "start": "vercel dev --yes",
+    "check": "tsc --noEmit",
+    "generate": "prisma generate --no-engine",
     "postinstall": "prisma generate --no-engine"
   },
   "dependencies": {
