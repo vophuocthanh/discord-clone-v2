@@ -6,10 +6,8 @@ export const router = new Hono();
 router
   .post('/sign-in', async (c) => {
     const { email, password } = await c.req.json();
-    if (email === 'phuocthanh@gmail.com' && password === '!Enouvo123') {
-      return c.json({ token: '124' });
-    }
-    return c.json({ error: 'Invalid email or password' }, 401);
+    const token = await AuthService.signIn(email, password);
+    return c.json({ token }, 200);
   })
   .post('/sign-up', async (c) => {
     const { email, password } = await c.req.json();
