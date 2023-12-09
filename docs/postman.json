@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "5edad58e-4757-4cc0-af06-07a70c941f90",
+		"name": "Discord",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23052071",
+		"_collection_link": "https://gold-shuttle-284427.postman.co/workspace/Team-Workspace~7c7863b7-9fe9-4b4d-8913-82799a17f617/collection/23052071-5edad58e-4757-4cc0-af06-07a70c941f90?action=share&source=collection_link&creator=23052071"
+	},
+	"item": [
+		{
+			"name": "sign-in",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://discord-api-omega.vercel.app/api/sign-in",
+					"protocol": "https",
+					"host": [
+						"discord-api-omega",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "orgs/:id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/orgs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orgs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/orgs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"mgn\",\r\n    \"icon\": \"https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/orgs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orgs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get /orgs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/orgs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orgs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

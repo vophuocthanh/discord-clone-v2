@@ -1,0 +1,19 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextIndex"]
+}
+
+model Org {
+  id String @id @default(cuid())
+  icon String
+  name String
+
+  @@map("orgs")
+}
+
+
