@@ -3,3 +3,4 @@
 .env
 public
 node_modules
+public/tsconfig.tsbuildinfo
