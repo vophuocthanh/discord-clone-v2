@@ -4,8 +4,6 @@
     "deploy": "vercel",
     "start": "node public/index.js",
     "build": "tsc && tsc-alias",
-    "build:watch": "(concurrently \"tsc -w\" \"tsc-alias -w\")",
-    "dev": "npm run build:watch & node --watch public/index.js",
     "check": "tsc --noEmit",
     "generate": "prisma generate --no-engine",
     "postinstall": "prisma generate --no-engine"
