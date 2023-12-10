@@ -1,4 +1,4 @@
-import { db } from '@prisma/db';
+import { db } from '@/lib/db';
 import { Hono } from 'hono';
 
 export const router = new Hono();

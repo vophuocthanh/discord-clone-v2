@@ -1,5 +1,6 @@
+import { db } from '@/lib/db';
 import { hashPassword } from '@/utils/password';
-import { db } from '@prisma/db';
+import * as bcrypt from 'bcrypt';
 
 export class AuthService {
   static async signIn(email: string, password: string) {
@@ -11,8 +12,7 @@ export class AuthService {
     if (!user) {
       throw new Error(`User ${email} not found`);
     }
-
-    const isValid = (await password) + user.salt === user.password;
+    const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) {
       throw new Error(`Invalid password`);
@@ -25,11 +25,12 @@ export class AuthService {
         email: email,
       },
     });
+
     if (user) {
-      throw new Error(`User ${email} already exists`);
+      throw new Error(`Email ${email} already exists`);
     }
     const salt = '124124';
-    const hashedPassword = hashPassword(password, salt);
+    const hashedPassword = await hashPassword(password, salt);
 
     const newUser = await db.user.create({
       data: {
@@ -38,6 +39,7 @@ export class AuthService {
         salt: salt,
       },
     });
+
     return newUser;
   }
 }
