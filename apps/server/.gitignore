@@ -1,6 +1,4 @@
 .vercel
-.history
 .env
 public
-node_modules
-tsconfig.tsbuildinfo
+.history
