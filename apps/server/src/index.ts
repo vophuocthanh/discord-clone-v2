@@ -22,5 +22,5 @@ app.route('/orgs', orgs);
 app.notFound((c) => c.json({ status: 404, message: 'Not found' }, 404));
 app.onError(errorFilter);
 serve(app, () => {
-  console.log('Server running on http://localhost:3000');
+  console.log('Server running on Open http://localhost:3000');
 });
