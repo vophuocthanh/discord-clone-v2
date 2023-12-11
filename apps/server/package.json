@@ -4,6 +4,7 @@
     "deploy": "vercel",
     "start": "node public/index.js",
     "build": "tsc && tsc-alias",
+    "dev": "tsx watch src/index.ts",
     "check": "tsc --noEmit",
     "generate": "prisma generate --no-engine",
     "postinstall": "prisma generate --no-engine"
@@ -13,18 +14,21 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.3.1",
-    "@prisma/client": "^5.6.0",
-    "@prisma/extension-accelerate": "^0.6.2",
+    "@hono/zod-validator": "^0.1.11",
+    "@prisma/client": "^5.7.0",
     "bcrypt": "^5.1.1",
     "concurrently": "^8.2.2",
-    "hono": "^3.10.1",
-    "path": "^0.12.7",
-    "prisma": "^5.6.0"
+    "dotenv": "^16.3.1",
+    "hono": "^3.11.4",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.7",
+    "prisma": "^5.7.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.6",
+    "prisma-dbml-generator": "^0.10.0",
     "tsc-alias": "^1.8.8",
-    "typescript": "^5.3.3",
-    "vercel": "^32.5.5"
+    "tsx": "^4.6.2",
+    "typescript": "^5.3.3"
   }
 }
