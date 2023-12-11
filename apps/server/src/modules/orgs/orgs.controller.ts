@@ -58,25 +58,13 @@ router
     c.json([
       {
         id: '001',
-        displayName: 'Goku',
-        username: 'goku',
-        avatar:
-          'https://www.giaonhan247.com/wp-content/uploads/2021/12/Songoku-huyen-thoai.jpg',
+        displayName: 'John Doe',
+        username: 'john_doe',
+        avatar: 'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
         memberSince: '2022-01-01',
         joinedDiscord: '2022-01-01',
         joinMethod: 'Discord',
         roles: ['Admin'],
-      },
-      {
-        id: '002',
-        displayName: 'Songoku',
-        username: 'songoku',
-        avatar:
-          'https://antimatter.vn/wp-content/uploads/2022/12/hinh-nen-songoku-4k-2k-800x500.jpg',
-        memberSince: '2022-01-01',
-        joinedDiscord: '2022-01-01',
-        joinMethod: 'Discord',
-        roles: ['Members'],
       },
     ])
   )
@@ -93,28 +81,16 @@ router
         createdAt: '2022-01-01T00:00:00.000Z',
         message: 'Hey, how are you?',
       },
-      {
-        id: 2,
-        sender: {
-          id: 1,
-          name: 'Hana',
-          avatar:
-            'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
-        },
-        createdAt: '2022-01-01T00:00:00.000Z',
-        message: 'What are you from?',
-      },
     ])
   )
   .get('/:orgId/channels/:channelId/members', (c) =>
     c.json([
       {
         id: 1,
-        name: 'John Doe',
-        avatar:
-          'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-        roles: ['Admin'],
-        backgroundColor: '#4000ff',
+        name: 'John',
+        avatar: 'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
+        roles: ['Admin', 'F0'],
+        backgroundColor: '#d40000',
         category: {
           id: 1,
           name: 'Đà Nẵng',
@@ -122,11 +98,10 @@ router
       },
       {
         id: 2,
-        name: 'Phước Thạnh',
-        avatar:
-          'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-        roles: ['Member', 'Moderator'],
-        backgroundColor: '#ff0000',
+        name: 'Tin Nguyen',
+        avatar: 'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
+        roles: ['Học viên'],
+        backgroundColor: '#d40000',
         category: {
           id: 2,
           name: 'Online',
@@ -134,26 +109,13 @@ router
       },
       {
         id: 3,
-        name: 'Tom',
-        avatar:
-          'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-        roles: ['Member'],
-        backgroundColor: '#00ff5e',
+        name: 'Son Tran',
+        avatar: 'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
+        roles: ['Học viên'],
+        backgroundColor: '#d40000',
         category: {
-          id: 3,
-          name: 'Offline',
-        },
-      },
-      {
-        id: 4,
-        name: 'Jerry',
-        avatar:
-          'https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg',
-        roles: ['Member'],
-        backgroundColor: '#00ff5e',
-        category: {
-          id: 3,
-          name: 'Offline',
+          id: 2,
+          name: 'Online',
         },
       },
     ])
