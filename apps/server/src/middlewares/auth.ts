@@ -12,7 +12,6 @@ export const auth = async (c: Context, next: Next) => {
       throw new UnauthorizedException('Unauthorized');
     }
     const data = jwt.verify(token, JWT_SECRET);
-    console.log('data:', data);
 
     const user = await db.user.findUnique({
       where: {
@@ -21,7 +20,6 @@ export const auth = async (c: Context, next: Next) => {
     });
 
     c.set('user', user);
-    console.log('user:', user);
     await next();
   } catch (error) {
     console.log(error);
