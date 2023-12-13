@@ -75,6 +75,17 @@ router
         joinMethod: 'Discord',
         roles: ['Admin'],
       },
+      {
+        id: '001',
+        displayName: 'Goku',
+        username: 'goku',
+        avatar:
+          'https://images.immediate.co.uk/production/volatile/sites/3/2023/08/2023.06.28-06.20-boundingintocomics-649c79f009cdf-Cropped-8d74232.png?resize=768,574',
+        memberSince: '2022-01-01',
+        joinedDiscord: '2022-01-01',
+        joinMethod: 'Discord',
+        roles: ['Members'],
+      },
     ])
   )
   .get('/:orgId/channels/:channelId/messages', (c) =>
@@ -90,14 +101,26 @@ router
         createdAt: '2022-01-01T00:00:00.000Z',
         message: 'Hey, how are you?',
       },
+      {
+        id: 2,
+        sender: {
+          id: 1,
+          name: 'Vo Phuoc Thanh',
+          avatar:
+            'https://staticg.sportskeeda.com/editor/2023/01/9487f-16728933915704-1920.jpg?w=840',
+        },
+        createdAt: '2022-01-01T00:00:00.000Z',
+        message: 'What are you doing?',
+      },
     ])
   )
   .get('/:orgId/channels/:channelId/members', (c) =>
     c.json([
       {
         id: 1,
-        name: 'John',
-        avatar: 'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
+        name: 'Vo Phuoc Thanh',
+        avatar:
+          'https://staticg.sportskeeda.com/editor/2023/01/9487f-16728933915704-1920.jpg?w=840',
         roles: ['Admin', 'F0'],
         backgroundColor: '#d40000',
         category: {
@@ -107,10 +130,11 @@ router
       },
       {
         id: 2,
-        name: 'Tin Nguyen',
-        avatar: 'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
+        name: 'Nobita',
+        avatar:
+          'https://i.ex-cdn.com/mgn.vn/files/news/2023/01/04/ctdragon-ball-son-goku-bao-nhieu-tuoi-trong-tung-phan-cua-bo-anime-210923.jpg',
         roles: ['Học viên'],
-        backgroundColor: '#d40000',
+        backgroundColor: '#00FF00',
         category: {
           id: 2,
           name: 'Online',
@@ -118,10 +142,11 @@ router
       },
       {
         id: 3,
-        name: 'Son Tran',
-        avatar: 'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
+        name: 'Doraemon',
+        avatar:
+          'https://cdn.pixabay.com/photo/2019/10/16/09/09/doraemon-4553920_960_720.png',
         roles: ['Học viên'],
-        backgroundColor: '#d40000',
+        backgroundColor: '#FF99CC',
         category: {
           id: 2,
           name: 'Online',
