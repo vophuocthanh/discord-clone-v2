@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import youtube from '@/assets/images/authorized-setting/youtube.webp';
 import { Button } from '@/components/ui/button';
 import { CheckboxAuthorized } from './checkbox/CheckboxAuthorized';
 
 export default function AuthorizedApp() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <div className='w-[52rem] space-y-4'>
       <h1 className='text-2xl'>Authorised Apps</h1>
@@ -19,11 +16,7 @@ export default function AuthorizedApp() {
           them at any time.
         </p>
       </div>
-      <div
-        className='border p-6 rounded-md space-y-4'
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+      <div className='border p-6 rounded-md space-y-4 group'>
         <div className='flex justify-between'>
           <div className='flex items-center gap-4'>
             <img
@@ -33,11 +26,9 @@ export default function AuthorizedApp() {
             />
             <span>Watch Together</span>
           </div>
-          {isHovered && (
-            <Button className='bg-transparent border-red-500 border hover:bg-red-500 text-white'>
-              Deauthorise
-            </Button>
-          )}
+          <Button className='hidden group-hover:block bg-transparent border-red-500 border hover:bg-red-500 text-white'>
+            Deauthorise
+          </Button>
         </div>
         <h3 className='text-sm uppercase font-bold text-primary-foreground/20'>
           About this App
