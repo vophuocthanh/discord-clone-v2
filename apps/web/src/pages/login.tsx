@@ -12,6 +12,8 @@ import { signIn } from '@/apis/auth';
 import { Link } from '@/router';
 import { ChevronLeft } from 'lucide-react';
 import qrCode from '@/assets/images/qr-code.png';
+import { toast } from 'sonner';
+import { AxiosError } from 'axios';
 
 export function Loader() {
   const isAuth = getToken();
@@ -47,7 +49,12 @@ export default function Component() {
       const res = await signIn(email, password);
       setToken(res.data.accessToken);
       navigate('/channels');
+      toast.success('Login successfully!');
     } catch (error) {
+      toast.error('Invalid email or password');
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message);
+      }
       console.error(error);
     } finally {
       setIsLoading(false);
