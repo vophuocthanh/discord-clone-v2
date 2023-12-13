@@ -3,26 +3,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["fullTextIndex"]
 }
 
 model Org {
-  id String @id @default(cuid())
-  icon String
-  name String
+  id     String @id @default(cuid())
+  icon   String
+  name   String
+  userID String
+  user   User   @relation(fields: [userID], references: [id])
 
   @@map("orgs")
 }
 
 model User {
-  id String @id @default(cuid())
-  email String @unique
+  id       String @id @default(cuid())
+  email    String @unique
   password String
-  salt String
+  salt     String
+  Org      Org[]
 
   @@map("users")
 }
-
-

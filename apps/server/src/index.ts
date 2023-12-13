@@ -2,9 +2,10 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { serve } from '@hono/node-server';
 import { logger } from 'hono/logger';
-import { router as auth } from './modules/auth/auth.controller';
-import { router as orgs } from './modules/orgs/orgs.controller';
+import { router as authRouter } from './modules/auth/auth.controller';
+import { router as orgsRouter } from './modules/orgs/orgs.controller';
 import { errorFilter } from './middlewares/error-filter';
+import { auth } from './middlewares/auth';
 
 const app = new Hono().basePath('/api');
 
@@ -16,8 +17,8 @@ app.use(
     credentials: true,
   })
 );
-app.route('/', auth);
-app.route('/orgs', orgs);
+app.route('/', authRouter);
+app.all('*', auth).route('/orgs', orgsRouter);
 
 app.notFound((c) => c.json({ status: 404, message: 'Not found' }, 404));
 app.onError(errorFilter);

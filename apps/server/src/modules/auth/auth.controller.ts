@@ -7,14 +7,9 @@ router
   .post('/sign-in', async (c) => {
     const { email, password } = await c.req.json();
 
-    const token = await AuthService.signIn(email, password);
+    const data = await AuthService.signIn(email, password);
 
-    return c.json(
-      {
-        token,
-      },
-      200
-    );
+    return c.json(data, 200);
   })
   .post('/sign-up', async (c) => {
     const { email, password } = await c.req.json();

@@ -1,8 +1,12 @@
+import { JWT_SECRET } from '@/lib/config';
 import { db } from '@/lib/db';
 import { BadRequestException, UnauthorizedException } from '@/utils/exceptions';
 import { hashPassword } from '@/utils/password';
 import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+const ACCESS_TOKEN_EXPIRES_IN = 60 * 60 * 24;
 
 export class AuthService {
   static async signIn(email: string, password: string) {
@@ -19,7 +23,17 @@ export class AuthService {
     if (!isValid) {
       throw new UnauthorizedException(`Invalid password`);
     }
-    return '1247127572343241251725';
+    const accessToken = jwt.sign(
+      {
+        userID: user.id,
+      },
+      JWT_SECRET,
+      {
+        expiresIn: ACCESS_TOKEN_EXPIRES_IN,
+      }
+    );
+
+    return { accessToken };
   }
 
   static async signUp(email: string, password: string) {
