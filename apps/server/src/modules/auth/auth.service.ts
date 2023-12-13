@@ -12,13 +12,12 @@ export class AuthService {
       },
     });
     if (!user) {
-      throw new Error(`Email ${email} not found`);
+      throw new UnauthorizedException(`Email ${email} not found`);
     }
-
     const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) {
-      throw new Error(`Invalid password`);
+      throw new UnauthorizedException(`Invalid password`);
     }
     return '1247127572343241251725';
   }
