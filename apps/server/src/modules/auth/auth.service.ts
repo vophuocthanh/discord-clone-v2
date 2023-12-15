@@ -1,6 +1,6 @@
-import { JWT_SECRET } from '@/lib/config';
 import { db } from '@/lib/db';
 import { mailService } from '@/lib/mail.service';
+import { JWT_SECRET } from '@/utils/constants';
 import { BadRequestException, UnauthorizedException } from '@/utils/exceptions';
 import { hashPassword } from '@/utils/password';
 import { Prisma, User } from '@prisma/client';
