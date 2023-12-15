@@ -1,7 +1,13 @@
 import { Hono } from 'hono';
 import { AuthService } from './auth.service';
-import { forgotPasswordDto, signInDto, signUpDto } from './dto/auth.dto';
+import {
+  forgotPasswordDto,
+  resetPasswordDto,
+  signInDto,
+  signUpDto,
+} from './dto/auth.dto';
 import { zValidator } from '@hono/zod-validator';
+import { auth } from '@/middlewares/auth';
 
 export const router = new Hono();
 
@@ -40,6 +46,25 @@ router
             'Reset password link has been sent to your email. Please check your email to reset your password.',
         },
         201
+      );
+    }
+  )
+  .put(
+    '/reset-password',
+    auth,
+    zValidator('json', resetPasswordDto),
+    async (c) => {
+      const user = c.get('user');
+      const { password } = await c.req.json();
+
+      await AuthService.resetPassword(user, password);
+
+      return c.json(
+        {
+          message:
+            'Your password has been reset successfully. Please login with your new password.',
+        },
+        200
       );
     }
   );

@@ -33,3 +33,11 @@ export const signUpDto = z.object({
     })
     .min(6, 'Password must be at least 6 characters long'),
 });
+
+export const resetPasswordDto = z.object({
+  password: z
+    .string({
+      required_error: 'Password is required',
+    })
+    .min(6, 'Password must be at least 6 characters long'),
+});

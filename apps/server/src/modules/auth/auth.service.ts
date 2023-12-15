@@ -3,7 +3,7 @@ import { db } from '@/lib/db';
 import { mailService } from '@/lib/mail.service';
 import { BadRequestException, UnauthorizedException } from '@/utils/exceptions';
 import { hashPassword } from '@/utils/password';
-import { Prisma } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -80,6 +80,28 @@ export class AuthService {
       to: email,
       html: `Click <a href="http://localhost:3000/auth/reset-password?token=${accessToken}">here</a> to reset your password`,
       subject: 'Reset  password',
+    });
+  }
+  static async resetPassword(user: User, newPassword: string) {
+    const isSamePassword = await bcrypt.compare(newPassword, user.password);
+
+    if (isSamePassword) {
+      throw new BadRequestException(
+        `New password cannot be the same as old password`
+      );
+    }
+
+    const salt = bcrypt.genSaltSync();
+    const hashedPassword = await hashPassword(newPassword, salt);
+
+    await db.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        password: hashedPassword,
+        salt: salt,
+      },
     });
   }
 }
