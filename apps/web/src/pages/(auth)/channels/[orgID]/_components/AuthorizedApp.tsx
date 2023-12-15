@@ -6,8 +6,8 @@ export default function AuthorizedApp() {
   return (
     <div className='w-[52rem] space-y-4'>
       <h1 className='text-2xl'>Authorised Apps</h1>
-      <div className='border bg-transparent p-6 rounded-md'>
-        <h3 className='text-sm uppercase font-bold text-primary-foreground/20'>
+      <div className='p-6 bg-transparent border rounded-md'>
+        <h3 className='text-sm font-bold uppercase text-primary-foreground/20'>
           Applications
         </h3>
         <p>
@@ -16,7 +16,7 @@ export default function AuthorizedApp() {
           them at any time.
         </p>
       </div>
-      <div className='border p-6 rounded-md space-y-4 group'>
+      <div className='p-6 space-y-4 border rounded-md group'>
         <div className='flex justify-between'>
           <div className='flex items-center gap-4'>
             <img
@@ -26,11 +26,11 @@ export default function AuthorizedApp() {
             />
             <span>Watch Together</span>
           </div>
-          <Button className='hidden group-hover:block bg-transparent border-red-500 border hover:bg-red-500 text-white'>
+          <Button className='hidden text-white bg-transparent border border-red-500 group-hover:block hover:bg-red-500'>
             Deauthorise
           </Button>
         </div>
-        <h3 className='text-sm uppercase font-bold text-primary-foreground/20'>
+        <h3 className='text-sm font-bold uppercase text-primary-foreground/20'>
           About this App
         </h3>
         <p>
@@ -38,7 +38,7 @@ export default function AuthorizedApp() {
           choice to share the remote or not.
         </p>
         <div className='flex flex-col'>
-          <h3 className='text-sm uppercase font-bold text-primary-foreground/20'>
+          <h3 className='text-sm font-bold uppercase text-primary-foreground/20'>
             Permissions
           </h3>
           <CheckboxAuthorized />

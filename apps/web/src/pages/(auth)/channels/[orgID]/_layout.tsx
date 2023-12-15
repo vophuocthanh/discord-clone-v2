@@ -157,7 +157,7 @@ export default function Component() {
               </span>
             ))}
           </div>
-          <div className='absolute bottom-0 flex items-center justify-between w-full px-3 py-1'>
+          <div className='bottom-0 flex items-center justify-between w-full px-3 py-1'>
             <div className='flex items-center gap-4 px-2 rounded cursor-pointer hover:bg-primary-foreground/20'>
               <img
                 src='https://st.quantrimang.com/photos/image/2019/03/13/HinhnenGoku-0.jpg'
