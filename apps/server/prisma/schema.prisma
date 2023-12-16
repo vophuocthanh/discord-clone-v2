@@ -13,11 +13,12 @@ generator client {
 }
 
 model Org {
-  id     String        @id @default(cuid())
-  icon   String
-  name   String
-  userID String
-  users  UsersOnOrgs[]
+  id       String        @id @default(cuid())
+  icon     String
+  name     String
+  userID   String
+  users    UsersOnOrgs[]
+  channels Channel[]
 
   @@map("orgs")
 }
@@ -36,6 +37,7 @@ model Channel {
   id    String @id @default(cuid())
   name  String
   orgId String
+  Org   Org    @relation(fields: [orgId], references: [id])
 
   @@map("channels")
 }
