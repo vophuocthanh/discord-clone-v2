@@ -4,6 +4,7 @@ import { paginationSchema } from '@/utils/schema';
 import { zValidator } from '@hono/zod-validator';
 import { Hono } from 'hono';
 import { z } from 'zod';
+import { OrgsService } from './orgs.service';
 
 export const router = new Hono();
 
@@ -50,6 +51,41 @@ router
       },
     });
     return c.json(orgs);
+  })
+  .put('/:id', async (c) => {
+    try {
+      const user = c.get('user');
+      const { name, icon } = await c.req.json<{ name: string; icon: string }>();
+      await db.org.update({
+        where: {
+          id: c.req.param('id'),
+        },
+        data: {
+          name: name,
+          icon: icon,
+          userID: user?.id,
+        },
+      });
+      return c.json({
+        message: 'Update orgs successfully!',
+      });
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
+  })
+  .delete('/:id', async (c) => {
+    try {
+      await db.org.delete({
+        where: {
+          id: c.req.param('id'),
+        },
+      });
+      return c.json({
+        message: 'Delete orgs successfully!',
+      });
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
   })
   .get('/:orgId/channels', (c) =>
     c.json([
