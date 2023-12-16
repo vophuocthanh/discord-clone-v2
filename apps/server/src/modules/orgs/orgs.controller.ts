@@ -1,19 +1,43 @@
 import { db } from '@/lib/db';
-import { User } from '@prisma/client';
+import { BadRequestException } from '@/utils/exceptions';
+import { paginationSchema } from '@/utils/schema';
+import { zValidator } from '@hono/zod-validator';
 import { Hono } from 'hono';
+import { z } from 'zod';
 
 export const router = new Hono();
 
 router
-  .get('/', async (c) => {
+  .get('/', zValidator('query', paginationSchema), async (c) => {
     const user = c.get('user');
+    const name = c.req.query('name');
+    const page = +c.req.query('page') || 1;
+    const limit = +c.req.query('limit') || 5;
 
     const orgs = await db.org.findMany({
+      skip: (page - 1) * limit,
+      take: limit,
       where: {
         userID: user?.id,
+        name: {
+          contains: name,
+        },
       },
     });
-    return c.json(orgs);
+
+    const total = await db.org.count({
+      where: {
+        userID: user?.id,
+        name: {
+          contains: name,
+        },
+      },
+    });
+    return c.json({
+      data: orgs,
+      total: total,
+      totalPage: Math.ceil(total / limit),
+    });
   })
   .post('/', async (c) => {
     const user = c.get('user');
@@ -63,7 +87,15 @@ router
       },
     ])
   )
-  .get('/:orgId/members', (c) =>
+  .get('/:orgId/members', async (c) => {
+    const orgId = c.req.param('orgId');
+
+    const members = await db.usersOnOrgs.findMany({
+      where: {
+        orgID: orgId,
+      },
+    });
+    console.log('members:', members);
     c.json([
       {
         id: '001',
@@ -86,8 +118,41 @@ router
         joinMethod: 'Discord',
         roles: ['Members'],
       },
-    ])
-  )
+    ]);
+  })
+  .post('/:orgId/members', async (c) => {
+    const orgId = c.req.param('orgId');
+
+    const members = await db.usersOnOrgs.findMany({
+      where: {
+        orgID: orgId,
+      },
+    });
+    console.log('members:', members);
+    c.json([
+      {
+        id: '001',
+        displayName: 'John Doe',
+        username: 'john_doe',
+        avatar: 'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
+        memberSince: '2022-01-01',
+        joinedDiscord: '2022-01-01',
+        joinMethod: 'Discord',
+        roles: ['Admin'],
+      },
+      {
+        id: '001',
+        displayName: 'Goku',
+        username: 'goku',
+        avatar:
+          'https://images.immediate.co.uk/production/volatile/sites/3/2023/08/2023.06.28-06.20-boundingintocomics-649c79f009cdf-Cropped-8d74232.png?resize=768,574',
+        memberSince: '2022-01-01',
+        joinedDiscord: '2022-01-01',
+        joinMethod: 'Discord',
+        roles: ['Members'],
+      },
+    ]);
+  })
   .get('/:orgId/channels/:channelId/messages', (c) =>
     c.json([
       {

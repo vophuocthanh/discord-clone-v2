@@ -7,7 +7,7 @@ Table orgs {
   icon String [not null]
   name String [not null]
   userID String [not null]
-  user users [not null]
+  orgs users_on_orgs [not null]
 }
 
 Table users {
@@ -15,7 +15,26 @@ Table users {
   email String [unique, not null]
   password String [not null]
   salt String [not null]
-  Org orgs [not null]
+  users users_on_orgs [not null]
 }
 
-Ref: orgs.userID > users.id
+Table channels {
+  id String [pk]
+  name String [not null]
+  orgId String [not null]
+}
+
+Table users_on_orgs {
+  user users [not null]
+  userID String [not null]
+  org orgs [not null]
+  orgID String [not null]
+
+  indexes {
+    (orgID, userID) [pk]
+  }
+}
+
+Ref: users_on_orgs.userID > users.id
+
+Ref: users_on_orgs.orgID > orgs.id

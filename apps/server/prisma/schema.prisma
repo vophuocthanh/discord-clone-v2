@@ -13,21 +13,39 @@ generator client {
 }
 
 model Org {
-  id     String @id @default(cuid())
+  id     String        @id @default(cuid())
   icon   String
   name   String
   userID String
-  user   User   @relation(fields: [userID], references: [id])
+  orgs   UsersOnOrgs[]
 
   @@map("orgs")
 }
 
 model User {
-  id       String @id @default(cuid())
-  email    String @unique
+  id       String        @id @default(cuid())
+  email    String        @unique
   password String
   salt     String
-  Org      Org[]
+  users    UsersOnOrgs[]
 
   @@map("users")
+}
+
+model Channel {
+  id    String @id @default(cuid())
+  name  String
+  orgId String
+
+  @@map("channels")
+}
+
+model UsersOnOrgs {
+  user   User   @relation(fields: [userID], references: [id])
+  userID String
+  org    Org    @relation(fields: [orgID], references: [id])
+  orgID  String
+
+  @@id([orgID, userID])
+  @@map("users_on_orgs")
 }
