@@ -7,7 +7,7 @@ Table orgs {
   icon String [not null]
   name String [not null]
   userID String [not null]
-  orgs users_on_orgs [not null]
+  users users_on_orgs [not null]
 }
 
 Table users {
@@ -15,7 +15,7 @@ Table users {
   email String [unique, not null]
   password String [not null]
   salt String [not null]
-  users users_on_orgs [not null]
+  orgs users_on_orgs [not null]
 }
 
 Table channels {

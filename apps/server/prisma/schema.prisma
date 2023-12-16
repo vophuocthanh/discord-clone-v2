@@ -17,7 +17,7 @@ model Org {
   icon   String
   name   String
   userID String
-  orgs   UsersOnOrgs[]
+  users  UsersOnOrgs[]
 
   @@map("orgs")
 }
@@ -27,7 +27,7 @@ model User {
   email    String        @unique
   password String
   salt     String
-  users    UsersOnOrgs[]
+  orgs     UsersOnOrgs[]
 
   @@map("users")
 }
