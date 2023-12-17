@@ -19,7 +19,7 @@ export default function App() {
 
   const { data } = useQuery(['orgs'], () => getOrgs());
   return (
-    <div className='flex w-full h-screen bg-background'>
+    <div className='flex w-full h-full overflow-y-scroll bg-background'>
       {!data ? (
         <div className='p-3 space-y-4'>
           <SkeletonOrg />
@@ -31,7 +31,6 @@ export default function App() {
         <OrgSidebar orgs={data?.data ?? []}></OrgSidebar>
       )}
       <Outlet></Outlet>
-      <div className=''></div>
     </div>
   );
 }

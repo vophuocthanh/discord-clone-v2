@@ -4,6 +4,18 @@ export const getOrgs = async () => {
   return request.get('/orgs');
 };
 
+export const postOrgs = async (name: string, icon: string) => {
+  try {
+    const res = await request.post('/orgs', {
+      name: name,
+      icon: icon,
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 interface Member {
   id: string;
   displayName: string;
