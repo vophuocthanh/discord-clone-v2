@@ -1,7 +1,7 @@
 import { db } from '@/lib/db';
 import { mailService } from '@/lib/mail.service';
-import { JWT_SECRET, WEB_URL } from '@/utils/constants';
 import { BadRequestException, UnauthorizedException } from '@/utils/exceptions';
+import { JWT_SECRET, WEB_URL } from '@/utils/constants';
 import { hashPassword } from '@/utils/password';
 import { Prisma, User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
