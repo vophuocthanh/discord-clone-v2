@@ -1,6 +1,6 @@
 import { db } from '@/lib/db';
 import { mailService } from '@/lib/mail.service';
-import { JWT_SECRET } from '@/utils/constants';
+import { JWT_SECRET, WEB_URL } from '@/utils/constants';
 import { BadRequestException, UnauthorizedException } from '@/utils/exceptions';
 import { hashPassword } from '@/utils/password';
 import { Prisma, User } from '@prisma/client';
@@ -78,7 +78,7 @@ export class AuthService {
 
     await mailService.sendMail({
       to: email,
-      html: `Click <a href="http://localhost:3000/auth/reset-password?token=${accessToken}">here</a> to reset your password`,
+      html: `Click <a href="${WEB_URL}/reset-password?token=${accessToken}">here</a> to reset your password`,
       subject: 'Reset  password',
     });
   }
