@@ -12,9 +12,11 @@ export type Path =
   | `/channels/:orgID/member-safety`
   | `/discover`
   | `/download`
+  | `/forgot-password`
   | `/login`
   | `/nitro`
   | `/register`
+  | `/reset-password`
   | `/safety`
   | `/servers`
 

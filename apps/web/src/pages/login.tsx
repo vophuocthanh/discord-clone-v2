@@ -66,11 +66,9 @@ export default function Component() {
       <div className='p-2 w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-xl md:max-w-4xl'>
         <div className='w-full p-8 flex gap-20 bg-gray-800 rounded-sm text-white'>
           <div className='w-full'>
-            <div className='block sm:hidden'>
-              <Link to='/' className='inline-flex mb-4'>
-                <ChevronLeft /> Go back
-              </Link>
-            </div>
+            <Link to='/' className='inline-flex mb-4'>
+              <ChevronLeft /> Go back
+            </Link>
             <h1 className='font-bold text-2xl text-center'>Welcome back!</h1>
             <p className='mb-4 text-center'>We're excited to see you again !</p>
             <form className='text-start mt-5' onSubmit={handleSubmit(onSubmit)}>
@@ -91,9 +89,12 @@ export default function Component() {
               {errors.password && (
                 <p className='my-1 text-red-500'>{errors.password.message}</p>
               )}
-              <p className='text-sky-500 text-xs text-start cursor-pointer my-1'>
+              <Link
+                to='/forgot-password'
+                className='text-sky-500 text-xs text-start cursor-pointer my-1'
+              >
                 Forgot Password?
-              </p>
+              </Link>
               <Button
                 className='w-full mt-4 mb-3'
                 type='submit'

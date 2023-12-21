@@ -13,5 +13,29 @@ export const LoginSchema = z.object({
     .min(1, {
       message: 'Password is required',
     })
-    .regex(validator.password, 'Password must contain at least 8 characters, 1 letter and 1 number'),
+    .regex(
+      validator.password,
+      'Password must contain at least 8 characters, 1 letter and 1 number'
+    ),
+});
+
+export const ForgotPasswordSchema = z.object({
+  email: z
+    .string()
+    .min(1, {
+      message: 'Email is required',
+    })
+    .email('Email must be valid'),
+});
+
+export const ResetPasswordSchema = z.object({
+  password: z
+    .string()
+    .min(1, {
+      message: 'Password is required',
+    })
+    .regex(
+      validator.password,
+      'Password must contain at least 8 characters, 1 letter and 1 number'
+    ),
 });
