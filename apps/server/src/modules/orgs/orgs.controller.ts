@@ -56,7 +56,7 @@ router
         message: 'Update orgs successfully!',
       });
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new BadRequestException('Update orgs failed!');
     }
   })
   .delete('/:id', async (c) => {
@@ -70,7 +70,7 @@ router
         message: 'Delete orgs successfully!',
       });
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new BadRequestException('Delete orgs failed!');
     }
   })
   .get('/:orgId/channels', (c) =>
