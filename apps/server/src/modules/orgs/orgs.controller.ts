@@ -3,7 +3,6 @@ import { BadRequestException } from '@/utils/exceptions';
 import { paginationSchema } from '@/utils/schema';
 import { zValidator } from '@hono/zod-validator';
 import { Hono } from 'hono';
-import { z } from 'zod';
 import { OrgsService } from './orgs.service';
 
 export const router = new Hono();
@@ -11,56 +10,33 @@ export const router = new Hono();
 router
   .get('/', zValidator('query', paginationSchema), async (c) => {
     const user = c.get('user');
-    const name = c.req.query('name');
-    const page = +c.req.query('page') || 1;
-    const limit = +c.req.query('limit') || 5;
+    const search = c.req.query('search');
+    const page = +c.req.query('page');
+    const limit = +c.req.query('limit');
 
-    const orgs = await db.org.findMany({
-      skip: (page - 1) * limit,
-      take: limit,
-      where: {
-        userID: user?.id,
-        name: {
-          contains: name,
-        },
-      },
+    const data = await OrgsService.getAll(user?.id, {
+      page,
+      limit,
+      search,
     });
-
-    const total = await db.org.count({
-      where: {
-        userID: user?.id,
-        name: {
-          contains: name,
-        },
-      },
-    });
-    return c.json({
-      data: orgs,
-      total: total,
-      totalPage: Math.ceil(total / limit),
-    });
+    return c.json(data);
   })
-  .get('/:id', async (c) => {
-    const user = c.get('user');
-    const orgs = await db.org.findMany({
-      where: {
-        userID: user?.id,
-        id: c.req.param('id'),
-      },
-    });
-    return c.json(orgs);
+  .get('/:orgId', async (c) => {
+    const orgId = c.req.param('orgId');
+
+    const org = await OrgsService.getBy(orgId);
+
+    return c.json(org);
   })
   .post('/', async (c) => {
     const user = c.get('user');
     const { name, icon } = await c.req.json<{ name: string; icon: string }>();
-    const orgs = await db.org.create({
-      data: {
-        name: name,
-        icon: icon,
-        userID: user?.id,
-      },
+    const org = await OrgsService.create({
+      userID: user?.id,
+      name,
+      icon,
     });
-    return c.json(orgs);
+    return c.json(org);
   })
   .put('/:id', async (c) => {
     try {

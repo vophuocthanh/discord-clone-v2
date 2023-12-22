@@ -1,5 +1,5 @@
 export class NotFoundException extends Error {
-  constructor(message) {
+  constructor(message: string) {
     super(message);
     this.status = 404;
     this.message = message;
@@ -7,7 +7,7 @@ export class NotFoundException extends Error {
 }
 
 export class BadRequestException extends Error {
-  constructor(message) {
+  constructor(message: string) {
     super(message);
     this.status = 400;
     this.message = message;
@@ -15,7 +15,7 @@ export class BadRequestException extends Error {
 }
 
 export class UnauthorizedException extends Error {
-  constructor(message) {
+  constructor(message: string) {
     super(message);
     this.status = 401;
     this.message = message;
@@ -23,7 +23,7 @@ export class UnauthorizedException extends Error {
 }
 
 export class ForbiddenException extends Error {
-  constructor(message) {
+  constructor(message: string) {
     super(message);
     this.status = 403;
     this.message = message;
@@ -31,14 +31,14 @@ export class ForbiddenException extends Error {
 }
 
 export class ConflictException extends Error {
-  constructor(message) {
+  constructor(message: string) {
     super(message);
     this.status = 409;
     this.message = message;
   }
 }
 
-type HTTPExceptionOptions = {
+export type HTTPExceptionOptions = {
   res?: Response;
   message?: string;
 };
