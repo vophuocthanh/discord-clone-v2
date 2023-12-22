@@ -11,8 +11,8 @@ router
   .get('/', zValidator('query', paginationSchema), async (c) => {
     const user = c.get('user');
     const search = c.req.query('search');
-    const page = +c.req.query('page');
-    const limit = +c.req.query('limit');
+    const page = +c.req.query('page') || 1;
+    const limit = +c.req.query('limit') || 5;
 
     const data = await OrgsService.getAll(user?.id, {
       page,
