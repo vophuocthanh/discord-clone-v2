@@ -1,22 +1,26 @@
-import { getOrgs } from '@/apis/orgs';
+import { getOrg } from '@/apis/orgs';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { useParams } from '@/router';
 import { ChevronDown, Crown, Home } from 'lucide-react';
 import { useQuery } from 'react-query';
 
 export default function PopoverSidebar() {
-  const { data } = useQuery(['orgs'], () => getOrgs());
-
+  const { orgID } = useParams('/channels/:orgID/:channelID');
+  const { data: org } = useQuery(['orgs', orgID], () => {
+    return getOrg(orgID);
+  });
+  console.log('org:', org);
   return (
     <Popover>
       <PopoverTrigger asChild>
         <div className='flex items-center justify-between p-3 border-b cursor-pointer select-none h-14 border-primary-foreground/10'>
           <div className='flex items-center gap-2 text-2xl'>
             <Home />
-            <h1 className='font-bold'>{data?.data[0].name}</h1>
+            <h1 className='font-bold'>{org?.name}</h1>
           </div>
           <ChevronDown />
         </div>

@@ -17,10 +17,11 @@ export default function App() {
     document.documentElement.classList.add('dark');
   }, []);
 
-  const { data } = useQuery(['orgs'], () => getOrgs());
+  const { data: org } = useQuery(['orgs'], () => getOrgs());
+
   return (
     <div className='flex w-full h-full overflow-y-scroll bg-background'>
-      {!data ? (
+      {!org ? (
         <div className='p-3 space-y-4'>
           <SkeletonOrg />
           <SkeletonOrg />
@@ -28,7 +29,7 @@ export default function App() {
           <SkeletonOrg />
         </div>
       ) : (
-        <OrgSidebar orgs={data?.data ?? []}></OrgSidebar>
+        <OrgSidebar orgs={org ?? []}></OrgSidebar>
       )}
       <Outlet></Outlet>
     </div>

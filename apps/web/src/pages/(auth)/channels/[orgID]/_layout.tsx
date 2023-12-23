@@ -53,8 +53,10 @@ export default function Component() {
   const { channelID, orgID } = useParams('/channels/:orgID/:channelID');
   const navigate = useNavigate();
 
-  const { data } = useQuery(['channels'], () => getChannels(orgID));
-  const channels = data?.data;
+  const { data: channels } = useQuery(['channels', orgID], () =>
+    getChannels(orgID)
+  );
+  console.log('channels', channels?.data);
   const navigateToChannel = (id: string) => {
     navigate(`/channels/${orgID}/${id}`);
   };
@@ -83,9 +85,11 @@ export default function Component() {
               to='/channels/:orgID/member-safety'
               params={{ orgID }}
               state={{
-                channel: channels?.find((channel) => channel.id === channelID),
+                channel: channels?.data.find(
+                  (channel) => channel.id === channelID
+                ),
               }}
-              className='flex w-full gap-2 px-3 py-2 hover:bg-primary-foreground/20'
+              className='px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20'
             >
               <Users />
               <p>Member</p>
@@ -93,7 +97,7 @@ export default function Component() {
           </div>
           <div className='px-2 text-primary-foreground/60'>
             <hr className='h-2 my-4 border-primary-foreground/60' />
-            {!data ? (
+            {!channels ? (
               <div className='flex flex-col space-y-10'>
                 <SkeletonChannel />
                 <SkeletonChannel />
@@ -102,10 +106,10 @@ export default function Component() {
               </div>
             ) : (
               <div className=''>
-                {Object.entries(groupBy(channels, 'category.name')).map(
+                {Object.entries(groupBy(channels, 'category.name'))?.map(
                   ([category, channels]) => (
                     <div key={category}>
-                      <div className='flex justify-between gap-2'>
+                      <div className='flex gap-2 justify-between'>
                         <div className='flex gap-2'>
                           <ChevronDown className='w-4' />
                           <h1 className='uppercase'> {category} </h1>
@@ -116,7 +120,7 @@ export default function Component() {
                         {channels.map((channel) => (
                           <div
                             className={cn('px-6 py-3 cursor-pointer', {
-                              'bg-primary-foreground/20 text-primary-foreground/80 rounded':
+                              'bg-primary-foreground/20 text-primary-foreground/80':
                                 channel.id === channelID,
                             })}
                             key={channel.id}

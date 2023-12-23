@@ -1,11 +1,13 @@
 import { Context } from 'hono';
 
 export const errorFilter = async (error: Error, c: Context) => {
+  const status = error.status ?? 500;
+
   return c.json(
     {
-      status: error.status ?? 500,
+      status,
       message: error.message ?? 'Something went wrong',
     },
-    error.status
+    status
   );
 };
