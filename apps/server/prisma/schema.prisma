@@ -19,8 +19,19 @@ model Org {
   userID   String
   users    UsersOnOrgs[]
   channels Channel[]
+  Role     Role[]
 
   @@map("orgs")
+}
+
+model Role {
+  id    String @id @default(cuid())
+  name  String
+  color String
+  orgID String
+  Org   Org    @relation(fields: [orgID], references: [id])
+
+  @@map("roles")
 }
 
 model User {

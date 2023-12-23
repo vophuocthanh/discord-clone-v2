@@ -9,6 +9,15 @@ Table orgs {
   userID String [not null]
   users users_on_orgs [not null]
   channels channels [not null]
+  Role roles [not null]
+}
+
+Table roles {
+  id String [pk]
+  name String [not null]
+  color String [not null]
+  orgID String [not null]
+  Org orgs [not null]
 }
 
 Table users {
@@ -36,6 +45,8 @@ Table users_on_orgs {
     (orgID, userID) [pk]
   }
 }
+
+Ref: roles.orgID > orgs.id
 
 Ref: channels.orgId > orgs.id
 
