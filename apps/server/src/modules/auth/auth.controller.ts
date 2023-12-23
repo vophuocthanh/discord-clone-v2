@@ -22,8 +22,8 @@ router
   .post('/sign-up', zValidator('json', signUpDto), async (c) => {
     const { email, password } = await c.req.json();
 
-    await AuthService.signUp(email, password);
-
+    const user = await AuthService.signUp(email, password);
+    await AuthService.sendVerifyEmail(user);
     return c.json(
       {
         message:

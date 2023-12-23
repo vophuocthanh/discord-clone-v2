@@ -19,27 +19,32 @@ model Org {
   userID   String
   users    UsersOnOrgs[]
   channels Channel[]
-  Role     Role[]
+  Role     Roles[]
 
   @@map("orgs")
 }
 
-model Role {
-  id    String @id @default(cuid())
-  name  String
-  color String
-  orgID String
-  Org   Org    @relation(fields: [orgID], references: [id])
+model Roles {
+  id     String  @id @default(cuid())
+  name   String
+  color  String
+  orgID  String
+  Org    Org     @relation(fields: [orgID], references: [id])
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
 
   @@map("roles")
 }
 
 model User {
-  id       String        @id @default(cuid())
-  email    String        @unique
-  password String
-  salt     String
-  orgs     UsersOnOrgs[]
+  id         String        @id @default(cuid())
+  email      String        @unique
+  password   String
+  salt       String
+  orgs       UsersOnOrgs[]
+  fullName   String?
+  Role       Roles[]
+  isVerified Boolean       @default(false)
 
   @@map("users")
 }

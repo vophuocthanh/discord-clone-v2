@@ -10,6 +10,14 @@ import jwt from 'jsonwebtoken';
 const ACCESS_TOKEN_EXPIRES_IN = 60 * 60 * 24;
 
 export class AuthService {
+  static async sendVerifyEmail(user: User) {
+    const accessToken = this.createToken(user.id);
+    return await mailService.sendMail({
+      to: user.email,
+      html: `Click <a href="${WEB_URL}/verify-email?token=${accessToken}">here</a> to verify your email`,
+      subject: 'Verify email',
+    });
+  }
   static async signIn(email: string, password: string) {
     const user = await db.user.findUnique({
       where: {

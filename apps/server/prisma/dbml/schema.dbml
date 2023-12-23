@@ -18,6 +18,8 @@ Table roles {
   color String [not null]
   orgID String [not null]
   Org orgs [not null]
+  User users
+  userId String
 }
 
 Table users {
@@ -26,6 +28,9 @@ Table users {
   password String [not null]
   salt String [not null]
   orgs users_on_orgs [not null]
+  fullName String
+  Role roles [not null]
+  isVerified Boolean [not null, default: false]
 }
 
 Table channels {
@@ -47,6 +52,8 @@ Table users_on_orgs {
 }
 
 Ref: roles.orgID > orgs.id
+
+Ref: roles.userId > users.id
 
 Ref: channels.orgId > orgs.id
 
