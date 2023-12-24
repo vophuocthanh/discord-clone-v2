@@ -32,6 +32,16 @@ router
       201
     );
   })
+  .put('/verify', async (c) => {
+    const user = c.get('user');
+    await AuthService.verifyUser(user);
+    return c.json(
+      {
+        message: 'Your email has been verified successfully.',
+      },
+      200
+    );
+  })
   .post(
     '/forgot-password',
     zValidator('json', forgotPasswordDto),
