@@ -7,7 +7,9 @@ import {
   signUpDto,
 } from './dto/auth.dto';
 import { zValidator } from '@hono/zod-validator';
-import { auth } from '@/middlewares/auth';
+import { auth, verifyToken } from '@/middlewares/auth';
+import { UnauthorizedException } from '@/utils/exceptions';
+import { WEB_URL } from '@/utils/constants';
 
 export const router = new Hono();
 
@@ -32,15 +34,16 @@ router
       201
     );
   })
-  .put('/verify', async (c) => {
-    const user = c.get('user');
+  .get('/verify-email', async (c) => {
+    const token = c.req.query('token');
+
+    if (!token) throw new UnauthorizedException('Missing token');
+
+    const user = await verifyToken(token);
+
     await AuthService.verifyUser(user);
-    return c.json(
-      {
-        message: 'Your email has been verified successfully.',
-      },
-      200
-    );
+
+    return c.redirect(`${WEB_URL}/verify-email-success`, 302);
   })
   .post(
     '/forgot-password',

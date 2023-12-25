@@ -1,36 +1,35 @@
-import { db } from '@/lib/db';
-import { mailService } from '@/lib/mail.service';
-import { BadRequestException, UnauthorizedException } from '@/utils/exceptions';
-import { JWT_SECRET, WEB_URL } from '@/utils/constants';
-import { hashPassword } from '@/utils/password';
 import { Prisma, User } from '@prisma/client';
+import { db } from '@/lib/db';
+import { BadRequestException, UnauthorizedException } from '@/utils/exceptions';
+import { hashPassword } from '@/utils/password';
 import * as bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { mailService } from '@/lib/mail.service';
+import { JWT_SECRET, WEB_URL, API_URL } from '@/utils/constants';
 
-const ACCESS_TOKEN_EXPIRES_IN = 60 * 60 * 24;
+export const ACCESS_TOKEN_EXPIRE_IN = 60 * 60 * 24;
 
-export class AuthService {
-  static async verifyUser(user: User) {
-    if (!user.isVerified) {
-      db.user.update({
-        where: {
-          id: user.id,
-        },
-        data: {
-          isVerified: true,
-        },
-      });
-    }
-  }
-  static async sendVerifyEmail(user: User) {
-    const accessToken = this.createToken(user.id);
-    return await mailService.sendMail({
-      to: user.email,
-      html: `Click <a href="${WEB_URL}/verify-email?token=${accessToken}">here</a> to verify your email`,
-      subject: 'Verify email',
+export const AuthService = {
+  verifyUser: async (user: User) => {
+    if (user.isVerified) return;
+    return db.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        isVerified: true,
+      },
     });
-  }
-  static async signIn(email: string, password: string) {
+  },
+  sendVerifyEmail: async (user: User) => {
+    const accessToken = AuthService.createToken(user);
+    return mailService.sendMail({
+      to: user.email,
+      html: `Click <a href="${API_URL}/verify-email?token=${accessToken}">here</a> to verify email!`,
+      subject: 'Verify Email',
+    });
+  },
+  signIn: async (email: string, password: string) => {
     const user = await db.user.findUnique({
       where: {
         email: email,
@@ -39,20 +38,26 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException(`Email ${email} not found`);
     }
+    if (!user.isVerified) {
+      throw new UnauthorizedException(
+        'Email not verified! Please verify your email before login'
+      );
+    }
+
     const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) {
-      throw new UnauthorizedException(`Invalid password`);
+      throw new UnauthorizedException('Invalid password');
     }
-    const accessToken = this.createToken(user.id);
+
+    const accessToken = AuthService.createToken(user);
 
     return { accessToken };
-  }
-
-  static async signUp(email: string, password: string) {
+  },
+  signUp: async (email: string, password: string) => {
     try {
       if (!email || !password) {
-        throw new BadRequestException(`Email and password are required`);
+        throw new BadRequestException('Email and password are required');
       }
 
       const salt = bcrypt.genSaltSync();
@@ -73,19 +78,20 @@ export class AuthService {
         error.code === 'P2002'
       ) {
         throw new UnauthorizedException(`User ${email} already exists`);
-      } else {
-        throw error;
       }
+      throw error;
     }
-  }
-
-  static createToken(userID: string) {
-    return jwt.sign({ userID: userID }, JWT_SECRET, {
-      expiresIn: ACCESS_TOKEN_EXPIRES_IN,
-    });
-  }
-
-  static async forgotPassword(email: string) {
+  },
+  createToken: (user: User) => {
+    return jwt.sign(
+      { userID: user.id, isVerified: user.isVerified },
+      JWT_SECRET,
+      {
+        expiresIn: ACCESS_TOKEN_EXPIRE_IN,
+      }
+    );
+  },
+  forgotPassword: async (email: string) => {
     const user = await db.user.findUnique({
       where: {
         email: email,
@@ -94,20 +100,20 @@ export class AuthService {
     if (!user) {
       throw new BadRequestException(`Email ${email} not found`);
     }
-    const accessToken = this.createToken(user.id);
+    const accessToken = AuthService.createToken(user);
 
     await mailService.sendMail({
       to: email,
       html: `Click <a href="${WEB_URL}/reset-password?token=${accessToken}">here</a> to reset your password`,
       subject: 'Reset  password',
     });
-  }
-  static async resetPassword(user: User, newPassword: string) {
+  },
+  resetPassword: async (user: User, newPassword: string) => {
     const isSamePassword = await bcrypt.compare(newPassword, user.password);
 
     if (isSamePassword) {
       throw new BadRequestException(
-        `New password cannot be the same as old password`
+        'New password cannot be the same as old password'
       );
     }
 
@@ -123,5 +129,5 @@ export class AuthService {
         salt: salt,
       },
     });
-  }
-}
+  },
+};
