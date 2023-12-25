@@ -13,37 +13,40 @@ generator client {
 }
 
 model Org {
-  id       String        @id @default(cuid())
-  icon     String
-  name     String
-  userID   String
-  users    UsersOnOrgs[]
-  channels Channel[]
-  Role     Roles[]
+  id           String         @id @default(cuid())
+  icon         String
+  name         String
+  userID       String
+  users        UsersOnOrgs[]
+  channels     Channel[]
+  Role         Role[]
+  UsersOnRoles UsersOnRoles[]
 
   @@map("orgs")
 }
 
-model Roles {
-  id     String  @id @default(cuid())
-  name   String
-  color  String
-  orgID  String
-  Org    Org     @relation(fields: [orgID], references: [id])
-  User   User?   @relation(fields: [userId], references: [id])
-  userId String?
+model Role {
+  id           String         @id @default(cuid())
+  name         String
+  color        String
+  orgID        String
+  org          Org            @relation(fields: [orgID], references: [id])
+  UsersOnRoles UsersOnRoles[]
+  User         User?          @relation(fields: [userId], references: [id])
+  userId       String?
 
   @@map("roles")
 }
 
 model User {
-  id         String        @id @default(cuid())
-  email      String        @unique
-  password   String
-  salt       String
-  orgs       UsersOnOrgs[]
-  fullName   String?
-  Role       Roles[]
+  id           String         @id @default(cuid())
+  email        String         @unique
+  password     String
+  salt         String
+  orgs         UsersOnOrgs[]
+  fullName     String?
+  Role         Role[]
+  UsersOnRoles UsersOnRoles[]
 
   @@map("users")
 }
@@ -51,10 +54,22 @@ model User {
 model Channel {
   id    String @id @default(cuid())
   name  String
-  orgId String
-  Org   Org    @relation(fields: [orgId], references: [id])
+  orgID String
+  Org   Org    @relation(fields: [orgID], references: [id])
 
   @@map("channels")
+}
+
+model UsersOnRoles {
+  user   User    @relation(fields: [userId], references: [id])
+  userId String
+  role   Role    @relation(fields: [roleId], references: [id])
+  roleId String
+  Org    Org?    @relation(fields: [orgID], references: [id])
+  orgID  String?
+
+  @@id([roleId, userId])
+  @@map("users_on_roles")
 }
 
 model UsersOnOrgs {
