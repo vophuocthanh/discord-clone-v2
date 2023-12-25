@@ -7,9 +7,7 @@ import {
   signUpDto,
 } from './dto/auth.dto';
 import { zValidator } from '@hono/zod-validator';
-import { auth, verifyToken } from '@/middlewares/auth';
-import { UnauthorizedException } from '@/utils/exceptions';
-import { WEB_URL } from '@/utils/constants';
+import { auth } from '@/middlewares/auth';
 
 export const router = new Hono();
 
@@ -24,8 +22,8 @@ router
   .post('/sign-up', zValidator('json', signUpDto), async (c) => {
     const { email, password } = await c.req.json();
 
-    const user = await AuthService.signUp(email, password);
-    await AuthService.sendVerifyEmail(user);
+    await AuthService.signUp(email, password);
+
     return c.json(
       {
         message:
@@ -33,17 +31,6 @@ router
       },
       201
     );
-  })
-  .get('/verify-email', async (c) => {
-    const token = c.req.query('token');
-
-    if (!token) throw new UnauthorizedException('Missing token');
-
-    const user = await verifyToken(token);
-
-    await AuthService.verifyUser(user);
-
-    return c.redirect(`${WEB_URL}/verify-email-success`, 302);
   })
   .post(
     '/forgot-password',

@@ -44,7 +44,6 @@ model User {
   orgs       UsersOnOrgs[]
   fullName   String?
   Role       Roles[]
-  isVerified Boolean       @default(false)
 
   @@map("users")
 }

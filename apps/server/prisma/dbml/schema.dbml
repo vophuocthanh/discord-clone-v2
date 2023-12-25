@@ -30,7 +30,6 @@ Table users {
   orgs users_on_orgs [not null]
   fullName String
   Role roles [not null]
-  isVerified Boolean [not null, default: false]
 }
 
 Table channels {

@@ -1,35 +1,16 @@
-import { Prisma, User } from '@prisma/client';
 import { db } from '@/lib/db';
+import { mailService } from '@/lib/mail.service';
 import { BadRequestException, UnauthorizedException } from '@/utils/exceptions';
+import { JWT_SECRET, WEB_URL } from '@/utils/constants';
 import { hashPassword } from '@/utils/password';
+import { Prisma, User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { mailService } from '@/lib/mail.service';
-import { JWT_SECRET, WEB_URL, API_URL } from '@/utils/constants';
 
-export const ACCESS_TOKEN_EXPIRE_IN = 60 * 60 * 24;
+const ACCESS_TOKEN_EXPIRES_IN = 60 * 60 * 24;
 
-export const AuthService = {
-  verifyUser: async (user: User) => {
-    if (user.isVerified) return;
-    return db.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        isVerified: true,
-      },
-    });
-  },
-  sendVerifyEmail: async (user: User) => {
-    const accessToken = AuthService.createToken(user);
-    return mailService.sendMail({
-      to: user.email,
-      html: `Click <a href="${API_URL}/verify-email?token=${accessToken}">here</a> to verify email!`,
-      subject: 'Verify Email',
-    });
-  },
-  signIn: async (email: string, password: string) => {
+export class AuthService {
+  static async signIn(email: string, password: string) {
     const user = await db.user.findUnique({
       where: {
         email: email,
@@ -38,26 +19,20 @@ export const AuthService = {
     if (!user) {
       throw new UnauthorizedException(`Email ${email} not found`);
     }
-    if (!user.isVerified) {
-      throw new UnauthorizedException(
-        'Email not verified! Please verify your email before login'
-      );
-    }
-
     const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) {
-      throw new UnauthorizedException('Invalid password');
+      throw new UnauthorizedException(`Invalid password`);
     }
-
-    const accessToken = AuthService.createToken(user);
+    const accessToken = this.createToken(user.id);
 
     return { accessToken };
-  },
-  signUp: async (email: string, password: string) => {
+  }
+
+  static async signUp(email: string, password: string) {
     try {
       if (!email || !password) {
-        throw new BadRequestException('Email and password are required');
+        throw new BadRequestException(`Email and password are required`);
       }
 
       const salt = bcrypt.genSaltSync();
@@ -78,20 +53,19 @@ export const AuthService = {
         error.code === 'P2002'
       ) {
         throw new UnauthorizedException(`User ${email} already exists`);
+      } else {
+        throw error;
       }
-      throw error;
     }
-  },
-  createToken: (user: User) => {
-    return jwt.sign(
-      { userID: user.id, isVerified: user.isVerified },
-      JWT_SECRET,
-      {
-        expiresIn: ACCESS_TOKEN_EXPIRE_IN,
-      }
-    );
-  },
-  forgotPassword: async (email: string) => {
+  }
+
+  static createToken(userID: string) {
+    return jwt.sign({ userID: userID }, JWT_SECRET, {
+      expiresIn: ACCESS_TOKEN_EXPIRES_IN,
+    });
+  }
+
+  static async forgotPassword(email: string) {
     const user = await db.user.findUnique({
       where: {
         email: email,
@@ -100,20 +74,20 @@ export const AuthService = {
     if (!user) {
       throw new BadRequestException(`Email ${email} not found`);
     }
-    const accessToken = AuthService.createToken(user);
+    const accessToken = this.createToken(user.id);
 
     await mailService.sendMail({
       to: email,
       html: `Click <a href="${WEB_URL}/reset-password?token=${accessToken}">here</a> to reset your password`,
       subject: 'Reset  password',
     });
-  },
-  resetPassword: async (user: User, newPassword: string) => {
+  }
+  static async resetPassword(user: User, newPassword: string) {
     const isSamePassword = await bcrypt.compare(newPassword, user.password);
 
     if (isSamePassword) {
       throw new BadRequestException(
-        'New password cannot be the same as old password'
+        `New password cannot be the same as old password`
       );
     }
 
@@ -129,5 +103,5 @@ export const AuthService = {
         salt: salt,
       },
     });
-  },
-};
+  }
+}
