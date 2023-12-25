@@ -19,6 +19,7 @@ export type Path =
   | `/reset-password`
   | `/safety`
   | `/servers`
+  | `/verify-email-success`
 
 export type Params = {
   '/channels/:orgID/:channelID': { orgID: string; channelID: string }
