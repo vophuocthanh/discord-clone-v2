@@ -4,12 +4,13 @@ import { Input } from '@/components/ui/input';
 import { getToken, setToken } from '@/lib/storage';
 import { Link, redirect, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { LoginSchema } from '@/lib/shema';
+import { SignUpSchema } from '@/lib/shema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useState } from 'react';
-import { signIn } from '@/apis/auth';
+import { signUp } from '@/apis/auth';
 import { Checkbox } from '@/components/ui/checkbox';
+import { toast } from 'sonner';
 
 export function Loader() {
   const isAuth = getToken();
@@ -29,26 +30,27 @@ export default function Component() {
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
-    resolver: zodResolver(LoginSchema),
+    resolver: zodResolver(SignUpSchema),
+
     defaultValues: {
       email: '',
       password: '',
-      username: '',
-      displayname: '',
     },
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof LoginSchema>> = async ({
+  const onSubmit: SubmitHandler<z.infer<typeof SignUpSchema>> = async ({
     email,
     password,
   }) => {
     try {
       setIsLoading(true);
-      const res = await signIn(email, password);
+      const res = await signUp(email, password);
       setToken(res.data.accessToken);
-      navigate('/orgs');
+      navigate('/login');
+      toast.success('Sign up successfully!');
     } catch (error) {
       console.error(error);
+      toast.error('Failed to sign up');
     } finally {
       setIsLoading(false);
     }
@@ -56,52 +58,29 @@ export default function Component() {
   return (
     <div className='relative flex w-full h-screen'>
       <img src={bgAuth} className='object-cover w-full h-full' />
-      <div className='p-2 w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-xl md:max-w-xl'>
-        <div className=' flex flex-col w-full p-8 bg-gray-800 rounded-sm text-white'>
+      <div className='absolute w-full max-w-xl p-2 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:max-w-xl'>
+        <div className='flex flex-col w-full p-8 text-white bg-gray-800 rounded-sm '>
           <h1 className='mb-6 text-2xl font-bold text-center'>
             Create an Account
           </h1>
-          <form className='text-start' onSubmit={handleSubmit(onSubmit)}>
-            <label className='w-full mb-4'>
-              <span className='font-bold text-gray-400 uppercase'>Email</span>
-              <Input {...register('email')} className='mt-2 rounded' />
-              {errors.email && (
-                <p className='mt-1 text-red-500'>{errors.email.message}</p>
-              )}
-            </label>
-            <label className='w-full mb-4'>
-              <span className='font-bold text-gray-400 uppercase'>
-                Display Name
-              </span>
-              <Input {...register('displayname')} className='mt-2 rounded' />
-              {errors.displayname && (
-                <p className='mt-1 text-red-500'>
-                  {errors.displayname.message}
-                </p>
-              )}
-            </label>
-            <label className='w-full mb-4'>
-              <span className='font-bold text-gray-400 uppercase'>
-                UserName
-              </span>
-              <Input {...register('username')} className='mt-2 rounded' />
-              {errors.username && (
-                <p className='mt-1 text-red-500'>{errors.username.message}</p>
-              )}
-            </label>
-            <label className='w-full mb-4'>
-              <span className='font-bold text-gray-400 uppercase'>
-                Password
-              </span>
-              <Input
-                type='password'
-                className='mt-2 rounded'
-                {...register('password')}
-              />
-              {errors.password && (
-                <p className='mt-1 text-red-500'>{errors.password.message}</p>
-              )}
-            </label>
+          <form className='mt-5 text-start' onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              placeholder='Email Or Phone Number'
+              className='text-white bg-gray-600 rounded'
+              {...register('email')}
+            />
+            {errors.email && (
+              <p className='mt-1 text-red-500'>{errors.email.message}</p>
+            )}
+            <Input
+              placeholder='Password'
+              type='password'
+              className='mt-6 text-white bg-gray-600 rounded'
+              {...register('password')}
+            />
+            {errors.password && (
+              <p className='my-1 text-red-500'>{errors.password.message}</p>
+            )}
             <div className='flex items-center justify-between w-full mt-4'>
               <label className='text-gray-400'>
                 <div className='flex items-center gap-2'>

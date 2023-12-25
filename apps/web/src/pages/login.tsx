@@ -61,20 +61,20 @@ export default function Component() {
     }
   };
   return (
-    <div className='h-screen relative w-full'>
-      <img src={bgAuth} className='w-full h-full object-cover' />
-      <div className='p-2 w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-xl md:max-w-4xl'>
-        <div className='w-full p-8 flex gap-20 bg-gray-800 rounded-sm text-white'>
+    <div className='relative w-full h-screen'>
+      <img src={bgAuth} className='object-cover w-full h-full' alt='bg-auth' />
+      <div className='absolute w-full max-w-xl p-2 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:max-w-4xl'>
+        <div className='flex w-full gap-20 p-8 text-white bg-gray-800 rounded-sm'>
           <div className='w-full'>
             <Link to='/' className='inline-flex mb-4'>
               <ChevronLeft /> Go back
             </Link>
-            <h1 className='font-bold text-2xl text-center'>Welcome back!</h1>
+            <h1 className='text-2xl font-bold text-center'>Welcome back!</h1>
             <p className='mb-4 text-center'>We're excited to see you again !</p>
-            <form className='text-start mt-5' onSubmit={handleSubmit(onSubmit)}>
+            <form className='mt-5 text-start' onSubmit={handleSubmit(onSubmit)}>
               <Input
                 placeholder='Email Or Phone Number'
-                className='bg-gray-600 rounded text-white'
+                className='text-white bg-gray-600 rounded'
                 {...register('email')}
               />
               {errors.email && (
@@ -83,7 +83,7 @@ export default function Component() {
               <Input
                 placeholder='Password'
                 type='password'
-                className='mt-6 bg-gray-600 rounded text-white'
+                className='mt-6 text-white bg-gray-600 rounded'
                 {...register('password')}
               />
               {errors.password && (
@@ -91,7 +91,7 @@ export default function Component() {
               )}
               <Link
                 to='/forgot-password'
-                className='text-sky-500 text-xs text-start cursor-pointer my-1'
+                className='my-1 text-xs cursor-pointer text-sky-500 text-start'
               >
                 Forgot Password?
               </Link>
@@ -110,7 +110,7 @@ export default function Component() {
               </p>
             </form>
           </div>
-          <div className='hidden md:flex items-center flex-col justify-center'>
+          <div className='flex-col items-center justify-center hidden md:flex'>
             <div className='space-y-4'>
               <div className='flex items-center justify-center w-48 h-48 mx-auto bg-white rounded'>
                 <img
@@ -120,7 +120,7 @@ export default function Component() {
                 />
               </div>
               <h1 className='text-2xl font-bold'>Log in with QR Code</h1>
-              <p className='text-primary-foreground/60 text-center'>
+              <p className='text-center text-primary-foreground/60'>
                 Scan this with the Discord mobile app to log in instantly
               </p>
             </div>

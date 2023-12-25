@@ -19,10 +19,6 @@ export const auth = async (c: Context, next: Next) => {
       },
     });
 
-    if (!user.isVerified) {
-      throw new UnauthorizedException('User is not verified');
-    }
-
     c.set('user', user);
     await next();
   } catch (error) {
