@@ -27,6 +27,7 @@ import TooltipIcon from '@/components/TooltipIcon';
 import { SkeletonChannel } from './_components/skeleton/SkeletonChannel';
 import EventsModal from './_components/EventsModal';
 import SettingModal from './_components/SettingModal';
+import PopoverUser from './_components/popover/PopoverUser';
 
 const OPTIONS = [
   {
@@ -158,19 +159,7 @@ export default function Component() {
             ))}
           </div>
           <div className='bottom-0 flex items-center justify-between w-full px-3 py-1'>
-            <div className='flex items-center gap-4 px-2 rounded cursor-pointer hover:bg-primary-foreground/20'>
-              <img
-                src='https://st.quantrimang.com/photos/image/2019/03/13/HinhnenGoku-0.jpg'
-                alt='avatar'
-                width={30}
-                height={30}
-                className='object-cover w-8 h-8 rounded-full aspect-square'
-              />
-              <div className='flex flex-col'>
-                <p className='text-base font-bold'>Songoku</p>
-                <p className='text-sm text-primary-foreground/60'>Online</p>
-              </div>
-            </div>
+            <PopoverUser></PopoverUser>
             <div className='flex items-center gap-2'>
               <TooltipIcon
                 icon={

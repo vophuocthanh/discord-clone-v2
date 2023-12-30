@@ -8,9 +8,15 @@ Table orgs {
   name String [not null]
   userID String [not null]
   users users_on_orgs [not null]
-  channels channels [not null]
   Role roles [not null]
   UsersOnRoles users_on_roles [not null]
+}
+
+Table blogs {
+  id String [pk]
+  image String [not null]
+  content String [not null]
+  title String [not null]
 }
 
 Table roles {
@@ -33,13 +39,40 @@ Table users {
   fullName String
   Role roles [not null]
   UsersOnRoles users_on_roles [not null]
+  Messages messages [not null]
+  channels users_on_channels [not null]
 }
 
 Table channels {
   id String [pk]
   name String [not null]
-  orgID String [not null]
-  Org orgs [not null]
+  orgId String [not null]
+  type ChannelType [not null]
+  isPrivate Boolean [not null, default: false]
+  members users_on_channels [not null]
+  messages messages [not null]
+}
+
+Table messages {
+  id String [pk]
+  content String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  senderId String [not null]
+  sender users [not null]
+  channelId String [not null]
+  channel channels [not null]
+}
+
+Table users_on_channels {
+  user users [not null]
+  userId String [not null]
+  channel channels [not null]
+  channelId String [not null]
+
+  indexes {
+    (userId, channelId) [pk]
+  }
 }
 
 Table users_on_roles {
@@ -66,11 +99,25 @@ Table users_on_orgs {
   }
 }
 
+Enum ChannelType {
+  TEXT
+  VOICE
+  FORUM
+  ANNOUNCEMENT
+  STAGE
+}
+
 Ref: roles.orgID > orgs.id
 
 Ref: roles.userId > users.id
 
-Ref: channels.orgID > orgs.id
+Ref: messages.senderId > users.id [delete: Cascade]
+
+Ref: messages.channelId > channels.id [delete: Cascade]
+
+Ref: users_on_channels.userId > users.id
+
+Ref: users_on_channels.channelId > channels.id
 
 Ref: users_on_roles.userId > users.id
 

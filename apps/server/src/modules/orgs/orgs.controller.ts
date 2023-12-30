@@ -6,6 +6,8 @@ import { Hono } from 'hono';
 import { OrgsService } from './orgs.service';
 import { createRoleDto } from './dto/create-roles.dto';
 import { createOrgDto } from './dto/create-org.dto';
+import { ChannelsService } from '../channels/channels.service';
+import { upsertChannelDto } from '../channels/dto/create-channel';
 
 export const router = new Hono();
 
@@ -100,42 +102,43 @@ router
       201
     );
   })
-  .get('/:orgId/channels', (c) =>
-    c.json([
-      {
-        id: '1',
-        name: 'Class 1',
-        category: {
-          id: 1,
-          name: 'Class',
-        },
-      },
-      {
-        id: '2',
-        name: 'Class 2',
-        category: {
-          id: 1,
-          name: 'Class',
-        },
-      },
-      {
-        id: '3',
-        name: 'Class 1',
-        category: {
-          id: 2,
-          name: 'Class Audio',
-        },
-      },
-      {
-        id: '4',
-        name: 'Class 2',
-        category: {
-          id: 2,
-          name: 'Class Audio',
-        },
-      },
-    ])
-  )
+  .put('/:orgId/roles/:roleId', async (c) => {
+    const roleId = c.req.param('roleId');
+    const createRoleDto = await c.req.json();
+    const role = await OrgsService.updateRole(roleId, createRoleDto);
+    return c.json({
+      status: 200,
+      data: role,
+      message: 'Update role successfully!',
+    });
+  })
+  .delete('/:orgId/roles/:roleId', async (c) => {
+    const roleId = c.req.param('roleId');
+    await OrgsService.deleteRole(roleId);
+    return c.json({
+      status: 200,
+      message: 'Delete role successfully!',
+    });
+  })
+  .get('/:orgId/channels', async (c) => {
+    const orgId = c.req.param('orgId');
+    const channels = await ChannelsService.getAllBy(orgId);
+
+    return c.json({
+      data: channels,
+      status: 200,
+    });
+  })
+  .post('/:orgId/channels', zValidator('json', upsertChannelDto), async (c) => {
+    const orgId = c.req.param('orgId');
+    const createChannelDto = await c.req.json();
+    const channel = await ChannelsService.create(orgId, createChannelDto);
+
+    return c.json({
+      data: channel,
+      status: 201,
+    });
+  })
   .get('/:orgId/members', async (c) => {
     const orgId = c.req.param('orgId');
 
@@ -144,30 +147,11 @@ router
         orgID: orgId,
       },
     });
-    console.log('members:', members);
-    c.json([
-      {
-        id: '001',
-        displayName: 'John Doe',
-        username: 'john_doe',
-        avatar: 'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
-        memberSince: '2022-01-01',
-        joinedDiscord: '2022-01-01',
-        joinMethod: 'Discord',
-        roles: ['Admin'],
-      },
-      {
-        id: '001',
-        displayName: 'Goku',
-        username: 'goku',
-        avatar:
-          'https://images.immediate.co.uk/production/volatile/sites/3/2023/08/2023.06.28-06.20-boundingintocomics-649c79f009cdf-Cropped-8d74232.png?resize=768,574',
-        memberSince: '2022-01-01',
-        joinedDiscord: '2022-01-01',
-        joinMethod: 'Discord',
-        roles: ['Members'],
-      },
-    ]);
+
+    return c.json({
+      data: members,
+      status: 200,
+    });
   })
   .post('/:orgId/members', async (c) => {
     const orgId = c.req.param('orgId');
@@ -177,30 +161,11 @@ router
         orgID: orgId,
       },
     });
-    console.log('members:', members);
-    c.json([
-      {
-        id: '001',
-        displayName: 'John Doe',
-        username: 'john_doe',
-        avatar: 'https://sukienvietsky.com/upload/news/son-tung-mtp-7359.jpeg',
-        memberSince: '2022-01-01',
-        joinedDiscord: '2022-01-01',
-        joinMethod: 'Discord',
-        roles: ['Admin'],
-      },
-      {
-        id: '001',
-        displayName: 'Goku',
-        username: 'goku',
-        avatar:
-          'https://images.immediate.co.uk/production/volatile/sites/3/2023/08/2023.06.28-06.20-boundingintocomics-649c79f009cdf-Cropped-8d74232.png?resize=768,574',
-        memberSince: '2022-01-01',
-        joinedDiscord: '2022-01-01',
-        joinMethod: 'Discord',
-        roles: ['Members'],
-      },
-    ]);
+
+    return c.json({
+      data: members,
+      status: 200,
+    });
   })
   .get('/:orgId/channels/:channelId/messages', (c) =>
     c.json([

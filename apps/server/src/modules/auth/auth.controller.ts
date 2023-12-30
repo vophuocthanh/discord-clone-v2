@@ -37,7 +37,6 @@ router
     zValidator('json', forgotPasswordDto),
     async (c) => {
       const { email } = await c.req.json();
-
       await AuthService.forgotPassword(email);
 
       return c.json(

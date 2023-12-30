@@ -66,4 +66,38 @@ export const OrgsService = {
     });
     return role;
   },
+  updateRole: async (roleId: string, createRoleDto: Prisma.RoleUpdateInput) => {
+    const role = await db.role.update({
+      where: {
+        id: roleId,
+      },
+      data: {
+        name: createRoleDto.name,
+        color: createRoleDto.color,
+      },
+    });
+    return role;
+  },
+  deleteRole: async (roleId: string) => {
+    try {
+      if (!roleId) {
+        throw new BadRequestException('Role not found!');
+      }
+      const role = await db.role.delete({
+        where: {
+          id: roleId,
+        },
+      });
+      return role;
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2025'
+      ) {
+        throw new BadRequestException(`Role ${roleId} not found`);
+      } else {
+        throw error;
+      }
+    }
+  },
 };
