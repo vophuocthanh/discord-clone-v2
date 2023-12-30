@@ -1,5 +1,6 @@
 import { db } from '@/lib/db';
 import { BadRequestException } from '@/utils/exceptions';
+import { Prisma } from '@prisma/client';
 
 interface CreateBlog {
   image: string;
@@ -22,6 +23,15 @@ export const BlogsService = {
       },
     });
 
+    return blog;
+  },
+  update: async (blogId: string, updateBlogDto: Prisma.BlogUpdateInput) => {
+    const blog = await db.blog.update({
+      where: {
+        id: blogId,
+      },
+      data: updateBlogDto,
+    });
     return blog;
   },
   getBy: async (blogId: string) => {
