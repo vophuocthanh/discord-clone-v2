@@ -1,120 +1,758 @@
 {
-	"info": {
-		"_postman_id": "5edad58e-4757-4cc0-af06-07a70c941f90",
-		"name": "Discord",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23052071",
-		"_collection_link": "https://gold-shuttle-284427.postman.co/workspace/Team-Workspace~7c7863b7-9fe9-4b4d-8913-82799a17f617/collection/23052071-5edad58e-4757-4cc0-af06-07a70c941f90?action=share&source=collection_link&creator=23052071"
-	},
-	"item": [
-		{
-			"name": "sign-in",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "",
-						"variables": ""
-					}
-				},
-				"url": {
-					"raw": "https://discord-api-omega.vercel.app/api/sign-in",
-					"protocol": "https",
-					"host": [
-						"discord-api-omega",
-						"vercel",
-						"app"
-					],
-					"path": [
-						"api",
-						"sign-in"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "orgs/:id",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/orgs",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"orgs"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/orgs",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"mgn\",\r\n    \"icon\": \"https://st.quantrimang.com/photos/image/2019/03/14/HinhnenGoku-18.jpg\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/orgs",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"orgs"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get /orgs",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/orgs",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"orgs"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "5edad58e-4757-4cc0-af06-07a70c941f90",
+    "name": "Discord",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23052071",
+    "_collection_link": "https://gold-shuttle-284427.postman.co/workspace/Team-Workspace~7c7863b7-9fe9-4b4d-8913-82799a17f617/collection/23052071-5edad58e-4757-4cc0-af06-07a70c941f90?action=share&source=collection_link&creator=23052071"
+  },
+  "item": [
+    {
+      "name": "Orgs",
+      "item": [
+        {
+          "name": "get /orgs",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHE0Y2xrMGQwMDAwYmVrYWUxcGR6OGhkIiwiaWF0IjoxNzAyNjk2MTMzLCJleHAiOjE3MDI3ODI1MzN9.KjVaLyJHqTpvBIC8LgVCZkWbTmLtAJuXpVwMfV8rJVE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/orgs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orgs"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/orgs",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2Q1bGswMDAwMmU5ZGJmeTFpMG40IiwiaWF0IjoxNzAzNTE3MjUxLCJleHAiOjE3MDM2MDM2NTF9.6V0oGtxAiv0hdaZtVfNrAMP4f2AIa2Gzpqh4N1kzj_E",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Enouvo\",\r\n    \"icon\": \"https://media.licdn.com/dms/image/C560BAQHa4mJsnhD5Uw/company-logo_200_200/0/1673521803298/enouvoitsolutions_logo?e=2147483647&v=beta&t=V2Aiz7YpzFoNMcJsoI4CrLBSrfaRvtrL8rgLXnq8Vz0\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/orgs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orgs"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update orgs",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHE0Y2xrMGQwMDAwYmVrYWUxcGR6OGhkIiwiaWF0IjoxNzAyNjk2MTMzLCJleHAiOjE3MDI3ODI1MzN9.KjVaLyJHqTpvBIC8LgVCZkWbTmLtAJuXpVwMfV8rJVE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"clq635xa90003vsi8s6kbd6bg\",\r\n    \"icon\": \"https://media.licdn.com/dms/image/C4D22AQFTxk32wQYC8w/feedshare-shrink_800/0/1654052683142?e=2147483647&v=beta&t=m7fYCh_D3i1VstB7aeXu8WPY8yXrn2HbKigJoo1ovJ0\",\r\n    \"name\": \"Mgn\",\r\n    \"userID\": \"clq4clk0d0000bekae1pdz8hd\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/orgs/clq635xa90003vsi8s6kbd6bg",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orgs", "clq635xa90003vsi8s6kbd6bg"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delele orgs",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHE0Y2xrMGQwMDAwYmVrYWUxcGR6OGhkIiwiaWF0IjoxNzAyNzM1NjgyLCJleHAiOjE3MDI4MjIwODJ9.0kbxPI5BFlCnaamcdhvB-aAPaoHC6Bvu0jwAORl2USY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/orgs/clq65v1gn000dj8lt1icprf5d",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orgs", "clq65v1gn000dj8lt1icprf5d"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Login / Sign Up",
+      "item": [
+        {
+          "name": "sign-up",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"hello123zxcq@gmail.com\",\r\n    \"password\": \"!Enouvo123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://discord-apis-mu.vercel.app/api/sign-up",
+              "protocol": "https",
+              "host": ["discord-apis-mu", "vercel", "app"],
+              "path": ["api", "sign-up"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "sign-in",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"phuocthanh2k03@gmail.com\",\r\n    \"password\": \"!Enouvo123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/sign-in",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "sign-in"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"phuocthanh2k03@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/forgot-password",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "forgot-password"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHE0Y2xrMGQwMDAwYmVrYWUxcGR6OGhkIiwiaWF0IjoxNzAyNjA5MjUzLCJleHAiOjE3MDI2OTU2NTN9.0Ydnfz6ZI24_lawGX-O3BF2FxSIRI2vPi8rgZDEOOxw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"password\": \"!Enouvo12345\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/reset-password",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "reset-password"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "Get Roles",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2Q1bGswMDAwMmU5ZGJmeTFpMG40IiwiaWF0IjoxNzAzNTE3MjUxLCJleHAiOjE3MDM2MDM2NTF9.6V0oGtxAiv0hdaZtVfNrAMP4f2AIa2Gzpqh4N1kzj_E",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/orgs/clql28zov0001adbc4jw27f2e/roles",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orgs", "clql28zov0001adbc4jw27f2e", "roles"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post roles",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2Q1bGswMDAwMmU5ZGJmeTFpMG40IiwiaWF0IjoxNzAzNTE3MjUxLCJleHAiOjE3MDM2MDM2NTF9.6V0oGtxAiv0hdaZtVfNrAMP4f2AIa2Gzpqh4N1kzj_E",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Members\",\r\n    \"color\": \"blue\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/orgs/clql28zov0001adbc4jw27f2e/roles",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orgs", "clql28zov0001adbc4jw27f2e", "roles"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "put roles",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2Q1bGswMDAwMmU5ZGJmeTFpMG40IiwiaWF0IjoxNzAzNTgwNjY4LCJleHAiOjE3MDM2NjcwNjh9.sxX79nsoHmi9EM5lscSxZgyxgaI9r8rQ5kkjqgRmDh8",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Members\",\r\n    \"color\": \"green\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/orgs/clql28zov0001adbc4jw27f2e/roles/clql5z4ad0001i54ja68nzz1s",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [
+                "api",
+                "orgs",
+                "clql28zov0001adbc4jw27f2e",
+                "roles",
+                "clql5z4ad0001i54ja68nzz1s"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete roles",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2Q1bGswMDAwMmU5ZGJmeTFpMG40IiwiaWF0IjoxNzAzNTgwNjY4LCJleHAiOjE3MDM2NjcwNjh9.sxX79nsoHmi9EM5lscSxZgyxgaI9r8rQ5kkjqgRmDh8",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/orgs/clql28zov0001adbc4jw27f2e/roles/clql5z4ad0001i54ja68nzz1s",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [
+                "api",
+                "orgs",
+                "clql28zov0001adbc4jw27f2e",
+                "roles",
+                "clql5z4ad0001i54ja68nzz1s"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "me",
+      "item": [
+        {
+          "name": "get me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2Q1bGswMDAwMmU5ZGJmeTFpMG40IiwiaWF0IjoxNzAzOTA0MjA2LCJleHAiOjE3MDM5OTA2MDZ9.ynzE9h5nn4cPRMUdsolyE58LGfhb-bO5zLyvke3Ajh0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/users/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "users", "me"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "put me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2Q1bGswMDAwMmU5ZGJmeTFpMG40IiwiaWF0IjoxNzAzOTA0MjA2LCJleHAiOjE3MDM5OTA2MDZ9.ynzE9h5nn4cPRMUdsolyE58LGfhb-bO5zLyvke3Ajh0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"fullName\": \"bin2k03\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/users/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "users", "me"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Channels",
+      "item": [
+        {
+          "name": "get channels",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2Q1bGswMDAwMmU5ZGJmeTFpMG40IiwiaWF0IjoxNzAzOTA0MjA2LCJleHAiOjE3MDM5OTA2MDZ9.ynzE9h5nn4cPRMUdsolyE58LGfhb-bO5zLyvke3Ajh0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/orgs/clql28zov0001adbc4jw27f2e/channels",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orgs", "clql28zov0001adbc4jw27f2e", "channels"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2Q1bGswMDAwMmU5ZGJmeTFpMG40IiwiaWF0IjoxNzAzOTA0MjA2LCJleHAiOjE3MDM5OTA2MDZ9.ynzE9h5nn4cPRMUdsolyE58LGfhb-bO5zLyvke3Ajh0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/orgs/clql28zov0001adbc4jw27f2e/channels",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "orgs", "clql28zov0001adbc4jw27f2e", "channels"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "put channels",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/channels/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "channels", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete channels",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2Q1bGswMDAwMmU5ZGJmeTFpMG40IiwiaWF0IjoxNzAzOTA0MjA2LCJleHAiOjE3MDM5OTA2MDZ9.ynzE9h5nn4cPRMUdsolyE58LGfhb-bO5zLyvke3Ajh0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/channels",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "channels"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Blog",
+      "item": [
+        {
+          "name": "get blog",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/blogs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "blogs"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post blog",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/blogs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "blogs"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "put blog",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/blogs/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "blogs", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete blog",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/blogs/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "blogs", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/orgs/1/channels/1/members",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/orgs/1/channels/1/members",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "orgs", "1", "channels", "1", "members"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/api/orgs",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://discord-apis-snowy.vercel.app/api/orgs",
+          "protocol": "https",
+          "host": ["discord-apis-snowy", "vercel", "app"],
+          "path": ["api", "orgs"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2hoNjEwMDAwcnU0dndtMWk5cm82IiwiaWF0IjoxNzAzNDg3NzYwLCJleHAiOjE3MDM1NzQxNjB9.J31ugE3gVwm53hzQsAHHtPz0KLiIgyeKyYaho_djaBk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"VNG\",\r\n    \"icon\": \"https://www.shutterstock.com/image-illustration/x-logo-twitter-new-mystery-260nw-2338412657.jpg\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/orgs",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "orgs"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJjbHFra2Q1bGswMDAwMmU5ZGJmeTFpMG40IiwiaWF0IjoxNzAzNTIyOTI3LCJleHAiOjE3MDM2MDkzMjd9.rbLBW6jylD-sQd6vhxjZy_OZpofGHj6QcSeJsm2uIaw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Admin\",\r\n    \"color\": \"red\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/orgs/clqkkd5lk00002e9dbfy1i0n4/roles",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "orgs", "clqkkd5lk00002e9dbfy1i0n4", "roles"]
+        }
+      },
+      "response": []
+    }
+  ]
 }
