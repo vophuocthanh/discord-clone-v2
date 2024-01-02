@@ -48,6 +48,32 @@ export const OrgsService = {
 
     return createdOrg;
   },
+  update: async (orgId: string, updateOrgsDto: Prisma.OrgUpdateInput) => {
+    const org = await db.org.update({
+      where: {
+        id: orgId,
+      },
+      data: updateOrgsDto,
+    });
+    return org;
+  },
+  delete: async (orgId: string) => {
+    try {
+      const org = await db.org.delete({
+        where: {
+          id: orgId,
+        },
+      });
+      return org;
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2025') {
+          throw new BadRequestException('Org not found!');
+        }
+      }
+      throw error;
+    }
+  },
   getRoles: async (orgId: string) => {
     const roles = db.role.findMany({
       where: {

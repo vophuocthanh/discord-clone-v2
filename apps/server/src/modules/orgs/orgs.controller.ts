@@ -8,6 +8,7 @@ import { createRoleDto } from './dto/create-roles.dto';
 import { createOrgDto } from './dto/create-org.dto';
 import { ChannelsService } from '../channels/channels.service';
 import { upsertChannelDto } from '../channels/dto/create-channel';
+import { updateOrgDto } from './dto/update-org.dto';
 
 export const router = new Hono();
 
@@ -42,40 +43,24 @@ router
     });
     return c.json(org);
   })
-  .put('/:id', async (c) => {
-    try {
-      const user = c.get('user');
-      const { name, icon } = await c.req.json<{ name: string; icon: string }>();
-      await db.org.update({
-        where: {
-          id: c.req.param('id'),
-        },
-        data: {
-          name: name,
-          icon: icon,
-          userID: user?.id,
-        },
-      });
-      return c.json({
-        message: 'Update orgs successfully!',
-      });
-    } catch (error) {
-      throw new BadRequestException('Update orgs failed!');
-    }
+  .put('/:id', zValidator('json', updateOrgDto), async (c) => {
+    const orgId = c.req.param('id');
+    const updateOrgDto = await c.req.json();
+    const org = await OrgsService.update(orgId, updateOrgDto);
+    return c.json({
+      data: org,
+      status: 200,
+      message: 'Update orgs successfully!',
+    });
   })
   .delete('/:id', async (c) => {
-    try {
-      await db.org.delete({
-        where: {
-          id: c.req.param('id'),
-        },
-      });
-      return c.json({
-        message: 'Delete orgs successfully!',
-      });
-    } catch (error) {
-      throw new BadRequestException('Delete orgs failed!');
-    }
+    const orgId = c.req.param('id');
+    const org = await OrgsService.delete(orgId);
+    return c.json({
+      data: org,
+      status: 200,
+      message: 'Delete orgs successfully!',
+    });
   })
   .get('/:orgId/roles', async (c) => {
     const orgId = c.req.param('orgId');

@@ -47,7 +47,7 @@ export default function Component() {
     try {
       setIsLoading(true);
       const res = await signIn(email, password);
-      setToken(res.data.accessToken);
+      setToken(res.data.token);
       navigate('/channels');
       toast.success('Login successfully!');
     } catch (error) {
