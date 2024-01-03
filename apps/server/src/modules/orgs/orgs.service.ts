@@ -74,6 +74,25 @@ export const OrgsService = {
       throw error;
     }
   },
+  getCategory(orgId: string) {
+    return db.category.findMany({
+      where: {
+        orgID: orgId,
+      },
+    });
+  },
+  createCategory: async (
+    orgId: string,
+    createCategoryDto: Prisma.CategoryCreateInput
+  ) => {
+    const category = await db.category.create({
+      data: {
+        orgID: orgId,
+        name: createCategoryDto.name,
+      },
+    });
+    return category;
+  },
   getRoles: async (orgId: string) => {
     const roles = db.role.findMany({
       where: {

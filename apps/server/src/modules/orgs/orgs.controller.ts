@@ -105,25 +105,49 @@ router
       message: 'Delete role successfully!',
     });
   })
-  .get('/:orgId/channels', async (c) => {
+  .get('/:orgId/category', async (c) => {
     const orgId = c.req.param('orgId');
-    const channels = await ChannelsService.getAllBy(orgId);
+    const category = await OrgsService.getCategory(orgId);
+    return c.json({
+      data: category,
+      status: 200,
+    });
+  })
+  .post('/:orgId/category', async (c) => {
+    const orgId = c.req.param('orgId');
+    const createCategoryDto = await c.req.json();
+    const category = await OrgsService.createCategory(orgId, createCategoryDto);
+    return c.json({
+      data: category,
+      status: 201,
+    });
+  })
+  .get('/:categoryId/channels', async (c) => {
+    const categoryId = c.req.param('categoryId');
+    const channels = await ChannelsService.getAllBy(categoryId);
 
     return c.json({
       data: channels,
       status: 200,
     });
   })
-  .post('/:orgId/channels', zValidator('json', upsertChannelDto), async (c) => {
-    const orgId = c.req.param('orgId');
-    const createChannelDto = await c.req.json();
-    const channel = await ChannelsService.create(orgId, createChannelDto);
+  .post(
+    '/:categoryId/channels',
+    zValidator('json', upsertChannelDto),
+    async (c) => {
+      const categoryId = c.req.param('categoryId');
+      const createChannelDto = await c.req.json();
+      const channel = await ChannelsService.create(
+        categoryId,
+        createChannelDto
+      );
 
-    return c.json({
-      data: channel,
-      status: 201,
-    });
-  })
+      return c.json({
+        data: channel,
+        status: 201,
+      });
+    }
+  )
   .get('/:orgId/members', async (c) => {
     const orgId = c.req.param('orgId');
 

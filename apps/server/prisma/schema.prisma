@@ -20,6 +20,7 @@ model Org {
   users        UsersOnOrgs[]
   Role         Role[]
   UsersOnRoles UsersOnRoles[]
+  categories   Category[]
 
   @@map("orgs")
 }
@@ -70,15 +71,26 @@ enum ChannelType {
 }
 
 model Channel {
-  id        String            @id @default(cuid())
-  name      String
-  orgId     String
-  type      ChannelType
-  isPrivate Boolean           @default(false)
-  members   UsersOnChannels[]
-  messages  Message[]
+  id         String            @id @default(cuid())
+  name       String
+  type       ChannelType
+  isPrivate  Boolean           @default(false)
+  members    UsersOnChannels[]
+  messages   Message[]
+  category   Category?         @relation(fields: [categoryId], references: [id])
+  categoryId String
 
   @@map("channels")
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String
+  channels Channel[]
+  org      Org       @relation(fields: [orgID], references: [id])
+  orgID    String
+
+  @@map("categories")
 }
 
 model Message {

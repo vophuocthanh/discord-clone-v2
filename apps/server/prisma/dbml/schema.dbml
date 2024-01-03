@@ -10,6 +10,7 @@ Table orgs {
   users users_on_orgs [not null]
   Role roles [not null]
   UsersOnRoles users_on_roles [not null]
+  categories categories [not null]
 }
 
 Table blogs {
@@ -46,11 +47,20 @@ Table users {
 Table channels {
   id String [pk]
   name String [not null]
-  orgId String [not null]
   type ChannelType [not null]
   isPrivate Boolean [not null, default: false]
   members users_on_channels [not null]
   messages messages [not null]
+  category categories
+  categoryId String [not null]
+}
+
+Table categories {
+  id String [pk]
+  name String [not null]
+  channels channels [not null]
+  org orgs [not null]
+  orgID String [not null]
 }
 
 Table messages {
@@ -110,6 +120,10 @@ Enum ChannelType {
 Ref: roles.orgID > orgs.id
 
 Ref: roles.userId > users.id
+
+Ref: channels.categoryId > categories.id
+
+Ref: categories.orgID > orgs.id
 
 Ref: messages.senderId > users.id [delete: Cascade]
 

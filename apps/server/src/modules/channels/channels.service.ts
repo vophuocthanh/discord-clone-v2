@@ -3,19 +3,22 @@ import { BadRequestException } from '@/utils/exceptions';
 import { Prisma } from '@prisma/client';
 
 export const ChannelsService = {
-  async getAllBy(orgId: string) {
+  async getAllBy(categoryId: string) {
     const channels = await db.channel.findMany({
       where: {
-        orgId: orgId,
+        categoryId: categoryId,
       },
     });
 
     return channels;
   },
-  async create(orgId: string, createChannelDto: Prisma.ChannelCreateInput) {
+  async create(
+    categoryID: string,
+    createChannelDto: Prisma.ChannelCreateInput
+  ) {
     const channel = await db.channel.create({
       data: {
-        orgId,
+        id: categoryID,
         ...createChannelDto,
       },
     });
