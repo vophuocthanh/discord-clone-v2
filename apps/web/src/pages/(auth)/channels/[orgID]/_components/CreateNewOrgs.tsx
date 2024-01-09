@@ -40,15 +40,13 @@ export function CreateNewOrgs() {
           <Plus />
         </div>
       </DialogTrigger>
-      <DialogContent className='sm:max-w-[425px]'>
+      <DialogContent className='sm:max-w-[625px] h-72 rounded'>
         <DialogHeader>
           <DialogTitle>Create New Orgs</DialogTitle>
         </DialogHeader>
         <div className='grid gap-4 py-4'>
           <div className='grid grid-cols-4 items-center gap-4'>
-            <Label htmlFor='name' className='text-right'>
-              Name
-            </Label>
+            <Label htmlFor='name'>Name</Label>
             <Input
               id='name'
               value={name}
@@ -58,9 +56,7 @@ export function CreateNewOrgs() {
             />
           </div>
           <div className='grid grid-cols-4 items-center gap-4'>
-            <Label htmlFor='username' className='text-right'>
-              Icon
-            </Label>
+            <Label htmlFor='username'>Icon</Label>
             <Input
               id='username'
               value={icon}

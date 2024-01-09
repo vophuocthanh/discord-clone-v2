@@ -10,10 +10,8 @@ import {
   MonitorUp,
   Music4,
   PhoneMissed,
-  Plus,
   Rocket,
   Signal,
-  Users,
   VibrateOff,
   Video,
 } from 'lucide-react';
@@ -28,6 +26,7 @@ import { SkeletonChannel } from './_components/skeleton/SkeletonChannel';
 import EventsModal from './_components/EventsModal';
 import SettingModal from './_components/SettingModal';
 import PopoverUser from './_components/popover/PopoverUser';
+import { CreateChannel } from './_components/CreateChannel';
 
 const OPTIONS = [
   {
@@ -80,7 +79,7 @@ export default function Component() {
               <Globe />
               <p>Browse Channels</p>
             </Link>
-            <Link
+            {/* <Link
               to='/channels/:orgID/member-safety'
               params={{ orgID }}
               state={{
@@ -90,7 +89,7 @@ export default function Component() {
             >
               <Users />
               <p>Member</p>
-            </Link>
+            </Link> */}
           </div>
           <div className='px-2 text-primary-foreground/60'>
             <hr className='h-2 my-4 border-primary-foreground/60' />
@@ -111,7 +110,7 @@ export default function Component() {
                           <ChevronDown className='w-4' />
                           <h1 className='uppercase'> {category} </h1>
                         </div>
-                        <Plus />
+                        <CreateChannel></CreateChannel>
                       </div>
                       <div className='py-4 space-y-2'>
                         {channels.map((channel) => (
