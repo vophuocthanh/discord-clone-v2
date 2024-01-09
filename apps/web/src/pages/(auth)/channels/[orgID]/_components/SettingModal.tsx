@@ -10,6 +10,7 @@ import NitroSetting from './NitroSetting';
 import AuthorizedApp from './AuthorizedApp';
 import Subscription from './Subscription';
 import ServerUpgrade from './ServerUpgrade';
+import Roles from './Roles';
 
 export default function SettingModal() {
   const [tab, setTab] = useState('user-settings/My Account');
@@ -38,6 +39,9 @@ export default function SettingModal() {
           },
           {
             name: 'Authorized Apps',
+          },
+          {
+            name: 'Roles',
           },
         ],
       },
@@ -125,6 +129,8 @@ export default function SettingModal() {
                   return <Profiles />;
                 case 'user-settings/Authorized Apps':
                   return <AuthorizedApp />;
+                case 'user-settings/Roles':
+                  return <Roles />;
                 case 'billing-settings/Nitro':
                   return <NitroSetting />;
                 case 'billing-settings/Server Upgrades':
