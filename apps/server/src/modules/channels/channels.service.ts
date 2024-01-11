@@ -12,13 +12,17 @@ export const ChannelsService = {
 
     return channels;
   },
-  async create(
-    categoryID: string,
+  async createByCategory(
+    categoryId: string,
     createChannelDto: Prisma.ChannelCreateInput
   ) {
     const channel = await db.channel.create({
       data: {
-        id: categoryID,
+        category: {
+          connect: {
+            id: categoryId,
+          },
+        },
         ...createChannelDto,
       },
     });

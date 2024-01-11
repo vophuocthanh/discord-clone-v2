@@ -18,6 +18,7 @@ router
       title,
       content,
     });
+    console.log('blog:', blog);
 
     return c.json(
       {

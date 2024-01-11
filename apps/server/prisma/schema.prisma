@@ -21,6 +21,7 @@ model Org {
   Role         Role[]
   UsersOnRoles UsersOnRoles[]
   categories   Category[]
+  channels     Channel[]
 
   @@map("orgs")
 }
@@ -73,23 +74,29 @@ enum ChannelType {
 model Channel {
   id         String            @id @default(cuid())
   name       String
+  orgId      String?
+  org        Org?              @relation(fields: [orgId], references: [id], onDelete: Cascade)
   type       ChannelType
   isPrivate  Boolean           @default(false)
   members    UsersOnChannels[]
   messages   Message[]
-  category   Category?         @relation(fields: [categoryId], references: [id])
-  categoryId String
+  categoryId String?
+  category   Category?         @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
+  @@index([categoryId], name: "categoryId")
+  @@index([orgId])
   @@map("channels")
 }
 
 model Category {
-  id       String    @id @default(cuid())
-  name     String
-  channels Channel[]
-  org      Org       @relation(fields: [orgID], references: [id])
-  orgID    String
+  id        String    @id @default(cuid())
+  name      String
+  orgId     String
+  org       Org       @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  isPrivate Boolean   @default(false)
+  channels  Channel[]
 
+  @@index([orgId], name: "orgId")
   @@map("categories")
 }
 

@@ -7,7 +7,7 @@ import { router as orgsRouter } from './modules/orgs/orgs.controller';
 import { router as blogsRouter } from './modules/blogs/blogs.controller';
 import { router as usersRouter } from './modules/users/users.controller';
 import { router as channelsRouter } from './modules/channels/channels.controller';
-import { router as categoryRouter } from './modules/category/category.controller';
+import { router as categoriesRouter } from './modules/categories/categories.controller';
 import { auth } from './middlewares/auth';
 import { errorFilter } from './middlewares/error-filter';
 
@@ -27,7 +27,7 @@ app.route('/blogs', blogsRouter);
 app.all('*', auth).route('/orgs', orgsRouter);
 app.all('*', auth).route('/users', usersRouter);
 app.all('*', auth).route('/channels', channelsRouter);
-app.all('*', auth).route('/category', categoryRouter);
+app.all('*', auth).route('/categories', categoriesRouter);
 
 app.notFound((c) => c.json({ status: 404, message: 'Not found' }, 404));
 
