@@ -2,6 +2,10 @@ import { db } from '@/lib/db';
 import { Prisma } from '@prisma/client';
 
 export const CategoriesService = {
+  getAll: async () => {
+    const categories = await db.category.findMany();
+    return categories;
+  },
   create: async (
     orgId: string,
     createCategoryDto: Prisma.CategoryCreateInput

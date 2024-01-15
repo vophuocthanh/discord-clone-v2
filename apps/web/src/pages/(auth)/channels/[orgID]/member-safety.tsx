@@ -16,9 +16,7 @@ import { useLocation } from 'react-router-dom';
 export default function Component() {
   const { orgID } = useParams('/channels/:orgID/member-safety');
   const location = useLocation();
-  const { data: membersResult } = useQuery(['members'], () =>
-    getOrgMembers(orgID)
-  );
+  const { data: members } = useQuery(['members'], () => getOrgMembers(orgID));
   return (
     <div>
       <header className='flex items-center justify-between p-3 text-2xl border-b h-14 bg-[#1d202ab8]'>
@@ -31,7 +29,7 @@ export default function Component() {
             <Link
               to='/channels/:orgID/:channelID'
               params={{ orgID: orgID, channelID: location.state.channel.id }}
-              className='p-2 text-xs border border-gray-300'
+              className='text-xs border border-gray-300 p-2'
             >
               Return to {location.state.channel.name}
             </Link>
@@ -59,15 +57,15 @@ export default function Component() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {membersResult?.data?.map((member) => (
+              {members?.map((member) => (
                 <TableRow key={member.id}>
-                  <TableCell className='flex items-center gap-2'>
+                  <TableCell className='gap-2 flex items-center'>
                     <Checkbox />
                     <div className='flex gap-2'>
                       <img
                         src={member.avatar}
                         alt={member.displayName}
-                        className='object-cover w-10 h-10 rounded-full'
+                        className='w-10 h-10 rounded-full object-cover'
                       />
                       <div>
                         <p className='text-green-500'>{member.displayName}</p>

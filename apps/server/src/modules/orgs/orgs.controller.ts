@@ -9,6 +9,8 @@ import { createOrgDto } from './dto/create-org.dto';
 import { ChannelsService } from '../channels/channels.service';
 import { upsertChannelDto } from '../channels/dto/create-channel';
 import { updateOrgDto } from './dto/update-org.dto';
+import { CategoriesService } from '../categories/categories.service';
+import { upsertCategoryDto } from '../categories/dto/create-category.dto';
 
 export const router = new Hono();
 
@@ -105,7 +107,7 @@ router
       message: 'Delete role successfully!',
     });
   })
-  .get('/:orgId/category', async (c) => {
+  .get('/:orgId/categories', async (c) => {
     const orgId = c.req.param('orgId');
     const category = await OrgsService.getCategory(orgId);
     return c.json({
@@ -113,15 +115,23 @@ router
       status: 200,
     });
   })
-  .post('/:orgId/category', async (c) => {
-    const orgId = c.req.param('orgId');
-    const createCategoryDto = await c.req.json();
-    const category = await OrgsService.createCategory(orgId, createCategoryDto);
-    return c.json({
-      data: category,
-      status: 201,
-    });
-  })
+  .post(
+    '/:orgId/categories',
+    zValidator('json', upsertCategoryDto),
+    async (c) => {
+      const orgId = c.req.param('orgId');
+      const createCategoryInput = await c.req.json();
+      const category = await CategoriesService.create(
+        orgId,
+        createCategoryInput
+      );
+
+      return c.json({
+        data: category,
+        status: 201,
+      });
+    }
+  )
   .get('/:categoryId/channels', async (c) => {
     const categoryId = c.req.param('categoryId');
     const channels = await ChannelsService.getAllBy(categoryId);
@@ -131,23 +141,16 @@ router
       status: 200,
     });
   })
-  .post(
-    '/:categoryId/channels',
-    zValidator('json', upsertChannelDto),
-    async (c) => {
-      const categoryId = c.req.param('categoryId');
-      const createChannelDto = await c.req.json();
-      const channel = await ChannelsService.create(
-        categoryId,
-        createChannelDto
-      );
+  .post('/:orgId/channels', zValidator('json', upsertChannelDto), async (c) => {
+    const orgId = c.req.param('orgId');
+    const createChannelDto = await c.req.json();
+    const channel = await ChannelsService.createByOrg(orgId, createChannelDto);
 
-      return c.json({
-        data: channel,
-        status: 201,
-      });
-    }
-  )
+    return c.json({
+      data: channel,
+      status: 201,
+    });
+  })
   .get('/:orgId/members', async (c) => {
     const orgId = c.req.param('orgId');
 

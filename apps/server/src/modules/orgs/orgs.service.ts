@@ -77,7 +77,7 @@ export const OrgsService = {
   getCategory(orgId: string) {
     return db.category.findMany({
       where: {
-        orgID: orgId,
+        orgId: orgId,
       },
     });
   },
@@ -87,7 +87,7 @@ export const OrgsService = {
   ) => {
     const category = await db.category.create({
       data: {
-        orgID: orgId,
+        orgId: orgId,
         name: createCategoryDto.name,
       },
     });

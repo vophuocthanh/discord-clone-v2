@@ -1,25 +1,16 @@
 import { request } from '@/lib/request';
+import * as z from 'zod';
 
-interface Channel {
-  id: string;
-  name: string;
-}
+const channelSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  isPrivate: z.boolean(),
+  type: z.string(),
+});
 
 export const getChannels = async (orgID: string) => {
-  return request.get<Channel[]>(`/orgs/${orgID}/channels`);
-};
-
-export const postChannel = async (
-  orgID: string,
-  name: string,
-  type: string,
-  isPrivate: boolean
-) => {
-  return request.post(`/orgs/${orgID}/channels`, {
-    name: name,
-    type: type,
-    isPrivate: isPrivate,
-  });
+  const res = await request.get(`/orgs/${orgID}/channels`);
+  return channelSchema.array().parse(res.data.data);
 };
 
 export const getChannelMembers = async (orgID: string, channelID: string) => {

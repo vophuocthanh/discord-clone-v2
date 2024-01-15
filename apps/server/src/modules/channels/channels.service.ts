@@ -29,6 +29,24 @@ export const ChannelsService = {
 
     return channel;
   },
+
+  async createByOrg(
+    orgId: string,
+    createChannelDto: Prisma.ChannelCreateInput
+  ) {
+    const channel = await db.channel.create({
+      data: {
+        org: {
+          connect: {
+            id: orgId,
+          },
+        },
+        ...createChannelDto,
+      },
+    });
+
+    return channel;
+  },
   async getBy(channelId: string) {
     const channel = await db.channel.findFirst({
       where: {
