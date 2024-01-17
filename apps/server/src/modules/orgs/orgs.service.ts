@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 import { BadRequestException } from '@/utils/exceptions';
 
 export const OrgsService = {
-  getAll: async (userId: string, { page = 1, limit = 5, search = '' }) => {
+  getAll: async (userId: string, { page = 1, limit = 10, search = '' }) => {
     const orgs = await db.org.findMany({
       skip: (page - 1) * limit,
       take: limit,
@@ -34,6 +34,13 @@ export const OrgsService = {
       where: {
         id: orgId,
       },
+      include: {
+        categories: {
+          include: {
+            channels: true,
+          },
+        },
+      },
     });
     if (!org) {
       throw new BadRequestException('Org not found!');
@@ -47,51 +54,6 @@ export const OrgsService = {
     });
 
     return createdOrg;
-  },
-  update: async (orgId: string, updateOrgsDto: Prisma.OrgUpdateInput) => {
-    const org = await db.org.update({
-      where: {
-        id: orgId,
-      },
-      data: updateOrgsDto,
-    });
-    return org;
-  },
-  delete: async (orgId: string) => {
-    try {
-      const org = await db.org.delete({
-        where: {
-          id: orgId,
-        },
-      });
-      return org;
-    } catch (error) {
-      if (error instanceof Prisma.PrismaClientKnownRequestError) {
-        if (error.code === 'P2025') {
-          throw new BadRequestException('Org not found!');
-        }
-      }
-      throw error;
-    }
-  },
-  getCategory(orgId: string) {
-    return db.category.findMany({
-      where: {
-        orgId: orgId,
-      },
-    });
-  },
-  createCategory: async (
-    orgId: string,
-    createCategoryDto: Prisma.CategoryCreateInput
-  ) => {
-    const category = await db.category.create({
-      data: {
-        orgId: orgId,
-        name: createCategoryDto.name,
-      },
-    });
-    return category;
   },
   getRoles: async (orgId: string) => {
     const roles = db.role.findMany({
@@ -110,39 +72,5 @@ export const OrgsService = {
       },
     });
     return role;
-  },
-  updateRole: async (roleId: string, createRoleDto: Prisma.RoleUpdateInput) => {
-    const role = await db.role.update({
-      where: {
-        id: roleId,
-      },
-      data: {
-        name: createRoleDto.name,
-        color: createRoleDto.color,
-      },
-    });
-    return role;
-  },
-  deleteRole: async (roleId: string) => {
-    try {
-      if (!roleId) {
-        throw new BadRequestException('Role not found!');
-      }
-      const role = await db.role.delete({
-        where: {
-          id: roleId,
-        },
-      });
-      return role;
-    } catch (error) {
-      if (
-        error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === 'P2025'
-      ) {
-        throw new BadRequestException(`Role ${roleId} not found`);
-      } else {
-        throw error;
-      }
-    }
   },
 };

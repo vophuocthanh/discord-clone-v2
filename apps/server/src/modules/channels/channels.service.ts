@@ -3,10 +3,10 @@ import { BadRequestException } from '@/utils/exceptions';
 import { Prisma } from '@prisma/client';
 
 export const ChannelsService = {
-  async getAllBy(categoryId: string) {
+  async getAllBy(orgId: string) {
     const channels = await db.channel.findMany({
       where: {
-        categoryId: categoryId,
+        orgId: orgId,
       },
     });
 
@@ -29,7 +29,6 @@ export const ChannelsService = {
 
     return channel;
   },
-
   async createByOrg(
     orgId: string,
     createChannelDto: Prisma.ChannelCreateInput

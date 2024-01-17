@@ -21,7 +21,7 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getChannels } from '@/apis/channels';
 import TooltipIcon from '@/components/TooltipIcon';
-import { SkeletonChannel } from './_components/skeleton/SkeletonChannel';
+// import { SkeletonChannel } from './_components/skeleton/SkeletonChannel';
 import EventsModal from './_components/EventsModal';
 import SettingModal from './_components/SettingModal';
 import PopoverUser from './_components/popover/PopoverUser';
@@ -61,6 +61,7 @@ export default function Component() {
   const { data: channels } = useQuery(['channels', orgID], () =>
     getChannels(orgID)
   );
+  console.log('channels', channels);
 
   const { data: org } = useQuery(['orgsNew', orgID], () => {
     return getOrg(orgID);
@@ -101,42 +102,42 @@ export default function Component() {
           </div>
           <div className='px-2 text-primary-foreground/60'>
             <hr className='h-2 my-4 border-primary-foreground/60' />
-            {!org ? (
+            {/* {!org ? (
               <div className='flex flex-col space-y-10'>
                 <SkeletonChannel />
                 <SkeletonChannel />
                 <SkeletonChannel />
                 <SkeletonChannel />
               </div>
-            ) : (
-              <div className=''>
-                {org?.categories.map((category) => (
-                  <div key={category.id}>
-                    <div className='flex justify-between gap-2'>
-                      <div className='flex gap-2'>
-                        <ChevronDown className='w-4' />
-                        <h1 className='uppercase'> {category.name} </h1>
-                      </div>
-                      <AddChannelModal />
+            ) : ( */}
+            <div className=''>
+              {org?.categories.map((category) => (
+                <div key={category.id}>
+                  <div className='flex justify-between gap-2'>
+                    <div className='flex gap-2'>
+                      <ChevronDown className='w-4' />
+                      <h1 className='uppercase'> {category.name} </h1>
                     </div>
-                    <div className='py-4 space-y-2'>
-                      {category.channels?.map((channel) => (
-                        <div
-                          className={cn('px-6 py-3 cursor-pointer', {
-                            'bg-primary-foreground/20 text-primary-foreground/80':
-                              channel.id === channelID,
-                          })}
-                          key={channel.id}
-                          onClick={() => navigateToChannel(channel.id)}
-                        >
-                          {channel.name}
-                        </div>
-                      ))}
-                    </div>
+                    <AddChannelModal />
                   </div>
-                ))}
-              </div>
-            )}
+                  <div className='py-4 space-y-2'>
+                    {category.channels?.map((channel) => (
+                      <div
+                        className={cn('px-6 py-3 cursor-pointer', {
+                          'bg-primary-foreground/20 text-primary-foreground/80':
+                            channel.id === channelID,
+                        })}
+                        key={channel.id}
+                        onClick={() => navigateToChannel(channel.id)}
+                      >
+                        {channel.name}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {/* )} */}
           </div>
         </div>
         <div className='flex flex-col'>
