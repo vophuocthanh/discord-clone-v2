@@ -37,7 +37,7 @@ router
   })
   .post('/', zValidator('json', createOrgDto), async (c) => {
     const user = c.get('user');
-    const { name, icon } = await c.req.json<{ name: string; icon: string }>();
+    const { name, icon } = await c.req.json();
     const org = await OrgsService.create({
       userID: user?.id,
       name,
@@ -135,6 +135,16 @@ router
   .get('/:categoryId/channels', async (c) => {
     const categoryId = c.req.param('categoryId');
     const channels = await ChannelsService.getAllBy(categoryId);
+
+    return c.json({
+      data: channels,
+      status: 200,
+    });
+  })
+
+  .get('/:orgId/channels', async (c) => {
+    const orgId = c.req.param('orgId');
+    const channels = await ChannelsService.getAllBy(orgId);
 
     return c.json({
       data: channels,

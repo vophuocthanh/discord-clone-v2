@@ -1,5 +1,6 @@
 import { request } from '@/lib/request';
 import * as z from 'zod';
+import { categorySchema } from './categories';
 
 const orgSchema = z.object({
   id: z.string(),
@@ -7,9 +8,10 @@ const orgSchema = z.object({
   icon: z.string(),
 });
 
+export type Org = z.infer<typeof orgSchema>;
+
 export const getOrgs = async () => {
   const res = await request.get('/orgs');
-  console.log(res.data);
   return orgSchema.array().parse(res.data.data);
 };
 
@@ -24,6 +26,7 @@ export const postOrgs = async (name: string, icon: string) => {
     console.log(error);
   }
 };
+
 const memberSchema = z.object({
   id: z.string(),
   displayName: z.string(),
@@ -44,21 +47,7 @@ export const getOrg = async (orgID: string) => {
   const res = await request.get(`/orgs/${orgID}`);
   return orgSchema
     .extend({
-      categories: z.array(
-        z.object({
-          id: z.string(),
-          isPrivate: z.boolean(),
-          name: z.string(),
-          channels: z.array(
-            z.object({
-              id: z.string(),
-              name: z.string(),
-              isPrivate: z.boolean(),
-              type: z.string(),
-            })
-          ),
-        })
-      ),
+      categories: z.array(categorySchema),
     })
     .parse(res.data.data);
 };
