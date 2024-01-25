@@ -18,13 +18,13 @@ export function DropdownButton() {
           </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-48 flex' align='end'>
+      <DropdownMenuContent className='flex w-48' align='end'>
         <div className='w-full'>
           <div className='flex flex-col p-4'>
-            <Button className='bg-transparent text-black hover:bg-gray-200 hover:underline hover:text-primary'>
+            <Button className='text-black bg-transparent hover:bg-gray-200 hover:underline hover:text-primary'>
               deb
             </Button>
-            <Button className='bg-transparent text-black hover:bg-gray-200 hover:underline hover:text-primary'>
+            <Button className='text-black bg-transparent hover:bg-gray-200 hover:underline hover:text-primary'>
               tar.gz
             </Button>
           </div>

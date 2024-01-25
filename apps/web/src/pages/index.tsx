@@ -13,13 +13,13 @@ import Footer from './_components/Footer';
 
 export default function Component() {
   return (
-    <div className='w-full bg-white'>
+    <div className='w-full text-white bg-white'>
       <div
         className='flex flex-col mx-auto items-center w-full bg-no-repeat bg-cover h-[38rem]'
         style={{ backgroundImage: `url(${bg})` }}
       >
-        <header className='flex items-center justify-between mt-7 h-20 w-full'>
-          <div className='flex items-center justify-between w-full gap-20 max-w-7xl mx-auto'>
+        <header className='flex items-center justify-between w-full h-20 mt-7'>
+          <div className='flex items-center justify-between w-full gap-20 mx-auto max-w-7xl'>
             <Link to='/'>
               <img src={logo} alt='logo' />
             </Link>

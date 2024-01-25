@@ -1,12 +1,5 @@
-type AvatarProps = React.ImgHTMLAttributes<HTMLImageElement>;
+type AvatarProps = React.ImgHTMLAttributes<HTMLOrSVGElement>;
+
 export default function Avatar({ src, alt }: AvatarProps) {
-  return (
-    <div>
-      <img
-        src={src}
-        alt={alt}
-        className='object-cover w-10 h-10 rounded-full aspect-square'
-      />
-    </div>
-  );
+  return <img src={src} alt={alt} className="w-14 h-14 object-cover rounded-full" />;
 }

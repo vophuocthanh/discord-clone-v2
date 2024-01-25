@@ -1,8 +1,7 @@
-import { cn } from '@/lib/utils';
+import { getChannels } from '@/apis/channels';
 import { Link, useParams } from '@/router';
 import {
-  ChevronDown,
-  Globe,
+  Grip,
   Headphones,
   MegaphoneOff,
   Mic,
@@ -16,19 +15,16 @@ import {
   VibrateOff,
   Video,
 } from 'lucide-react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useQuery } from 'react-query';
-import { getChannels } from '@/apis/channels';
-import TooltipIcon from '@/components/TooltipIcon';
-// import { SkeletonChannel } from './_components/skeleton/SkeletonChannel';
-import EventsModal from './_components/EventsModal';
+import { useQuery } from '@tanstack/react-query';
+import { Outlet } from 'react-router-dom';
 import SettingModal from './_components/SettingModal';
-import PopoverUser from './_components/popover/PopoverUser';
+import EventsModal from './_components/EventsModal';
 import { getOrg } from '@/apis/orgs';
-import AddChannelModal from './_components/AddChannelModal';
 import OrgMenuDropDown from './_components/OrgMenuDropDown';
-
+import CategorySection from './_components/CategorySection';
+import TooltipIcon from '@/components/TooltipIcon';
+import PopoverUser from './_components/popover/PopoverUser';
+import { useState } from 'react';
 const OPTIONS = [
   {
     id: 1,
@@ -52,30 +48,27 @@ export default function Component() {
   const [micOn, setMicOn] = useState(false);
   const [headphoneOn, steHeadphoneOn] = useState(true);
   const { channelID, orgID } = useParams('/channels/:orgID/:channelID');
-  const navigate = useNavigate();
 
-  const navigateToChannel = (id: string) => {
-    navigate(`/channels/${orgID}/${id}`);
-  };
-
-  const { data: channels } = useQuery(['channels', orgID], () =>
-    getChannels(orgID)
-  );
-  console.log('channels', channels);
-
-  const { data: org } = useQuery(['orgsNew', orgID], () => {
-    return getOrg(orgID);
+  const { data: channels } = useQuery({
+    queryKey: ['channels', orgID],
+    queryFn: () => getChannels(orgID),
   });
-  console.log('org:', org);
+
+  const { data: org } = useQuery({
+    queryKey: ['orgs', orgID],
+    queryFn: () => getOrg(orgID),
+  });
+
   const handleMic = () => {
     setMicOn(!micOn);
   };
   const handleHeadphone = () => {
     steHeadphoneOn(!headphoneOn);
   };
+
   return (
     <div className='flex w-full'>
-      <div className='relativem bg-priary-foreground/10 text-primary-foreground 0 w-[20rem] flex flex-col'>
+      <div className='relative bg-primary-foreground/10 text-primary-foreground 0 w-[16rem] flex flex-col'>
         <OrgMenuDropDown org={org} />
         <div className='overflow-scroll h-3/4'>
           <div className='pt-2 pl-2 text-xl text-primary-foreground/60'>
@@ -85,8 +78,8 @@ export default function Component() {
               params={{ orgID }}
               className='flex w-full gap-2 px-3 py-2 hover:bg-primary-foreground/20'
             >
-              <Globe />
-              <p>Browse Channels</p>
+              <Grip />
+              <p> Browse Channels </p>
             </Link>
             <Link
               to='/channels/:orgID/member-safety'
@@ -97,47 +90,14 @@ export default function Component() {
               className='flex w-full gap-2 px-3 py-2 hover:bg-primary-foreground/20'
             >
               <Users />
-              <p>Member</p>
+              <p> Members </p>
             </Link>
           </div>
           <div className='px-2 text-primary-foreground/60'>
             <hr className='h-2 my-4 border-primary-foreground/60' />
-            {/* {!org ? (
-              <div className='flex flex-col space-y-10'>
-                <SkeletonChannel />
-                <SkeletonChannel />
-                <SkeletonChannel />
-                <SkeletonChannel />
-              </div>
-            ) : ( */}
-            <div className=''>
-              {org?.categories.map((category) => (
-                <div key={category.id}>
-                  <div className='flex justify-between gap-2'>
-                    <div className='flex gap-2'>
-                      <ChevronDown className='w-4' />
-                      <h1 className='uppercase'> {category.name} </h1>
-                    </div>
-                    <AddChannelModal />
-                  </div>
-                  <div className='py-4 space-y-2'>
-                    {category.channels?.map((channel) => (
-                      <div
-                        className={cn('px-6 py-3 cursor-pointer', {
-                          'bg-primary-foreground/20 text-primary-foreground/80':
-                            channel.id === channelID,
-                        })}
-                        key={channel.id}
-                        onClick={() => navigateToChannel(channel.id)}
-                      >
-                        {channel.name}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-            {/* )} */}
+            {org?.categories.map((category) => (
+              <CategorySection category={category} key={category.id} />
+            ))}
           </div>
         </div>
         <div className='flex flex-col'>
@@ -205,7 +165,7 @@ export default function Component() {
           </div>
         </div>
       </div>
-      <div className='w-5/6 bg-primary-foreground/50'>
+      <div className='w-[calc(100%-16rem)]'>
         <Outlet />
       </div>
     </div>

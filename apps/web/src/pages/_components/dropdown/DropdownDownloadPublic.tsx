@@ -22,25 +22,25 @@ export function DropdownDownloadPublic() {
           </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-80 flex mx-auto' side='bottom'>
+      <DropdownMenuContent className='flex mx-auto w-80' side='bottom'>
         {/* <div className='w-full'>
           <div className='flex flex-col p-4'>
-            <Button className='bg-transparent text-black hover:bg-gray-200 hover:underline hover:text-primary'>
+            <Button className='text-black bg-transparent hover:bg-gray-200 hover:underline hover:text-primary'>
               Mac
             </Button>
-            <Button className='bg-transparent text-black hover:bg-gray-200 hover:underline hover:text-primary'>
+            <Button className='text-black bg-transparent hover:bg-gray-200 hover:underline hover:text-primary'>
               Linux deb
             </Button>
-            <Button className='bg-transparent text-black hover:bg-gray-200 hover:underline hover:text-primary'>
+            <Button className='text-black bg-transparent hover:bg-gray-200 hover:underline hover:text-primary'>
               Linux tar.gz
             </Button>
-            <Button className='bg-transparent text-black hover:bg-gray-200 hover:underline hover:text-primary'>
+            <Button className='text-black bg-transparent hover:bg-gray-200 hover:underline hover:text-primary'>
               Windows 32-bit
             </Button>
-            <Button className='bg-transparent text-black hover:bg-gray-200 hover:underline hover:text-primary'>
+            <Button className='text-black bg-transparent hover:bg-gray-200 hover:underline hover:text-primary'>
               Windows 64-bit
             </Button>
-            <Button className='bg-transparent text-black hover:bg-gray-200 hover:underline hover:text-primary'>
+            <Button className='text-black bg-transparent hover:bg-gray-200 hover:underline hover:text-primary'>
               Windows 64-bit(Canary)
             </Button>
           </div>

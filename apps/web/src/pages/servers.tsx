@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import logo from '@/assets/images/server/logo.svg';
 import { Button } from '@/components/ui/button';
 import Footer from './_components/Footer';
-import { DropdownServer } from './(auth)/channels/[orgID]/_components/DropdownServer';
 import bg from '@/assets/images/background.png';
 import { Input } from '@/components/ui/input';
 import { Minus } from 'lucide-react';
@@ -19,6 +18,7 @@ import trustSafety from '@/assets/images/support/trust-safety.png';
 import FAQs from '@/assets/images/support/FAQs.png';
 import developerSupport from '@/assets/images/support/develoepr-support.png';
 import twitter from '@/assets/images/support/icon-twitter.png';
+import { DropdownServer } from './(auth)/channels/[orgID]/_components/DropdownServer';
 
 const SUPPORTS = [
   {

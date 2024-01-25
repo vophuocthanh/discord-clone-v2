@@ -82,14 +82,14 @@ export default function SettingModal() {
       <DialogTrigger asChild>
         <Settings className='cursor-pointer' />
       </DialogTrigger>
-      <DialogContent className='max-w-full h-screen flex gap-0 p-0'>
-        <div className='w-1/3 bg-primary-foreground/10 flex justify-end'>
-          <div className='w-1/2 mt-10 p-2'>
+      <DialogContent className='flex h-screen max-w-full gap-0 p-0'>
+        <div className='flex justify-end w-1/3 bg-primary-foreground/10'>
+          <div className='w-1/2 p-2 mt-10'>
             <div>
               {SETTINGS.map((setting) => (
-                <div key={setting.key} className='border-b py-3'>
+                <div key={setting.key} className='py-3 border-b'>
                   {setting.name && (
-                    <div className='p-2 rounded-sm text-xs font-bold uppercase'>
+                    <div className='p-2 text-xs font-bold uppercase rounded-sm'>
                       {setting.name}
                     </div>
                   )}
@@ -119,7 +119,7 @@ export default function SettingModal() {
             </div>
           </div>
         </div>
-        <div className='w-2/3 p-6 h-screen overflow-auto bg-primary-foreground/20'>
+        <div className='w-2/3 h-screen p-6 overflow-auto bg-primary-foreground/20'>
           <div className='mt-10'>
             {(() => {
               switch (tab) {

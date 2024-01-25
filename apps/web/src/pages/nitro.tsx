@@ -6,7 +6,6 @@ import biggeer from '@/assets/images/bigger.svg';
 import swet from '@/assets/images/swet.svg';
 import emoji from '@/assets/images/emoji.svg';
 import unlock from '@/assets/images/unlock.svg';
-import Footer from './_components/Footer';
 import {
   ArrowUpFromLine,
   BadgePercent,
@@ -16,6 +15,7 @@ import {
   Smile,
   SmilePlus,
 } from 'lucide-react';
+import Footer from './_components/Footer';
 export default function Component() {
   return (
     <div className='relative w-full'>
@@ -24,9 +24,9 @@ export default function Component() {
           <source src={nitroVideo} type='video/webm' />
         </video>
       </div>
-      <header className='absolute left-0 right-0 top-0 mx-auto justify-center flex'>
+      <header className='absolute top-0 left-0 right-0 flex justify-center mx-auto'>
         <div className='h-[40rem] mt-12 text-white flex flex-col justify-between items-center'>
-          <div className='flex items-center justify-between w-full gap-20 max-w-7xl mx-auto'>
+          <div className='flex items-center justify-between w-full gap-20 mx-auto max-w-7xl'>
             <Link to='/'>
               <img src={logo} alt='logo' />
             </Link>
@@ -60,7 +60,7 @@ export default function Component() {
             </Link>
           </div>
           <div className='w-96 mb-[18rem] mr-auto px-10 mt-20'>
-            <h1 className='text-7xl text-white font-bold'>
+            <h1 className='font-bold text-white text-7xl'>
               Unleash more fun with Nitro
             </h1>
             <p>
@@ -68,62 +68,62 @@ export default function Component() {
               profile, share bigger files, and so much more.{' '}
             </p>
           </div>
-          <div className='flex justify-between gap-10 mx-auto max-w-6xl'>
+          <div className='flex justify-between max-w-6xl gap-10 mx-auto'>
             <div className='w-[36rem] flex justify-between flex-col p-6 h-[31rem] bg-white bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-500 rounded'>
               <div className='flex flex-col space-y-4'>
-                <h1 className='text-4xl uppercase font-bold'>Nitro Basic</h1>
-                <div className='flex gap-6 items-center'>
+                <h1 className='text-4xl font-bold uppercase'>Nitro Basic</h1>
+                <div className='flex items-center gap-6'>
                   <ArrowUpFromLine />
                   <span className='text-xl'>50MB uploads</span>
                 </div>
-                <div className='flex gap-6 items-center'>
+                <div className='flex items-center gap-6'>
                   <Smile />
                   <span className='text-xl'>Custom emoji anywhere</span>
                 </div>
-                <div className='flex gap-6 items-center'>
+                <div className='flex items-center gap-6'>
                   <SmilePlus />
                   <span className='text-xl'>Unlimited Super Reactions</span>
                 </div>
-                <div className='flex gap-6 items-center'>
+                <div className='flex items-center gap-6'>
                   <BadgePercent />
                   <span className='text-xl'>
                     Special Nitro badge on your profile
                   </span>
                 </div>
               </div>
-              <Button className='w-full h-16 rounded-full bg-white text-black hover:bg-white hover:shadow-xl text-xl hover:text-primary'>
+              <Button className='w-full h-16 text-xl text-black bg-white rounded-full hover:bg-white hover:shadow-xl hover:text-primary'>
                 Subscribe
               </Button>
             </div>
             <div className='w-[36rem] p-6 space-y-10 h-[31rem] bg-white rounded bg-gradient-to-tr flex flex-col justify-between from-purple-600 via-pink-600 to-rose-500'>
               <div className='flex flex-col space-y-4'>
-                <h1 className='text-4xl uppercase font-bold'>Nitro</h1>
-                <div className='flex gap-6 items-center'>
+                <h1 className='text-4xl font-bold uppercase'>Nitro</h1>
+                <div className='flex items-center gap-6'>
                   <ArrowUpFromLine />
                   <span className='text-xl'>500MB uploads</span>
                 </div>
-                <div className='flex gap-6 items-center'>
+                <div className='flex items-center gap-6'>
                   <Smile />
                   <span className='text-xl'>Custom emoji anywhere</span>
                 </div>
-                <div className='flex gap-6 items-center'>
+                <div className='flex items-center gap-6'>
                   <SmilePlus />
                   <span className='text-xl'>Unlimited Super Reactions</span>
                 </div>
-                <div className='flex gap-6 items-center'>
+                <div className='flex items-center gap-6'>
                   <ScreenShare />
                   <span className='text-xl'>HD video streaming</span>
                 </div>
-                <div className='flex gap-6 items-center'>
+                <div className='flex items-center gap-6'>
                   <Server />
                   <span className='text-xl'>2 Server Boosts</span>
                 </div>
-                <div className='flex gap-6 items-center'>
+                <div className='flex items-center gap-6'>
                   <PersonStanding />
                   <span className='text-xl'>Custom profiles and more!</span>
                 </div>
               </div>
-              <Button className='w-full h-16 rounded-full bg-white text-black hover:bg-white hover:shadow-xl text-xl hover:text-primary'>
+              <Button className='w-full h-16 text-xl text-black bg-white rounded-full hover:bg-white hover:shadow-xl hover:text-primary'>
                 Subscribe
               </Button>
             </div>
@@ -162,7 +162,7 @@ export default function Component() {
           </div>
         </div>
       </div>
-      <Button className='mx-auto flex bg-black w-56 rounded-full my-20 hover:bg-black hover:shadow-md h-16 text-xl'>
+      <Button className='flex w-56 h-16 mx-auto my-20 text-xl bg-black rounded-full hover:bg-black hover:shadow-md'>
         Show all perks
       </Button>
       <Footer />

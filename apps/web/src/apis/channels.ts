@@ -1,12 +1,20 @@
 import { request } from '@/lib/request';
 import * as z from 'zod';
 
-const channelSchema = z.object({
+export enum ChannelType {
+  VOICE = 'VOICE',
+  TEXT = 'TEXT',
+  FORUM = 'FORUM',
+}
+
+export const channelSchema = z.object({
   id: z.string(),
   name: z.string(),
   isPrivate: z.boolean(),
-  type: z.string(),
+  type: z.nativeEnum(ChannelType),
 });
+
+export type Channel = z.infer<typeof channelSchema>;
 
 export const getChannels = async (orgID: string) => {
   const res = await request.get(`/orgs/${orgID}/channels`);

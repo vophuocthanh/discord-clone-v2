@@ -4,8 +4,8 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { BellOff, ChevronRight } from 'lucide-react';
-import { RadioGroupNotification } from '../RadioGroupNotification';
 import TooltipIcon from '@/components/TooltipIcon';
+import { RadioGroupNotification } from '../RadioGroupNotification';
 
 export default function PopoverNotification() {
   return (
@@ -23,7 +23,7 @@ export default function PopoverNotification() {
           <p>Tắt âm kênh</p>
           <ChevronRight className='cursor-pointer' />
         </div>
-        <RadioGroupNotification></RadioGroupNotification>
+        <RadioGroupNotification />
       </PopoverContent>
     </Popover>
   );

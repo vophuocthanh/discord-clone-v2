@@ -1,37 +1,33 @@
 import { getOrgs } from '@/apis/orgs';
 import OrgSidebar from '@/components/OrgSidebar';
+import { getToken } from '@/lib/storage';
+import { redirect } from '@/router';
 import { useEffect } from 'react';
-import { useQuery } from 'react-query';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { SkeletonOrg } from './channels/[orgID]/_components/skeleton/SkeletonOrg';
+import { useQuery } from '@tanstack/react-query';
+import { Outlet } from 'react-router-dom';
+
+export function Loader() {
+  const isAuth = getToken();
+  if (!isAuth) {
+    return redirect('/login');
+  }
+  return null;
+}
 
 export default function App() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    document.documentElement.classList.add('dark');
-    if (window.location.pathname === '/') {
-      navigate('/channels/1');
-    }
-  }, [navigate]);
   useEffect(() => {
     document.documentElement.classList.add('dark');
   }, []);
 
-  const { data: org } = useQuery(['orgs'], () => getOrgs());
+  const { data: orgs } = useQuery({
+    queryKey: ['orgs'],
+    queryFn: () => getOrgs(),
+  });
 
   return (
-    <div className='flex w-full h-full overflow-y-scroll bg-background'>
-      {!org ? (
-        <div className='p-3 space-y-4'>
-          <SkeletonOrg />
-          <SkeletonOrg />
-          <SkeletonOrg />
-          <SkeletonOrg />
-        </div>
-      ) : (
-        <OrgSidebar orgs={org ?? []}></OrgSidebar>
-      )}
-      <Outlet></Outlet>
+    <div className='flex w-full h-screen bg-background text-primary-foreground'>
+      <OrgSidebar orgs={orgs ?? []} />
+      <Outlet />
     </div>
   );
 }

@@ -11,8 +11,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Plus } from 'lucide-react';
-import { postOrgs } from '@/apis/orgs';
 import { toast } from 'sonner';
+import { postOrgs } from '@/apis/orgs';
 
 export function CreateNewOrgs() {
   const [name, setName] = useState('');
@@ -45,7 +45,7 @@ export function CreateNewOrgs() {
           <DialogTitle>Create New Orgs</DialogTitle>
         </DialogHeader>
         <div className='grid gap-4 py-4'>
-          <div className='grid grid-cols-4 items-center gap-4'>
+          <div className='grid items-center grid-cols-4 gap-4'>
             <Label htmlFor='name'>Name</Label>
             <Input
               id='name'
@@ -55,7 +55,7 @@ export function CreateNewOrgs() {
               className='col-span-3'
             />
           </div>
-          <div className='grid grid-cols-4 items-center gap-4'>
+          <div className='grid items-center grid-cols-4 gap-4'>
             <Label htmlFor='username'>Icon</Label>
             <Input
               id='username'

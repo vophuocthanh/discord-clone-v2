@@ -4,13 +4,13 @@ import { Input } from '@/components/ui/input';
 import { getToken, setToken } from '@/lib/storage';
 import { Link, redirect, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { SignUpSchema } from '@/lib/shema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useState } from 'react';
 import { signUp } from '@/apis/auth';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
+import { SignUpSchema } from '@/lib/schema';
 
 export function Loader() {
   const isAuth = getToken();

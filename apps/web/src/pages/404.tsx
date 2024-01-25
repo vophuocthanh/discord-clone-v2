@@ -7,9 +7,9 @@ import Footer from './_components/Footer';
 export default function Component() {
   return (
     <div className='w-full h-full'>
-      <header className='mx-auto justify-center flex'>
+      <header className='flex justify-center mx-auto'>
         <div className='flex flex-col h-[calc(100vh-10rem)] items-center max-w-6xl mt-12 text-white'>
-          <div className='flex items-center justify-between w-full text-black gap-20 mb-40'>
+          <div className='flex items-center justify-between w-full gap-20 mb-40 text-black'>
             <Link to='/'>
               <img src={logo} alt='logo' className='text-black' />
             </Link>
@@ -37,13 +37,13 @@ export default function Component() {
               </Link>
             </div>
             <Link to='/login'>
-              <Button className='text-white  rounded-full hover:shadow-xl'>
+              <Button className='text-white rounded-full hover:shadow-xl'>
                 Open Discord
               </Button>
             </Link>
           </div>
-          <div className='flex items-center justify-between max-w-6xl text-black gap-10'>
-            <div className='w-1/2 flex-col flex space-y-4'>
+          <div className='flex items-center justify-between max-w-6xl gap-10 text-black'>
+            <div className='flex flex-col w-1/2 space-y-4'>
               <h1 className='text-6xl font-black text-primary'>WRONG TURN?</h1>
               <p className='mt-10'>
                 You look lost, stranger. You know what helps when you’re lost? A
@@ -54,19 +54,19 @@ export default function Component() {
               <div className='flex flex-col'>
                 <Link
                   to='https://discordstatus.com/'
-                  className='text-blue-400 text-xl hover:text-blue-600'
+                  className='text-xl text-blue-400 hover:text-blue-600'
                 >
                   Status Page
                 </Link>
                 <Link
                   to='/'
-                  className='text-blue-400 text-xl hover:text-blue-600'
+                  className='text-xl text-blue-400 hover:text-blue-600'
                 >
                   @Discord
                 </Link>
                 <Link
                   to='/servers'
-                  className='text-blue-400 text-xl hover:text-blue-600'
+                  className='text-xl text-blue-400 hover:text-blue-600'
                 >
                   Discord Support
                 </Link>

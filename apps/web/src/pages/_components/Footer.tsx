@@ -29,7 +29,7 @@ const SOCIAL = [
 ];
 export default function Footer() {
   return (
-    <footer className='w-full bg-black h-[44rem]'>
+    <footer className='w-full text-white bg-black h-[44rem]'>
       <div className='flex items-start max-w-5xl gap-20 pt-20 mx-auto'>
         <div className='flex flex-col max-w-[200px] space-y-4 p-4'>
           <h1 className='text-3xl font-bold uppercase text-primary'>

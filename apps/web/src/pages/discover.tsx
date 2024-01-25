@@ -56,13 +56,13 @@ export default function Component() {
     []
   );
   return (
-    <div className='w-full h-full bg-white'>
+    <div className='w-full h-full text-white bg-white'>
       <div
         className='flex flex-col mx-auto items-center w-full bg-no-repeat bg-cover h-[28rem]'
         style={{ backgroundImage: `url(${bg})` }}
       >
-        <header className='flex items-center justify-between mt-7 h-20 w-full'>
-          <div className='flex items-center justify-between w-full gap-20 max-w-7xl mx-auto'>
+        <header className='flex items-center justify-between w-full h-20 mt-7'>
+          <div className='flex items-center justify-between w-full gap-20 mx-auto max-w-7xl'>
             <Link to='/'>
               <img src={logo} alt='logo' />
             </Link>
@@ -105,8 +105,8 @@ export default function Component() {
           </p>
         </div>
       </div>
-      <div className='w-full text-black bg-white my-20'>
-        <div className='flex items-center max-w-7xl gap-10 mx-auto '>
+      <div className='w-full my-20 text-black bg-white'>
+        <div className='flex items-center gap-10 mx-auto max-w-7xl '>
           <div className='w-[100rem] bg-gray-100 h-14 flex items-center rounded'>
             <Input
               className='w-[73rem] rounded bg-gray-300 text-lg'
@@ -118,7 +118,7 @@ export default function Component() {
             <Search />
           </Button>
         </div>
-        <div className='max-w-7xl mx-auto h-full flex gap-0 p-0 text-black'>
+        <div className='flex h-full gap-0 p-0 mx-auto text-black max-w-7xl'>
           <div className='w-64 p-2'>
             <div>
               {SETTINGS.map((setting) => (
@@ -148,7 +148,7 @@ export default function Component() {
               ))}
             </div>
           </div>
-          <div className='w-full p-6 h-full text-black'>
+          <div className='w-full h-full p-6 text-black'>
             {(() => {
               switch (tab) {
                 case 'all/All':
@@ -171,12 +171,12 @@ export default function Component() {
         </div>
       </div>
       <SectionInView className='text-black flex-col justify-center flex bg-[#5865f2] w-full h-[23rem]'>
-        <div className='flex items-center justify-center max-w-5xl gap-10  mx-auto'>
+        <div className='flex items-center justify-center max-w-5xl gap-10 mx-auto'>
           <div className='flex flex-col'>
             <h1 className='text-4xl font-bold text-white'>
               Have a server you want to add to Discovery?
             </h1>
-            <Button className='mt-10 w-96 mx-auto rounded-full bg-black hover:bg-black text-xl h-16'>
+            <Button className='h-16 mx-auto mt-10 text-xl bg-black rounded-full w-96 hover:bg-black'>
               Make Your Community Public
             </Button>
           </div>

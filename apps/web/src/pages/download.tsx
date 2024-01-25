@@ -58,7 +58,7 @@ export default function Component() {
                 An adventure awaits. Hang out with your friends on our desktop
                 app <br /> and keep the conversation going on mobile.
               </p>
-              <div className='mt-10 flex gap-10 items-center'>
+              <div className='flex items-center gap-10 mt-10'>
                 <Button className='flex h-16 gap-4 px-6 text-xl text-black bg-white rounded-full hover:bg-white hover:text-primary hover:shadow-xl'>
                   <span>
                     <Download />
@@ -72,22 +72,22 @@ export default function Component() {
           </SectionInView>
         </div>
       </header>
-      <div className='flex text-black justify-between items-center max-w-6xl mx-auto gap-10 my-20'>
+      <div className='flex items-center justify-between max-w-6xl gap-10 mx-auto my-20 text-black'>
         <div className='flex flex-col space-y-10'>
           <div className='relative flex w-[36rem] overflow-hidden flex-col items-center space-y-6  rounded-lg h-[46rem] bg-[#f6f6f6]'>
-            <h1 className='text-4xl mt-28 font-bold'>iOS</h1>
-            <Button className='bg-black text-white rounded-full text-xl p-8 hover:bg-black hover:shadow-md hover:scale-110'>
+            <h1 className='text-4xl font-bold mt-28'>iOS</h1>
+            <Button className='p-8 text-xl text-white bg-black rounded-full hover:bg-black hover:shadow-md hover:scale-110'>
               Download
             </Button>
             <img src={ios} alt='ios' className='absolute top-[21.5rem]' />
           </div>
           <div className='relative flex w-[36rem] flex-col overflow-hidden items-center space-y-6  rounded-lg h-[40rem] bg-[#f6f6f6]'>
-            <h1 className='text-4xl mt-28 font-bold'>Linux</h1>
+            <h1 className='text-4xl font-bold mt-28'>Linux</h1>
             <DropdownButton></DropdownButton>
             <img src={linux} alt='ios' className='absolute top-[16rem]' />
           </div>
           <div className='relative flex w-[36rem] flex-col overflow-hidden items-center space-y-6 rounded-lg h-96 bg-[#f6f6f6]'>
-            <h1 className='text-4xl mt-28 font-bold'>Feeling experimental?</h1>
+            <h1 className='text-4xl font-bold mt-28'>Feeling experimental?</h1>
             <p>
               Try our Public Test Build and test new features before they
               launch.
@@ -97,15 +97,15 @@ export default function Component() {
         </div>
         <div className='flex flex-col space-y-10'>
           <div className='relative flex w-[36rem] overflow-hidden flex-col items-center space-y-6  rounded-lg h-[46rem] bg-[#f6f6f6]'>
-            <h1 className='text-4xl mt-14 font-bold'>Android</h1>
-            <Button className='bg-black text-white rounded-full text-xl p-8 hover:bg-black hover:shadow-md hover:scale-110'>
+            <h1 className='text-4xl font-bold mt-14'>Android</h1>
+            <Button className='p-8 text-xl text-white bg-black rounded-full hover:bg-black hover:shadow-md hover:scale-110'>
               Download
             </Button>
             <img src={android} alt='ios' className='absolute top-[13.5rem]' />
           </div>
           <div className='relative flex w-[36rem] overflow-hidden flex-col items-center space-y-6  rounded-lg h-[38rem] bg-[#f6f6f6]'>
-            <h1 className='text-4xl mt-14 font-bold'>Mac</h1>
-            <Button className='bg-black text-white rounded-full text-xl p-8 hover:bg-black hover:shadow-md hover:scale-110'>
+            <h1 className='text-4xl font-bold mt-14'>Mac</h1>
+            <Button className='p-8 text-xl text-white bg-black rounded-full hover:bg-black hover:shadow-md hover:scale-110'>
               Download
             </Button>
             <img src={mac} alt='ios' className='absolute top-[13.5rem]' />

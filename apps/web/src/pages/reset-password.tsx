@@ -2,7 +2,7 @@ import { resetPassword } from '@/apis/auth';
 import bgAuth from '@/assets/images/bg-auth.png';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ResetPasswordSchema } from '@/lib/shema';
+import { ResetPasswordSchema } from '@/lib/schema';
 import { getToken } from '@/lib/storage';
 import { Link, useNavigate } from '@/router';
 import { zodResolver } from '@hookform/resolvers/zod';

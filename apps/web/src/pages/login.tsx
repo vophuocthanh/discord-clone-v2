@@ -4,7 +4,6 @@ import { Input } from '@/components/ui/input';
 import { getToken, setToken } from '@/lib/storage';
 import { redirect, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { LoginSchema } from '@/lib/shema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useState } from 'react';
@@ -14,6 +13,7 @@ import { ChevronLeft } from 'lucide-react';
 import qrCode from '@/assets/images/qr-code.png';
 import { toast } from 'sonner';
 import { AxiosError } from 'axios';
+import { LoginSchema } from '@/lib/schema';
 
 export function Loader() {
   const isAuth = getToken();

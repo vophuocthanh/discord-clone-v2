@@ -18,6 +18,7 @@ export const LoginSchema = z.object({
       'Password must contain at least 8 characters, 1 letter and 1 number'
     ),
 });
+
 export const SignUpSchema = z.object({
   email: z
     .string()

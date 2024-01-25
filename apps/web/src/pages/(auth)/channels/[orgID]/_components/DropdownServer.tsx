@@ -14,14 +14,14 @@ export function DropdownServer() {
         <div className='flex items-center gap-2'>
           <Link
             to='/nitro'
-            className='hover:underline select-none outline-none'
+            className='outline-none select-none hover:underline'
           >
             English (US)
           </Link>
           <ArrowDown className='w-4 h-4' />
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-36 flex flex-col p-4 space-y-2 justify-center'>
+      <DropdownMenuContent className='flex flex-col justify-center p-4 space-y-2 w-36'>
         <DropdownMenuLabel>Dansk</DropdownMenuLabel>
         <DropdownMenuLabel>Deutsch</DropdownMenuLabel>
         <DropdownMenuLabel>Polski</DropdownMenuLabel>

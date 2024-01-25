@@ -1,5 +1,5 @@
-import { getOrgMembers } from '@/apis/orgs';
-import { Checkbox } from '@/components/ui/checkbox';
+import { getOrgMembers } from "@/apis/orgs";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Table,
   TableBody,
@@ -7,68 +7,73 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Link, useParams } from '@/router';
-import { HelpCircle, Users } from 'lucide-react';
-import { useQuery } from 'react-query';
-import { useLocation } from 'react-router-dom';
+} from "@/components/ui/table";
+import { Link, useParams } from "@/router";
+import { HelpCircle, Users } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
 
 export default function Component() {
-  const { orgID } = useParams('/channels/:orgID/member-safety');
+  const { orgID } = useParams("/channels/:orgID/member-safety");
   const location = useLocation();
-  const { data: members } = useQuery(['members'], () => getOrgMembers(orgID));
+
+  const { data: members } = useQuery({
+    queryKey: ["members"],
+    queryFn: () => getOrgMembers(orgID),
+  });
+
   return (
     <div>
-      <header className='flex items-center justify-between p-3 text-2xl border-b h-14 bg-[#1d202ab8]'>
-        <div className='flex items-center gap-4'>
+      <header className="p-3 h-14 border-b bg-primary-foreground/20  text-2xl flex items-center justify-between">
+        <div className="flex items-center gap-4">
           <Users />
           Members
         </div>
-        <div className='flex items-center gap-4'>
+        <div className="flex items-center gap-4">
           {location.state?.channel && (
             <Link
-              to='/channels/:orgID/:channelID'
+              to="/channels/:orgID/:channelID"
               params={{ orgID: orgID, channelID: location.state.channel.id }}
-              className='text-xs border border-gray-300 p-2'
+              className="text-xs border border-gray-300 p-2"
             >
               Return to {location.state.channel.name}
             </Link>
           )}
-          <HelpCircle className='cursor-pointer' />
+          <HelpCircle className="cursor-pointer" />
         </div>
       </header>
-      <div className='p-6 bg-zinc-900 h-[calc(100vh-3.5rem)]'>
-        <div className='rounded-lg bg-primary-foreground/20'>
-          <div className='p-4 border-b border-gray-400'>
-            <h1>Recent Members</h1>
+      <div className="p-6 ">
+        <div className="bg-primary-foreground/20  rounded-lg">
+          <div className="p-4 border-b border-gray-400">
+            <h1> Recent Members </h1>
           </div>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className='flex items-center gap-2 text-white'>
-                  <Checkbox className='w-6 h-6 border-gray-400 rounded' />
+                <TableHead className="gap-2 flex items-center">
+                  <Checkbox />
                   <span>Name</span>
                 </TableHead>
-                <TableHead className='text-white'>Member Since</TableHead>
-                <TableHead className='text-white'>JOINED Discord</TableHead>
-                <TableHead className='text-white'>Join Method</TableHead>
-                <TableHead className='text-white'>Roles</TableHead>
-                <TableHead className='text-white'>Signals</TableHead>
+                <TableHead>Member Since</TableHead>
+                <TableHead>JOINED Discord</TableHead>
+                <TableHead>Join Method</TableHead>
+                <TableHead>Roles</TableHead>
+                <TableHead>Signals</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {members?.map((member) => (
                 <TableRow key={member.id}>
-                  <TableCell className='gap-2 flex items-center'>
+                  <TableCell className="gap-2 flex items-center">
                     <Checkbox />
-                    <div className='flex gap-2'>
+                    <div className="flex gap-2">
                       <img
                         src={member.avatar}
                         alt={member.displayName}
-                        className='w-10 h-10 rounded-full object-cover'
+                        className="w-10 h-10 rounded-full object-cover"
                       />
                       <div>
-                        <p className='text-green-500'>{member.displayName}</p>
+                        <p className="text-green-500">{member.displayName}</p>
                         <p>{member.username}</p>
                       </div>
                     </div>
