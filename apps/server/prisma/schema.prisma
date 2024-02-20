@@ -19,7 +19,6 @@ model Org {
   userID       String
   users        UsersOnOrgs[]
   Role         Role[]
-  UsersOnRoles UsersOnRoles[]
   categories   Category[]
   channels     Channel[]
 
@@ -42,7 +41,6 @@ model Role {
   orgID        String
   org          Org            @relation(fields: [orgID], references: [id])
   UsersOnRoles UsersOnRoles[]
-  User         User?          @relation(fields: [userId], references: [id])
   userId       String?
 
   @@map("roles")
@@ -54,14 +52,41 @@ model User {
   password     String
   salt         String
   orgs         UsersOnOrgs[]
+  username   String?           @unique
   fullName     String?
-  Role         Role[]
   UsersOnRoles UsersOnRoles[]
   Messages     Message[]
   channels     UsersOnChannels[]
 
+  friends    Friend[]          @relation(name: "user")
+  friendsOf  Friend[]          @relation(name: "userOf")
+
   @@map("users")
 }
+
+enum RelationShipStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
+
+model Friend {
+  id     String @id @default(cuid())
+  user   User   @relation(name: "user", fields: [userId], references: [id])
+  userId String
+
+  userOfId String
+  userOf   User   @relation(name: "userOf", fields: [userOfId], references: [id])
+
+  status RelationShipStatus @default(value: PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, userOfId])
+  @@map("friends")
+}
+
 
 enum ChannelType {
   TEXT
@@ -128,7 +153,6 @@ model UsersOnRoles {
   userId String
   role   Role    @relation(fields: [roleId], references: [id])
   roleId String
-  Org    Org?    @relation(fields: [orgID], references: [id])
   orgID  String?
 
   @@id([roleId, userId])

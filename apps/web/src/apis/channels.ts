@@ -24,3 +24,13 @@ export const getChannels = async (orgID: string) => {
 export const getChannelMembers = async (orgID: string, channelID: string) => {
   return request.get(`/orgs/${orgID}/channels/${channelID}/members`);
 };
+
+export const postChannel = async ({
+  categoryId,
+  createChannelDto,
+}: {
+  categoryId: string;
+  createChannelDto: Channel;
+}) => {
+  return request.post(`/categories/${categoryId}/channels`, createChannelDto);
+};

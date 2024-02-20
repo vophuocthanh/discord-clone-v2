@@ -39,7 +39,7 @@ export default function AddCategoryModal() {
   return (
     <Dialog open={open}>
       <DialogTrigger asChild onClick={() => setOpen(true)}>
-        <div className='w-full flex justify-between items-center gap-2 px-2 py-1 hover:bg-primary rounded cursor-pointer'>
+        <div className='flex items-center justify-between w-full gap-2 px-2 py-1 rounded cursor-pointer hover:bg-primary'>
           <span> Create Category </span>
           <FolderPlus />
         </div>
@@ -47,9 +47,9 @@ export default function AddCategoryModal() {
       <DialogContent className='sm:max-w-[425px] bg-primary-foreground/10'>
         <h1 className='text-xl font-bold'> Create Category </h1>
         <div>
-          <p className='uppercase text-xs font-bold'> Category Name </p>
+          <p className='text-xs font-bold uppercase'> Category Name </p>
           <Input
-            className=' mt-2'
+            className='mt-2 '
             placeholder='New Category'
             value={category}
             onChange={(e) => setCategory(e.target.value)}

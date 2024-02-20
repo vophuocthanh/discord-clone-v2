@@ -9,7 +9,6 @@ Table orgs {
   userID String [not null]
   users users_on_orgs [not null]
   Role roles [not null]
-  UsersOnRoles users_on_roles [not null]
   categories categories [not null]
   channels channels [not null]
 }
@@ -28,7 +27,6 @@ Table roles {
   orgID String [not null]
   org orgs [not null]
   UsersOnRoles users_on_roles [not null]
-  User users
   userId String
 }
 
@@ -38,11 +36,28 @@ Table users {
   password String [not null]
   salt String [not null]
   orgs users_on_orgs [not null]
+  username String [unique]
   fullName String
-  Role roles [not null]
   UsersOnRoles users_on_roles [not null]
   Messages messages [not null]
   channels users_on_channels [not null]
+  friends friends [not null]
+  friendsOf friends [not null]
+}
+
+Table friends {
+  id String [pk]
+  user users [not null]
+  userId String [not null]
+  userOfId String [not null]
+  userOf users [not null]
+  status RelationShipStatus [not null, default: 'PENDING']
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+
+  indexes {
+    (userId, userOfId) [unique]
+  }
 }
 
 Table channels {
@@ -94,7 +109,6 @@ Table users_on_roles {
   userId String [not null]
   role roles [not null]
   roleId String [not null]
-  Org orgs
   orgID String
 
   indexes {
@@ -113,6 +127,12 @@ Table users_on_orgs {
   }
 }
 
+Enum RelationShipStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
+
 Enum ChannelType {
   TEXT
   VOICE
@@ -123,7 +143,9 @@ Enum ChannelType {
 
 Ref: roles.orgID > orgs.id
 
-Ref: roles.userId > users.id
+Ref: friends.userId > users.id
+
+Ref: friends.userOfId > users.id
 
 Ref: channels.orgId > orgs.id [delete: Cascade]
 
@@ -142,8 +164,6 @@ Ref: users_on_channels.channelId > channels.id
 Ref: users_on_roles.userId > users.id
 
 Ref: users_on_roles.roleId > roles.id
-
-Ref: users_on_roles.orgID > orgs.id
 
 Ref: users_on_orgs.userID > users.id
 

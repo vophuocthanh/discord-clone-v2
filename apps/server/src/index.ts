@@ -8,6 +8,7 @@ import { router as blogsRouter } from './modules/blogs/blogs.controller';
 import { router as usersRouter } from './modules/users/users.controller';
 import { router as channelsRouter } from './modules/channels/channels.controller';
 import { router as categoriesRouter } from './modules/categories/categories.controller';
+import { router as friendsRouter } from './modules/friends/friends.controller';
 import { auth } from './middlewares/auth';
 import { errorFilter } from './middlewares/error-filter';
 
@@ -28,6 +29,7 @@ app.all('*', auth).route('/orgs', orgsRouter);
 app.all('*', auth).route('/users', usersRouter);
 app.all('*', auth).route('/channels', channelsRouter);
 app.all('*', auth).route('/categories', categoriesRouter);
+app.all('*', auth).route('/friends', friendsRouter);
 
 app.notFound((c) => c.json({ status: 404, message: 'Not found' }, 404));
 
