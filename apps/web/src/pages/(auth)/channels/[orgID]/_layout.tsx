@@ -16,7 +16,7 @@ import {
   Video,
 } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import SettingModal from './_components/SettingModal';
 import EventsModal from './_components/EventsModal';
 import { getOrg } from '@/apis/orgs';
@@ -25,6 +25,7 @@ import CategorySection from './_components/CategorySection';
 import TooltipIcon from '@/components/TooltipIcon';
 import PopoverUser from './_components/popover/PopoverUser';
 import { useState } from 'react';
+import { cn } from '@/lib/utils';
 const OPTIONS = [
   {
     id: 1,
@@ -48,6 +49,7 @@ export default function Component() {
   const [micOn, setMicOn] = useState(false);
   const [headphoneOn, steHeadphoneOn] = useState(true);
   const { channelID, orgID } = useParams('/channels/:orgID/:channelID');
+  const location = useLocation();
 
   const { data: channels } = useQuery({
     queryKey: ['channels', orgID],
@@ -71,12 +73,18 @@ export default function Component() {
       <div className='relative bg-primary-foreground/10 text-primary-foreground 0 w-[16rem] flex flex-col'>
         <OrgMenuDropDown org={org} />
         <div className='overflow-scroll h-3/4'>
-          <div className='pt-2 pl-2 text-xl text-primary-foreground/60'>
+          <div className='pt-2 pl-2 space-y-2 text-xl text-primary-foreground/60'>
             <EventsModal />
             <Link
               to='/channels/:orgID/channel-browser'
               params={{ orgID }}
-              className='flex w-full gap-2 px-3 py-2 hover:bg-primary-foreground/20'
+              className={cn(
+                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20',
+                {
+                  'bg-primary-foreground/20':
+                    location.pathname.split('/').pop() === 'channel-browser',
+                }
+              )}
             >
               <Grip />
               <p> Browse Channels </p>
@@ -87,7 +95,13 @@ export default function Component() {
               state={{
                 channel: channels?.find((channel) => channel.id === channelID),
               }}
-              className='flex w-full gap-2 px-3 py-2 hover:bg-primary-foreground/20'
+              className={cn(
+                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20',
+                {
+                  'bg-primary-foreground/20':
+                    location.pathname.split('/').pop() === 'member-safety',
+                }
+              )}
             >
               <Users />
               <p> Members </p>

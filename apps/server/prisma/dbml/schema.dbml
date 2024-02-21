@@ -13,6 +13,15 @@ Table orgs {
   channels channels [not null]
 }
 
+Table categories {
+  id String [pk]
+  name String [not null]
+  orgId String [not null]
+  org orgs [not null]
+  isPrivate Boolean [not null, default: false]
+  channels channels [not null]
+}
+
 Table blogs {
   id String [pk]
   image String [not null]
@@ -26,7 +35,7 @@ Table roles {
   color String [not null]
   orgID String [not null]
   org orgs [not null]
-  UsersOnRoles users_on_roles [not null]
+  users users_on_roles [not null]
   userId String
 }
 
@@ -38,9 +47,10 @@ Table users {
   orgs users_on_orgs [not null]
   username String [unique]
   fullName String
-  UsersOnRoles users_on_roles [not null]
-  Messages messages [not null]
+  isVerified Boolean [default: false]
+  roles users_on_roles [not null]
   channels users_on_channels [not null]
+  messages messages [not null]
   friends friends [not null]
   friendsOf friends [not null]
 }
@@ -71,15 +81,6 @@ Table channels {
   messages messages [not null]
   categoryId String
   category categories
-}
-
-Table categories {
-  id String [pk]
-  name String [not null]
-  orgId String [not null]
-  org orgs [not null]
-  isPrivate Boolean [not null, default: false]
-  channels channels [not null]
 }
 
 Table messages {
@@ -141,6 +142,8 @@ Enum ChannelType {
   STAGE
 }
 
+Ref: categories.orgId > orgs.id [delete: Cascade]
+
 Ref: roles.orgID > orgs.id
 
 Ref: friends.userId > users.id
@@ -150,8 +153,6 @@ Ref: friends.userOfId > users.id
 Ref: channels.orgId > orgs.id [delete: Cascade]
 
 Ref: channels.categoryId > categories.id [delete: Cascade]
-
-Ref: categories.orgId > orgs.id [delete: Cascade]
 
 Ref: messages.senderId > users.id [delete: Cascade]
 

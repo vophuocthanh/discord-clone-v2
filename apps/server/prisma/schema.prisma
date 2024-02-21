@@ -13,16 +13,28 @@ generator client {
 }
 
 model Org {
-  id           String         @id @default(cuid())
-  icon         String
-  name         String
-  userID       String
-  users        UsersOnOrgs[]
-  Role         Role[]
-  categories   Category[]
-  channels     Channel[]
+  id         String        @id @default(cuid())
+  icon       String
+  name       String
+  userID     String
+  users      UsersOnOrgs[]
+  Role       Role[]
+  categories Category[]
+  channels   Channel[]
 
   @@map("orgs")
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  orgId     String
+  org       Org       @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  isPrivate Boolean   @default(false)
+  channels  Channel[]
+
+  @@index([orgId], name: "orgId")
+  @@map("categories")
 }
 
 model Blog {
@@ -35,29 +47,29 @@ model Blog {
 }
 
 model Role {
-  id           String         @id @default(cuid())
-  name         String
-  color        String
-  orgID        String
-  org          Org            @relation(fields: [orgID], references: [id])
-  UsersOnRoles UsersOnRoles[]
-  userId       String?
+  id     String         @id @default(cuid())
+  name   String
+  color  String
+  orgID  String
+  org    Org            @relation(fields: [orgID], references: [id])
+  users  UsersOnRoles[]
+  userId String?
 
   @@map("roles")
 }
 
 model User {
-  id           String            @id @default(cuid())
-  email        String            @unique
-  password     String
-  salt         String
-  orgs         UsersOnOrgs[]
+  id         String            @id @default(cuid())
+  email      String            @unique
+  password   String
+  salt       String
+  orgs       UsersOnOrgs[]
   username   String?           @unique
-  fullName     String?
-  UsersOnRoles UsersOnRoles[]
-  Messages     Message[]
-  channels     UsersOnChannels[]
-
+  fullName   String?
+  isVerified Boolean?          @default(false)
+  roles      UsersOnRoles[]
+  channels   UsersOnChannels[]
+  messages   Message[]
   friends    Friend[]          @relation(name: "user")
   friendsOf  Friend[]          @relation(name: "userOf")
 
@@ -87,7 +99,6 @@ model Friend {
   @@map("friends")
 }
 
-
 enum ChannelType {
   TEXT
   VOICE
@@ -111,18 +122,6 @@ model Channel {
   @@index([categoryId], name: "categoryId")
   @@index([orgId])
   @@map("channels")
-}
-
-model Category {
-  id        String    @id @default(cuid())
-  name      String
-  orgId     String
-  org       Org       @relation(fields: [orgId], references: [id], onDelete: Cascade)
-  isPrivate Boolean   @default(false)
-  channels  Channel[]
-
-  @@index([orgId], name: "orgId")
-  @@map("categories")
 }
 
 model Message {

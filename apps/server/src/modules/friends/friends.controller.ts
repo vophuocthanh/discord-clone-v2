@@ -3,6 +3,7 @@ import { FriendsService } from './friends.service';
 import { sendFriendRequestDto } from './dtos/send-friend-request.dto';
 import { zValidator } from '@hono/zod-validator';
 import { UsersService } from '../users/users.service';
+import { JsonArray } from '@prisma/client/runtime/library';
 
 export const router = new Hono();
 
@@ -12,8 +13,7 @@ router
     const friends = await FriendsService.getAllBy(user.id);
 
     return c.json({
-      data: friends,
-      status: 200,
+      data: friends as unknown as JsonArray,
     });
   })
   .post('/', zValidator('json', sendFriendRequestDto), async (c) => {
