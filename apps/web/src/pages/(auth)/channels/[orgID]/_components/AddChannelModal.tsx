@@ -5,41 +5,12 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { Lock, Plus } from 'lucide-react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useParams } from '@/router';
-import { postChannel } from '@/apis/channels';
-import { useState } from 'react';
 
 interface Props {
   category: Category;
 }
 
 export default function AddChannelModal({ category }: Props) {
-  const [channels, setChannels] = useState('');
-  const { orgID } = useParams('/channels/:orgID/:channelID');
-  const [isPrivate, setIsPrivate] = useState(false);
-  const queryClient = useQueryClient();
-  const createChannelMutation = useMutation({
-    mutationFn: postChannel,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['createChannel', orgID],
-      });
-    },
-  });
-
-  const handleCreateChannel = () => {
-    if (!isPrivate) {
-      createChannelMutation.mutate({
-        categoryId: orgID,
-        createChannelDto: {
-          name: channels,
-          type: 'TEXT',
-          isPrivate,
-        },
-      });
-    }
-  };
   return (
     <Dialog>
       <DialogTrigger>

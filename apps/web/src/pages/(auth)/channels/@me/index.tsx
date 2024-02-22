@@ -22,7 +22,7 @@ export default function Me() {
             </div>
           ))}
         </TabsContent>
-        <TabsContent value='pending'></TabsContent>
+        <TabsContent value='pending' className='w-full h-full'></TabsContent>
       </Tabs>
     </div>
   );

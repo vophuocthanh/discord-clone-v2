@@ -79,7 +79,7 @@ export default function Component() {
               to='/channels/:orgID/channel-browser'
               params={{ orgID }}
               className={cn(
-                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20',
+                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20 rounded-sm',
                 {
                   'bg-primary-foreground/20':
                     location.pathname.split('/').pop() === 'channel-browser',
@@ -96,7 +96,7 @@ export default function Component() {
                 channel: channels?.find((channel) => channel.id === channelID),
               }}
               className={cn(
-                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20',
+                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20 rounded-sm',
                 {
                   'bg-primary-foreground/20':
                     location.pathname.split('/').pop() === 'member-safety',

@@ -8,11 +8,11 @@ export default function SettingLayout() {
     <div className='flex w-full'>
       <div className='relative bg-primary-foreground/10 text-primary-foreground 0 w-[16rem] flex flex-col'>
         <div className='overflow-scroll h-3/4'>
-          <div className='p-2 pt-2 text-xl text-primary-foreground/60'>
+          <div className='p-2 pt-2 space-y-2 text-xl text-primary-foreground/60'>
             <Link
               to='/channels/@me'
               className={cn(
-                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20',
+                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20 rounded-sm',
                 {
                   'bg-primary-foreground/20':
                     location.pathname === '/channels/@me',
@@ -25,7 +25,7 @@ export default function SettingLayout() {
             <Link
               to='/nitro'
               className={cn(
-                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20',
+                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20 rounded-sm',
                 {
                   'bg-primary-foreground/20': location.pathname === '/nitro',
                 }
@@ -37,7 +37,7 @@ export default function SettingLayout() {
             <Link
               to='/shop'
               className={cn(
-                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20',
+                'px-3 py-2 flex gap-2 w-full hover:bg-primary-foreground/20 rounded-sm',
                 {
                   'bg-primary-foreground/20': location.pathname === '/shop',
                 }

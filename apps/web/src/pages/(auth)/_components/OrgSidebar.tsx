@@ -1,8 +1,8 @@
 import { Org } from '@/lib/type';
 import { cn } from '@/lib/utils';
-import { CreateNewOrgs } from '@/pages/(auth)/channels/[orgID]/_components/CreateNewOrgs';
 import { useParams, useNavigate } from '@/router';
 import { useLocation } from 'react-router-dom';
+import AddOrgModal from './AddOrgModal';
 
 interface OrgSidebarProps {
   orgs: Org[];
@@ -60,7 +60,7 @@ export default function OrgSidebar({ orgs = [] }: OrgSidebarProps) {
           />
         </div>
       ))}
-      <CreateNewOrgs />
+      <AddOrgModal />
     </div>
   );
 }

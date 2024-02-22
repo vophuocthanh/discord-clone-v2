@@ -1,5 +1,5 @@
 import { getOrgs } from '@/apis/orgs';
-import OrgSidebar from '@/components/OrgSidebar';
+import OrgSidebar from '@/pages/(auth)/_components/OrgSidebar';
 import { getToken } from '@/lib/storage';
 import { redirect } from '@/router';
 import { useEffect } from 'react';

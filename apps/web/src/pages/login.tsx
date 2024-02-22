@@ -18,7 +18,7 @@ import { LoginSchema } from '@/lib/schema';
 export function Loader() {
   const isAuth = getToken();
   if (isAuth) {
-    return redirect('/channels');
+    return redirect('/channels/@me');
   }
   return null;
 }
@@ -48,7 +48,7 @@ export default function Component() {
       setIsLoading(true);
       const res = await signIn(email, password);
       setToken(res.data.accessToken);
-      navigate('/channels');
+      navigate('/channels/@me');
       toast.success('Login successfully!');
     } catch (error) {
       toast.error('Invalid email or password');
